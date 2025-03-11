@@ -15,8 +15,8 @@ export const projectId = import.meta.env.VITE_REOWN_PROJECT_ID!;
 
 // WalletConnect metadata
 const metadata = {
-  name: 'Image Caption Matcher Poc',
-  description: 'Image Caption Matcher Poc',
+  name: 'Web3 Messaging Usecase Demo',
+  description: 'Web3 Messaging Usecase Demo',
   url: '',
   icons: [
     'https://cdn.prod.website-files.com/6646148828eddb19c172bf2a/665db3ba85a625628c353a64_Logo-RLC-Yellow.png',
