@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { ArrowRight } from 'react-feather';
+import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import useUserStore from '@/stores/useUser.store';
+import { chunkArray } from '@/utils/chunkArray';
 import { formatTimestamp } from '@/utils/formatTimestamp';
 import { pluralize } from '@/utils/pluralize';
 import { cn } from '@/utils/style.utils';
@@ -31,12 +33,24 @@ const COLOR_CLASSES: {
   },
 };
 
-// Update the component to use the COLOR_CLASSES object
+const DEALS_PER_PAGE = 4;
+
+const getDataType = (schema: { [key: string]: unknown }) => {
+  if (schema.email) {
+    return 'mail';
+  }
+  if (schema.telegram_chatId || schema.chatId) {
+    return 'telegram';
+  }
+  return 'other';
+};
+
 export default function ProtectedDataList() {
   const { address: userAddress } = useUserStore();
   const [selectedTab, setSelectedTab] = useState<
     'all' | 'telegram' | 'mail' | 'other'
   >('all');
+  const [currentPage, setCurrentPage] = useState(0);
 
   const {
     data: protectedDataList,
@@ -62,20 +76,9 @@ export default function ProtectedDataList() {
     retry: true,
   });
 
-  const getDataType = (schema: { [key: string]: unknown }) => {
-    if (schema.email) {
-      return 'mail';
-    }
-    if (schema.telegram_chatId || schema.chatId) {
-      return 'telegram';
-    }
-    return 'other';
-  };
-
   const getProtectedDataByType = (
     type: 'all' | 'telegram' | 'mail' | 'other'
   ) => {
-    ``;
     if (type === 'all') {
       return protectedDataList;
     }
@@ -83,6 +86,10 @@ export default function ProtectedDataList() {
       (data) => getDataType(data.schema) === type
     );
   };
+
+  const pagesOfProtectedData =
+    protectedDataList &&
+    chunkArray(getProtectedDataByType(selectedTab), DEALS_PER_PAGE);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -135,9 +142,12 @@ export default function ProtectedDataList() {
                 'text-sm font-medium whitespace-nowrap',
                 selectedTab === key && COLOR_CLASSES[key].chip
               )}
-              onClick={() =>
-                setSelectedTab(key as 'all' | 'telegram' | 'mail' | 'other')
-              }
+              onClick={() => {
+                setSelectedTab(key as 'all' | 'telegram' | 'mail' | 'other');
+                if (currentPage !== 0) {
+                  setCurrentPage(0);
+                }
+              }}
             >
               {key.toUpperCase()}
             </Button>
@@ -145,55 +155,66 @@ export default function ProtectedDataList() {
         </div>
       </div>
       <div className="mt-4 flex min-h-72 flex-col gap-4 sm:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {getProtectedDataByType(selectedTab)?.map((data) => {
-          const dataType = getDataType(data.schema);
-          const colorConfig = COLOR_CLASSES[dataType] || COLOR_CLASSES.other;
+        {pagesOfProtectedData &&
+          pagesOfProtectedData[currentPage]?.map((data) => {
+            const dataType = getDataType(data.schema);
+            const colorConfig = COLOR_CLASSES[dataType] || COLOR_CLASSES.other;
 
-          return (
-            <div
-              key={data.address}
-              className="radial-bg before:bg-grey-800 rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 pt-[calc(--spacing(8)+42px)] before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]"
-            >
+            return (
               <div
-                className={cn(
-                  'absolute inset-x-px top-px h-[42px] rounded-t-[calc(20px-1px)] bg-gradient-to-r from-[#14141B] from-25%',
-                  colorConfig.gradientTo
-                )}
-              />
-              <Button
-                variant="chip"
-                size="sm"
-                className={cn(colorConfig.chip, 'w-fit')}
-                onClick={() =>
-                  setSelectedTab(
-                    dataType as 'all' | 'telegram' | 'mail' | 'other'
-                  )
-                }
+                key={data.address}
+                className="radial-bg before:bg-grey-800 rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 pt-[calc(--spacing(8)+42px)] before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]"
               >
-                {dataType.toUpperCase()}
-              </Button>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold">{data.name}</h3>
-                <p className="text-grey-200 text-lg">
-                  {formatTimestamp(data.creationTimestamp)}
-                </p>
-              </div>
-              <Button
-                variant="text"
-                size="none"
-                className="group mt-auto w-fit text-lg font-bold"
-              >
-                Manage Access{' '}
-                <ArrowRight
-                  size="20"
-                  className="duration-300 group-hover:translate-x-1"
+                <div
+                  className={cn(
+                    'absolute inset-x-px top-px h-[42px] rounded-t-[calc(20px-1px)] bg-gradient-to-r from-[#14141B] from-25%',
+                    colorConfig.gradientTo
+                  )}
                 />
-              </Button>
-            </div>
-          );
-        })}
+                <Button
+                  variant="chip"
+                  size="sm"
+                  className={cn(colorConfig.chip, 'w-fit')}
+                  onClick={() => {
+                    setSelectedTab(
+                      dataType as 'all' | 'telegram' | 'mail' | 'other'
+                    );
+                    if (currentPage !== 0) {
+                      setCurrentPage(0);
+                    }
+                  }}
+                >
+                  {dataType.toUpperCase()}
+                </Button>
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-bold">{data.name}</h3>
+                  <p className="text-grey-200 text-lg">
+                    {formatTimestamp(data.creationTimestamp)}
+                  </p>
+                </div>
+                <Button
+                  variant="text"
+                  size="none"
+                  className="group mt-auto w-fit text-lg font-bold"
+                >
+                  Manage Access{' '}
+                  <ArrowRight
+                    size="20"
+                    className="duration-300 group-hover:translate-x-1"
+                  />
+                </Button>
+              </div>
+            );
+          })}
+        {pagesOfProtectedData && pagesOfProtectedData?.length > 1 && (
+          <PaginatedNavigation
+            className="sm:col-span-2 md:col-span-3 xl:col-span-4"
+            pages={pagesOfProtectedData}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+          />
+        )}
       </div>
-      <div className="space-y-10 xl:px-10"></div>
     </div>
   );
 }
