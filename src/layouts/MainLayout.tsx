@@ -13,7 +13,7 @@ export default function MainLayout() {
   return (
     <div className="flex">
       <NavBar />
-      <div className="w-full px-10">
+      <div className="m:px-10 w-full px-6">
         <TopNavBar />
         <div className="mt-10 mb-24 max-w-[1260px] flex-1">
           {!isConnected ? <ConnectWallet /> : <Outlet />}
