@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRight } from 'react-feather';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button } from '@/components/ui/button';
@@ -33,8 +33,6 @@ const COLOR_CLASSES: {
   },
 };
 
-const PROTECTED_DATA_PER_PAGE = 4;
-
 const getDataType = (schema: { [key: string]: unknown }) => {
   if (schema.email) {
     return 'mail';
@@ -45,12 +43,34 @@ const getDataType = (schema: { [key: string]: unknown }) => {
   return 'other';
 };
 
+const useWindowSize = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
+};
+
 export default function ProtectedDataList() {
   const { address: userAddress } = useUserStore();
   const [selectedTab, setSelectedTab] = useState<
     'all' | 'telegram' | 'mail' | 'other'
   >('all');
   const [currentPage, setCurrentPage] = useState(0);
+  const windowSize = useWindowSize();
 
   const {
     data: protectedDataList,
@@ -88,12 +108,24 @@ export default function ProtectedDataList() {
     );
   };
 
+  const getItemsPerPage = () => {
+    if (windowSize.width > 80 * 16) {
+      return 4;
+    }
+    if (windowSize.width > 48 * 16) {
+      return 3;
+    }
+    if (windowSize.width > 40 * 16) {
+      return 2;
+    }
+    return 3;
+  };
+
+  const itemsPerPage = getItemsPerPage();
+
   const pagesOfProtectedData =
     protectedDataList &&
-    chunkArray(
-      getProtectedDataByType(selectedTab) || [],
-      PROTECTED_DATA_PER_PAGE
-    );
+    chunkArray(getProtectedDataByType(selectedTab) || [], itemsPerPage);
 
   if (isLoading) {
     return <div>Loading...</div>;
