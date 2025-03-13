@@ -155,24 +155,36 @@ export default function ProtectedDataList() {
           <p>Remove Confidentially</p>
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-3">
-          {Object.keys(COLOR_CLASSES).map((key) => (
-            <Button
-              key={key}
-              variant="chip"
-              className={cn(
-                'text-sm font-medium whitespace-nowrap',
-                selectedTab === key && COLOR_CLASSES[key].chip
-              )}
-              onClick={() => {
-                setSelectedTab(key as 'all' | 'telegram' | 'mail' | 'other');
-                if (currentPage !== 0) {
-                  setCurrentPage(0);
-                }
-              }}
-            >
-              {key.toUpperCase()}
-            </Button>
-          ))}
+          {Object.keys(COLOR_CLASSES).map((key) => {
+            const hasOtherData =
+              key === 'other' &&
+              protectedDataList?.some(
+                (data) => getDataType(data.schema) === 'other'
+              );
+            if (key === 'all' || hasOtherData || key !== 'other') {
+              return (
+                <Button
+                  key={key}
+                  variant="chip"
+                  className={cn(
+                    'text-sm font-medium whitespace-nowrap',
+                    selectedTab === key && COLOR_CLASSES[key].chip
+                  )}
+                  onClick={() => {
+                    setSelectedTab(
+                      key as 'all' | 'telegram' | 'mail' | 'other'
+                    );
+                    if (currentPage !== 0) {
+                      setCurrentPage(0);
+                    }
+                  }}
+                >
+                  {key.toUpperCase()}
+                </Button>
+              );
+            }
+            return null;
+          })}
         </div>
       </div>
       <div className="mt-4 flex min-h-72 flex-col gap-4 sm:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
