@@ -146,7 +146,8 @@ body {
   @apply bg-background text-foreground;
 }
 
-h1 {
+h1,
+h2 {
   @apply font-anybody text-2xl font-extrabold;
 }
 

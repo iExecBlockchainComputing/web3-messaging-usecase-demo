@@ -143,13 +143,15 @@ export default function ProtectedDataList() {
       </div>
       <div className="space-y-6">
         <div className="space-y-2">
-          <h2>
+          <h2 className="text-xl font-extrabold">
             My protected data{' '}
-            <span>
+            <span className="text-lg font-normal">
+              (
               {pluralize(
                 protectedDataList ? protectedDataList.length : 0,
                 'item'
               )}
+              )
             </span>
           </h2>
           <p>Remove Confidentially</p>
