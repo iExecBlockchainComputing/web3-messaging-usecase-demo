@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'react-feather';
+import { Alert } from '@/components/Alert';
+import { CircularLoader } from '@/components/CircularLoader';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
@@ -84,16 +86,12 @@ export default function ProtectedDataList() {
         throw new Error('User address is undefined');
       }
       const dataProtectorCore = await getDataProtectorCoreClient();
-      const result = await dataProtectorCore.getProtectedData({
-        owner: userAddress,
+      return dataProtectorCore.getProtectedData({
+        owner: '0x1d6ce6c05043c28672218b103acb1e017babb68e',
       });
-      console.log(result);
-
-      return result;
     },
     enabled: !!userAddress,
     refetchOnWindowFocus: false,
-    retry: true,
   });
 
   const getProtectedDataByType = (
@@ -126,19 +124,6 @@ export default function ProtectedDataList() {
   const pagesOfProtectedData =
     protectedDataList &&
     chunkArray(getProtectedDataByType(selectedTab) || [], itemsPerPage);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return (
-      <div className="mt-4">
-        <p>Oops, something went wrong while fetching your applications data.</p>
-        <p className="mt-1 text-sm">{error?.toString()}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="grid gap-10">
@@ -191,7 +176,23 @@ export default function ProtectedDataList() {
         </div>
       </div>
       <div className="mt-4 flex min-h-72 flex-col gap-4 sm:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {pagesOfProtectedData &&
+        {!pagesOfProtectedData || pagesOfProtectedData?.length === 0 ? (
+          <div className="text-text-2 col-span-5 flex h-48 items-center justify-center text-center">
+            {isLoading ? (
+              <CircularLoader />
+            ) : isError ? (
+              <Alert variant="error">
+                <p>
+                  Oops, something went wrong while fetching your protected data
+                  data.
+                </p>
+                <p className="mt-1 text-sm">{error?.toString()}</p>
+              </Alert>
+            ) : (
+              <p>No protected data yet.</p>
+            )}
+          </div>
+        ) : (
           pagesOfProtectedData[currentPage]?.map((data) => {
             const dataType = getDataType(data.schema);
             const colorConfig = COLOR_CLASSES[dataType] || COLOR_CLASSES.other;
@@ -241,7 +242,8 @@ export default function ProtectedDataList() {
                 </Button>
               </div>
             );
-          })}
+          })
+        )}
         {pagesOfProtectedData && pagesOfProtectedData?.length > 1 && (
           <PaginatedNavigation
             className="sm:col-span-2 md:col-span-3 xl:col-span-4"
