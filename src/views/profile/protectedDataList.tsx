@@ -33,7 +33,7 @@ const COLOR_CLASSES: {
   },
 };
 
-const DEALS_PER_PAGE = 4;
+const PROTECTED_DATA_PER_PAGE = 4;
 
 const getDataType = (schema: { [key: string]: unknown }) => {
   if (schema.email) {
@@ -82,14 +82,18 @@ export default function ProtectedDataList() {
     if (type === 'all') {
       return protectedDataList;
     }
-    return protectedDataList?.filter(
-      (data) => getDataType(data.schema) === type
+    return (
+      protectedDataList?.filter((data) => getDataType(data.schema) === type) ||
+      []
     );
   };
 
   const pagesOfProtectedData =
     protectedDataList &&
-    chunkArray(getProtectedDataByType(selectedTab), DEALS_PER_PAGE);
+    chunkArray(
+      getProtectedDataByType(selectedTab) || [],
+      PROTECTED_DATA_PER_PAGE
+    );
 
   if (isLoading) {
     return <div>Loading...</div>;
