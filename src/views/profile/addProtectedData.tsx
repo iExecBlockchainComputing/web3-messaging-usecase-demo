@@ -64,27 +64,29 @@ export default function AddProtectedData() {
       </div>
       <div className="mt-4 flex flex-col gap-4 sm:grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {Object.keys(COLOR_CLASSES).map((key) => (
-          <div
+          <label
             key={key}
+            htmlFor={key}
             className={cn(
-              'radial-bg rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 duration-300',
-              'before:bg-grey-800 before:absolute before:inset-px before:z-20 before:rounded-[calc(20px-1px)] before:duration-300',
-              'after:from-grey-800 after:from-50% after:absolute after:inset-px after:-z-10 after:rounded-[calc(20px-1px)] after:bg-gradient-to-br',
-              selectedTab === key && 'before:bg-transparent',
+              'radial-bg rounded-20 relative z-0 flex cursor-pointer flex-col gap-6 overflow-hidden p-8 duration-300',
+              'before:bg-grey-800 before:absolute before:inset-px before:z-20 before:rounded-[calc(20px-1px)] before:duration-300 hover:before:bg-transparent',
+              'after:from-grey-800 after:absolute after:inset-px after:-z-10 after:rounded-[calc(20px-1px)] after:bg-gradient-to-br after:from-50%',
+              selectedTab === key && 'before:bg-grey-800/30',
               COLOR_CLASSES[key].gradientTo
             )}
             onClick={() => setSelectedTab(key as 'telegram' | 'mail')}
           >
+            <input className="absolute -z-10" type="radio" name="" id={key} />
             <div className="z-30 grid gap-6">
-              <div className='flex items-center gap-4'>
+              <div className="flex items-center gap-4">
                 <div className="rounded-lg bg-yellow-300/10 p-2.5 text-yellow-300">
-                {COLOR_CLASSES[key].icon}
+                  {COLOR_CLASSES[key].icon}
                 </div>
                 <p className="font-anybody capitalize">{key}</p>
               </div>
               <p>{COLOR_CLASSES[key].dataReadableType}</p>
             </div>
-          </div>
+          </label>
         ))}
       </div>
     </div>
