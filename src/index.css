@@ -148,7 +148,15 @@ body {
 
 h1,
 h2 {
-  @apply font-anybody text-2xl font-extrabold;
+  @apply font-anybody;
+}
+
+h1 {
+  @apply text-2xl font-extrabold;
+}
+
+h2 {
+  @apply text-xl font-bold;
 }
 
 /* Chrome, Safari, Edge, Opera */
