@@ -10,13 +10,13 @@ import {
   XCircle,
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
-import { create } from 'zustand';
 import { Alert } from '@/components/Alert';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import useStatusStore from '@/stores/useStatus.store';
 import useUserStore from '@/stores/useUser.store';
 import { getUserFriendlyStatues } from '@/utils/getUserFriendlyStatues';
 import { cn } from '@/utils/style.utils';
@@ -39,38 +39,6 @@ const COLOR_CLASSES: {
     icon: <User size={20} />,
   },
 };
-
-type OneStatus = {
-  title: string;
-  isDone?: boolean;
-  isError?: boolean;
-  payload?: Record<string, string>;
-};
-
-type StatusState = {
-  statuses: Record<
-    string,
-    { isDone?: boolean; isError?: boolean; payload?: Record<string, string> }
-  >;
-  addOrUpdateStatusToStore: (status: OneStatus) => void;
-  resetStatuses: () => void;
-};
-
-const useStatusStore = create<StatusState>((set) => ({
-  statuses: {},
-  addOrUpdateStatusToStore: (status) =>
-    set((state) => ({
-      statuses: {
-        ...state.statuses,
-        [status.title]: {
-          isDone: status.isDone,
-          isError: status.isError ?? false,
-          payload: status.payload,
-        },
-      },
-    })),
-  resetStatuses: () => set({ statuses: {} }),
-}));
 
 export default function AddProtectedData() {
   const { address: userAddress } = useUserStore();
