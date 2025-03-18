@@ -104,6 +104,23 @@ export default function AddProtectedData() {
     }
   }, [location.search]);
 
+  const validateFormData = () => {
+    if (currentStep === 0 && !formData.dataType) {
+      return 'Please select a data type';
+    }
+    if (currentStep === 1 && !formData.encryptedDataContent) {
+      return formData.dataType === 'mail'
+        ? 'Please enter an email address'
+        : 'Please enter a telegram chatId';
+    }
+    if (currentStep === 2 && !formData.encryptedDataName) {
+      return formData.dataType === 'mail'
+        ? 'Please name your protected email address'
+        : 'Please name your protected telegram chatId';
+    }
+    return null;
+  };
+
   const handleBackClick = () => {
     if (currentStep === 0) {
       navigate('/profile');
@@ -113,46 +130,16 @@ export default function AddProtectedData() {
   };
 
   const handleNextClick = async () => {
-    if (currentStep === 0) {
-      if (!formData.dataType) {
-        toast({
-          variant: 'danger',
-          title: 'Error',
-          description: 'Please select a data type',
-        });
-        return;
-      }
-      updateStep(currentStep + 1);
+    const errorMessage = validateFormData();
+    if (errorMessage) {
+      toast({ variant: 'danger', title: 'Error', description: errorMessage });
+      return;
     }
-    if (currentStep === 1) {
-      const isMail = formData.dataType === 'mail';
-      // TODO check if email or chatId is correct
-      if (!formData.encryptedDataContent) {
-        toast({
-          variant: 'danger',
-          title: 'Error',
-          description: isMail
-            ? 'Please enter a email address'
-            : 'Please enter a telegram chatId',
-        });
-        return;
-      }
-      updateStep(currentStep + 1);
-    }
+
     if (currentStep === 2) {
-      const isMail = formData.dataType === 'mail';
-      if (!formData.encryptedDataName) {
-        toast({
-          variant: 'danger',
-          title: 'Error',
-          description: isMail
-            ? 'Please name your protected email address'
-            : 'Please name your protected telegram chatId',
-        });
-        return;
-      }
-      CreateProtectedDataMutation.mutate(isMail);
-      // TODO unvalidate main query
+      CreateProtectedDataMutation.mutate(formData.dataType === 'mail');
+    } else {
+      updateStep(currentStep + 1);
     }
   };
 
