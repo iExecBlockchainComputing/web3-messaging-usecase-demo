@@ -7,7 +7,7 @@ export default function StatusMessage({
   isError,
 }: {
   message: string;
-  isDone: boolean;
+  isDone?: boolean;
   isError?: boolean;
 }) {
   return (
