@@ -40,6 +40,13 @@ const COLOR_CLASSES: {
   },
 };
 
+type OneStatus = {
+  title: string;
+  isDone?: boolean;
+  isError?: boolean;
+  payload?: Record<string, string>;
+};
+
 type StatusState = {
   statuses: Record<
     string,
@@ -382,7 +389,7 @@ export default function AddProtectedData() {
               )}
             </div>
           )}
-          <div className="flex justify-center mt-6 md:justify-end gap-4 sm:col-span-2 lg:col-span-3">
+          <div className="mt-6 flex justify-center gap-4 sm:col-span-2 md:justify-end lg:col-span-3">
             <Button
               disabled={CreateProtectedDataMutation.isPending}
               onClick={handleBackClick}
