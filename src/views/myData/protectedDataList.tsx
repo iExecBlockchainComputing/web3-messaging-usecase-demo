@@ -137,7 +137,7 @@ export default function ProtectedDataList() {
           </p>
         </div>
         <Button className="mx-auto sm:ml-0">
-          <NavLink to="/profile/add-protected-data">Create new</NavLink>
+          <NavLink to="/my-data/add-protected-data">Create new</NavLink>
         </Button>
         <div className="absolute inset-0 -z-10 blur-2xl sm:blur-[100px] lg:blur-[150px]">
           <div className="absolute top-1/4 right-0 aspect-[23/30] w-1/2 rounded-full bg-[#00115C] sm:-top-12" />

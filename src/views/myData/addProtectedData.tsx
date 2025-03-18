@@ -8,7 +8,7 @@ import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
-import StatusMessage from '@/modules/profile/StatusMessage';
+import StatusMessage from '@/modules/myData/StatusMessage';
 import useStatusStore from '@/stores/useStatus.store';
 import useUserStore from '@/stores/useUser.store';
 import { getUserFriendlyStatues } from '@/utils/getUserFriendlyStatues';
@@ -84,7 +84,7 @@ export default function AddProtectedData() {
 
   const handleBackClick = () => {
     if (currentStep === 0) {
-      navigate('/profile');
+      navigate('/my-data');
     } else {
       updateStep(currentStep - 1);
     }
@@ -129,7 +129,7 @@ export default function AddProtectedData() {
       queryClient.invalidateQueries({
         queryKey: ['apps', userAddress],
       });
-      navigate('/profile');
+      navigate('/my-data');
       toast({
         title: 'You have successfully add a new protected data.',
         variant: 'success',

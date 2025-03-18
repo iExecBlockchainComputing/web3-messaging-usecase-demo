@@ -40,7 +40,7 @@ export function NavBar() {
         <div className="left-navbar text-grey-400 mt-10 flex grow flex-col">
           <div className="mt-0.5 grow">
             <NavLink
-              to={'/profile'}
+              to={'/my-data'}
               className={({ isActive }) =>
                 cn(
                   'flex items-center gap-x-3 px-2 py-2 duration-200 hover:text-white md:py-3',
@@ -63,7 +63,7 @@ export function NavBar() {
                   fill="currentColor"
                 />
               </svg>
-              <span>Profile</span>
+              <span>My data</span>
             </NavLink>
           </div>
 
