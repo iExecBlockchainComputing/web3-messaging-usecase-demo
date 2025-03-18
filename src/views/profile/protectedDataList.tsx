@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'react-feather';
+import { NavLink } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
@@ -39,7 +40,7 @@ const getDataType = (schema: { [key: string]: unknown }) => {
   if (schema.email) {
     return 'mail';
   }
-  if (schema.telegram_chatId || schema.chatId) {
+  if (schema.telegramChatId || schema.chatId) {
     return 'telegram';
   }
   return 'other';
@@ -87,11 +88,11 @@ export default function ProtectedDataList() {
       }
       const dataProtectorCore = await getDataProtectorCoreClient();
       return dataProtectorCore.getProtectedData({
-        owner: '0x1d6ce6c05043c28672218b103acb1e017babb68e',
+        owner: userAddress,
       });
     },
     enabled: !!userAddress,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   });
 
   const getProtectedDataByType = (
@@ -135,7 +136,9 @@ export default function ProtectedDataList() {
             confidential messaging.
           </p>
         </div>
-        <Button className="mx-auto sm:ml-0">Create new</Button>
+        <Button className="mx-auto sm:ml-0">
+          <NavLink to="/profile/add-protected-data">Create new</NavLink>
+        </Button>
         <div className="absolute inset-0 -z-10 blur-2xl sm:blur-[100px] lg:blur-[150px]">
           <div className="absolute top-1/4 right-0 aspect-[23/30] w-1/2 rounded-full bg-[#00115C] sm:-top-12" />
           <div className="absolute top-0 right-0 hidden aspect-square h-full translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FCECC0] sm:block" />
@@ -238,7 +241,9 @@ export default function ProtectedDataList() {
                   {dataType.toUpperCase()}
                 </Button>
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold">{data.name}</h3>
+                  <h3 className="text-2xl font-bold">
+                    {data.name ? data.name : '(No name)'}
+                  </h3>
                   <p className="text-grey-200 text-lg">
                     {formatTimestamp(data.creationTimestamp)}
                   </p>
