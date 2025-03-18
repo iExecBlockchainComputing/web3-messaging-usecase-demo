@@ -1,21 +1,14 @@
 import { OneProtectDataStatus } from '@iexec/dataprotector';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { JSX, useEffect, useState } from 'react';
-import {
-  ArrowRight,
-  CheckCircle,
-  Info,
-  Mail,
-  User,
-  XCircle,
-} from 'react-feather';
+import { ArrowRight, Info, Mail, User } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
-import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import StatusMessage from '@/modules/profile/StatusMessage';
 import useStatusStore from '@/stores/useStatus.store';
 import useUserStore from '@/stores/useUser.store';
 import { getUserFriendlyStatues } from '@/utils/getUserFriendlyStatues';
@@ -243,21 +236,23 @@ export default function AddProtectedData() {
           )}
           {currentStep === 1 && formData.dataType === 'telegram' && (
             <div className="grid gap-2 sm:col-span-2 lg:col-span-3">
-              <label htmlFor="telegram_chat_id">Telegram Chat Id *</label>
-              <input
-                onChange={(e) => {
-                  setFormData((prevData) => ({
-                    ...prevData,
-                    encryptedDataContent: e.target.value,
-                  }));
-                }}
-                minLength={9}
-                maxLength={10}
-                placeholder="012345678"
-                className="focus:border-primary border-grey-300 mt-2 max-w-xl rounded-lg border bg-transparent p-3 transition duration-200 focus:outline-none"
-                type="text"
-                id="telegram_chat_id"
-              />
+              <div className="grid gap-2">
+                <label htmlFor="telegram_chat_id">Telegram Chat Id *</label>
+                <input
+                  onChange={(e) => {
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      encryptedDataContent: e.target.value,
+                    }));
+                  }}
+                  minLength={9}
+                  maxLength={10}
+                  placeholder="012345678"
+                  className="focus:border-primary border-grey-300 mt-2 max-w-xl rounded-lg border bg-transparent p-3 transition duration-200 focus:outline-none"
+                  type="text"
+                  id="telegram_chat_id"
+                />
+              </div>
               <div className="mt-4 grid gap-4 rounded-3xl border border-[#00115C] bg-[#00115C]/20 px-10 py-6">
                 <div className="flex items-center gap-4">
                   <span className="rounded-lg bg-[#00115C] p-2.5">
@@ -318,19 +313,12 @@ export default function AddProtectedData() {
                   <div className="mt-6">
                     {Object.entries(statuses).map(
                       ([message, { isDone, isError }]) => (
-                        <div
+                        <StatusMessage
                           key={message}
-                          className={`mt-2 flex items-center gap-x-2 text-left ${isDone ? 'text-grey-500' : isError ? 'text-red-500' : 'text-white'}`}
-                        >
-                          {isError ? (
-                            <XCircle size="24" />
-                          ) : isDone ? (
-                            <CheckCircle size="24" className="text-primary" />
-                          ) : (
-                            <LoadingSpinner className="text-primary size-6" />
-                          )}
-                          {message}
-                        </div>
+                          message={message}
+                          isDone={isDone}
+                          isError={isError}
+                        />
                       )
                     )}
                   </div>
