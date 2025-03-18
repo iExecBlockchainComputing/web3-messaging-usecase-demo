@@ -37,7 +37,8 @@ export const Stepper: React.FC<StepperProps> = ({ currentStep, steps }) => {
               <div
                 className={cn(
                   'mx-auto flex size-8 items-center justify-center rounded-full',
-                  isActive ? 'bg-white text-black' : 'bg-grey-700'
+                  isActive ? 'bg-white text-black' : 'bg-grey-700',
+                  isCompleted && 'bg-primary text-black'
                 )}
                 aria-label={`Step ${index + 1}`}
               >
