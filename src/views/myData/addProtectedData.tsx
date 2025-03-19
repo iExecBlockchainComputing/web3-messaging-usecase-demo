@@ -160,12 +160,10 @@ export default function AddProtectedData() {
   return (
     <div className="grid gap-10">
       <div className="flex flex-col gap-6">
-        <div>
-          <h1 className="text-center sm:text-left">Protect new data</h1>
-          <p>
-            Protect new email or telegram: encrypt, monetize and control access.
-          </p>
-        </div>
+        <h1 className="text-center sm:text-left">Protect new data</h1>
+        <p>
+          Protect new email or telegram: encrypt, monetize and control access.
+        </p>
       </div>
       <Stepper
         currentStep={currentStep}
