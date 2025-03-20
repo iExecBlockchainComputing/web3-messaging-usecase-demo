@@ -30,10 +30,6 @@ const COLOR_CLASSES: {
     gradientTo: 'to-[#50366b]',
     chip: 'before:bg-[#251E31] bg-[#9531E9] text-[#9531E9]',
   },
-  other: {
-    gradientTo: 'to-[#459388]',
-    chip: 'before:bg-[#1a2125] bg-[#459388] text-[#459388]',
-  },
 };
 
 const getDataType = (schema: { [key: string]: unknown }) => {
@@ -43,7 +39,6 @@ const getDataType = (schema: { [key: string]: unknown }) => {
   if (schema.telegramChatId || schema.chatId) {
     return 'telegram';
   }
-  return 'other';
 };
 
 const useWindowSize = () => {
@@ -69,9 +64,9 @@ const useWindowSize = () => {
 
 export default function ProtectedDataList() {
   const { address: userAddress } = useUserStore();
-  const [selectedTab, setSelectedTab] = useState<
-    'all' | 'telegram' | 'mail' | 'other'
-  >('all');
+  const [selectedTab, setSelectedTab] = useState<'all' | 'telegram' | 'mail'>(
+    'all'
+  );
   const [currentPage, setCurrentPage] = useState(0);
   const windowSize = useWindowSize();
 
@@ -95,15 +90,13 @@ export default function ProtectedDataList() {
     refetchOnWindowFocus: true,
   });
 
-  const getProtectedDataByType = (
-    type: 'all' | 'telegram' | 'mail' | 'other'
-  ) => {
-    if (type === 'all') {
-      return protectedDataList;
-    }
+  const getProtectedDataByType = (type: 'all' | 'telegram' | 'mail') => {
     return (
-      protectedDataList?.filter((data) => getDataType(data.schema) === type) ||
-      []
+      protectedDataList?.filter((data) =>
+        type === 'all'
+          ? ['telegram', 'mail'].includes(getDataType(data.schema) || '')
+          : getDataType(data.schema) === type
+      ) || []
     );
   };
 
@@ -161,34 +154,24 @@ export default function ProtectedDataList() {
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-3">
           {Object.keys(COLOR_CLASSES).map((key) => {
-            const hasOtherData =
-              key === 'other' &&
-              protectedDataList?.some(
-                (data) => getDataType(data.schema) === 'other'
-              );
-            if (key === 'all' || hasOtherData || key !== 'other') {
-              return (
-                <Button
-                  key={key}
-                  variant="chip"
-                  className={cn(
-                    'text-sm font-medium whitespace-nowrap',
-                    selectedTab === key && COLOR_CLASSES[key].chip
-                  )}
-                  onClick={() => {
-                    setSelectedTab(
-                      key as 'all' | 'telegram' | 'mail' | 'other'
-                    );
-                    if (currentPage !== 0) {
-                      setCurrentPage(0);
-                    }
-                  }}
-                >
-                  {key.toUpperCase()}
-                </Button>
-              );
-            }
-            return null;
+            return (
+              <Button
+                key={key}
+                variant="chip"
+                className={cn(
+                  'text-sm font-medium whitespace-nowrap',
+                  selectedTab === key && COLOR_CLASSES[key].chip
+                )}
+                onClick={() => {
+                  setSelectedTab(key as 'all' | 'telegram' | 'mail');
+                  if (currentPage !== 0) {
+                    setCurrentPage(0);
+                  }
+                }}
+              >
+                {key.toUpperCase()}
+              </Button>
+            );
           })}
         </div>
       </div>
@@ -212,7 +195,8 @@ export default function ProtectedDataList() {
         ) : (
           pagesOfProtectedData[currentPage]?.map((protectedData) => {
             const dataType = getDataType(protectedData.schema);
-            const colorConfig = COLOR_CLASSES[dataType] || COLOR_CLASSES.other;
+            const colorConfig =
+              COLOR_CLASSES[dataType ?? 'all'] || COLOR_CLASSES.other;
 
             return (
               <div
@@ -230,15 +214,13 @@ export default function ProtectedDataList() {
                   size="sm"
                   className={cn(colorConfig.chip, 'w-fit')}
                   onClick={() => {
-                    setSelectedTab(
-                      dataType as 'all' | 'telegram' | 'mail' | 'other'
-                    );
+                    setSelectedTab(dataType as 'all' | 'telegram' | 'mail');
                     if (currentPage !== 0) {
                       setCurrentPage(0);
                     }
                   }}
                 >
-                  {dataType.toUpperCase()}
+                  {dataType && dataType.toUpperCase()}
                 </Button>
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold">
