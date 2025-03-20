@@ -28,7 +28,7 @@ const COLOR_CLASSES: {
   },
   mail: {
     gradientTo: 'to-[#50366b]',
-    chip: 'before:bg-[#251E31] bg-[#9531E9] text-[#9531E9]',
+    chip: 'before:bg-[#251E31] bg-[#BC70FD] text-[#BC70FD]',
   },
 };
 
