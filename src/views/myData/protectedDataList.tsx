@@ -210,13 +210,13 @@ export default function ProtectedDataList() {
             )}
           </div>
         ) : (
-          pagesOfProtectedData[currentPage]?.map((data) => {
-            const dataType = getDataType(data.schema);
+          pagesOfProtectedData[currentPage]?.map((protectedData) => {
+            const dataType = getDataType(protectedData.schema);
             const colorConfig = COLOR_CLASSES[dataType] || COLOR_CLASSES.other;
 
             return (
               <div
-                key={data.address}
+                key={protectedData.address}
                 className="radial-bg before:bg-grey-800 rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 pt-[calc(--spacing(8)+42px)] before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]"
               >
                 <div
@@ -242,10 +242,10 @@ export default function ProtectedDataList() {
                 </Button>
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold">
-                    {data.name ? data.name : '(No name)'}
+                    {protectedData.name ? protectedData.name : '(No name)'}
                   </h3>
                   <p className="text-grey-200 text-lg">
-                    {formatTimestamp(data.creationTimestamp)}
+                    {formatTimestamp(protectedData.creationTimestamp)}
                   </p>
                 </div>
                 <Button
