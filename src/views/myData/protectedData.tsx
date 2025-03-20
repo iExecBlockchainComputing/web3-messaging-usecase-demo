@@ -240,7 +240,7 @@ export default function ProtectedData() {
                   <p>{grantedAccess.error.toString()}</p>
                 </Alert>
               ) : (
-                <div>
+                <div className='space-y-4'>
                   <p>No authorized users yet.</p>
                   <Button onClick={() => {}}>Authorize user</Button>
                 </div>
