@@ -6,6 +6,7 @@ import { CircularLoader } from '@/components/CircularLoader';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import GrantAccessModal from '@/modules/myData/protectedData/GrantAccessModal';
 import { ProtectedDataDetails } from '@/modules/myData/protectedData/ProtectedDataDetails';
 import useUserStore from '@/stores/useUser.store';
 import { chunkArray } from '@/utils/chunkArray';
@@ -40,6 +41,7 @@ export default function ProtectedData() {
   const { address: userAddress } = useUserStore();
   const { protectedDataId } = useParams();
   const [currentPage, setCurrentPage] = useState(0);
+  const [isGrantAccessModalOpen, setGrantAccessModalOpen] = useState(false);
 
   const protectedData = useQuery({
     queryKey: ['protectedData', protectedDataId, userAddress],
@@ -90,6 +92,10 @@ export default function ProtectedData() {
 
   return (
     <div className="grid gap-8">
+      <GrantAccessModal
+        isSwitchingModalOpen={isGrantAccessModalOpen}
+        setSwitchingModalOpen={setGrantAccessModalOpen}
+      />
       <h1 className="relative w-fit text-4xl sm:text-left md:text-center">
         {protectedData.data && (
           <span
@@ -116,7 +122,13 @@ export default function ProtectedData() {
               These are the users who you allowed to access this protected data.
             </p>
           </div>
-          <Button onClick={() => {}}>Authorize new user</Button>
+          <Button
+            onClick={() => {
+              setGrantAccessModalOpen(true);
+            }}
+          >
+            Authorize new user
+          </Button>
         </div>
         <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_1fr] items-center overflow-hidden rounded-3xl border [&>div]:px-5 [&>div]:py-5">
           <div className="text-grey-300 text-xs font-semibold">
@@ -140,7 +152,13 @@ export default function ProtectedData() {
               ) : (
                 <div className="space-y-4">
                   <p>No authorized users yet.</p>
-                  <Button onClick={() => {}}>Authorize user</Button>
+                  <Button
+                    onClick={() => {
+                      setGrantAccessModalOpen(true);
+                    }}
+                  >
+                    Authorize user
+                  </Button>
                 </div>
               )}
             </div>
