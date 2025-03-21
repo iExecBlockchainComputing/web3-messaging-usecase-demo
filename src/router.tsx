@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
         element: <AddProtectedData />,
       },
       {
-        path: '/my-data/:protectedDataId',
+        path: '/my-data/:protectedDataAddress',
         element: <ProtectedData />,
       },
     ],

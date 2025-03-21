@@ -39,12 +39,12 @@ const ITEMS_PER_PAGE = 8;
 
 export default function ProtectedData() {
   const { address: userAddress } = useUserStore();
-  const { protectedDataId } = useParams();
+  const { protectedDataAddress } = useParams();
   const [currentPage, setCurrentPage] = useState(0);
   const [isGrantAccessModalOpen, setGrantAccessModalOpen] = useState(false);
 
   const protectedData = useQuery({
-    queryKey: ['protectedData', protectedDataId, userAddress],
+    queryKey: ['protectedData', protectedDataAddress, userAddress],
     queryFn: async () => {
       if (!userAddress) {
         throw new Error('User address is undefined');
@@ -52,17 +52,17 @@ export default function ProtectedData() {
       const dataProtectorCore = await getDataProtectorCoreClient();
       // TODO check protectedDataList before
       const protectedDatas = await dataProtectorCore.getProtectedData({
-        protectedDataAddress: protectedDataId,
+        protectedDataAddress: protectedDataAddress,
         owner: userAddress,
       });
       return protectedDatas[0];
     },
-    enabled: !!userAddress && !!protectedDataId,
+    enabled: !!userAddress && !!protectedDataAddress,
     refetchOnWindowFocus: true,
   });
 
   const grantedAccess = useQuery({
-    queryKey: ['granted access', protectedDataId, userAddress],
+    queryKey: ['granted access', protectedDataAddress, userAddress],
     queryFn: async () => {
       if (!userAddress) {
         throw new Error('User address is undefined');
@@ -70,13 +70,13 @@ export default function ProtectedData() {
       const dataProtectorCore = await getDataProtectorCoreClient();
       // TODO check protectedDataList before
       const { grantedAccess } = await dataProtectorCore.getGrantedAccess({
-        protectedData: protectedDataId,
+        protectedData: protectedDataAddress,
       });
       console.log('grantedAccess', grantedAccess);
 
       return chunkArray(grantedAccess, ITEMS_PER_PAGE);
     },
-    enabled: !!userAddress && !!protectedDataId,
+    enabled: !!userAddress && !!protectedDataAddress,
     refetchOnWindowFocus: true,
   });
 
@@ -95,6 +95,7 @@ export default function ProtectedData() {
       <GrantAccessModal
         isSwitchingModalOpen={isGrantAccessModalOpen}
         setSwitchingModalOpen={setGrantAccessModalOpen}
+        protectedDataAddress={protectedDataAddress}
       />
       <h1 className="relative w-fit text-4xl sm:text-left md:text-center">
         {protectedData.data && (
