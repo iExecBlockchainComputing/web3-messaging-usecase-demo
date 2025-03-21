@@ -30,10 +30,10 @@ export default function GrantAccessModal({
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
   const validateFormData = () => {
@@ -93,9 +93,10 @@ export default function GrantAccessModal({
   return (
     <Dialog
       open={isSwitchingModalOpen}
-      onOpenChange={(openState: boolean) => (
-        setSwitchingModalOpen(openState), resetForm()
-      )}
+      onOpenChange={(openState) => {
+        setSwitchingModalOpen(openState);
+        resetForm();
+      }}
     >
       <DialogContent>
         <DialogTitle>
@@ -165,53 +166,25 @@ export default function GrantAccessModal({
               id="access_number"
             />
           </div>
-          {/* <div className="flex w-full max-w-[550px] flex-col gap-y-0.5 text-sm">
-            {Object.keys(statuses).length > 0 && (
-              <div className="mt-6">
-                {Object.entries(statuses).map(
-                  ([message, { isDone, isError }]) => (
-                    <StatusMessage
-                      key={message}
-                      message={message}
-                      isDone={isDone}
-                      isError={isError}
-                    />
-                  )
-                )}
-              </div>
-            )}
-          </div> */}
-          {grantAccessMutation.isError &&
-          grantAccessMutation.error.message === 'Failed to sign data access' &&
-          !(grantAccessMutation.error.cause as Error).message.startsWith(
-            'ethers-user-denied'
-          ) ? (
+          {grantAccessMutation.isError && (
             <Alert variant="error">
               <p>Oops, something went wrong while adding an authorized user.</p>
               <p>
                 {grantAccessMutation.error.cause
-                  ? grantAccessMutation.error.cause.toString()
+                  ? grantAccessMutation.error.cause.message.toString()
                   : grantAccessMutation.error.toString()}
               </p>
-              <p>
-                Are you sure your protected data was created in the same
-                environment?'
-              </p>
+              {grantAccessMutation.error.message ===
+                'Failed to sign data access' &&
+                !(grantAccessMutation.error.cause as Error).message.startsWith(
+                  'ethers-user-denied'
+                ) && (
+                  <p>
+                    Are you sure your protected data was created in the same
+                    environment?
+                  </p>
+                )}
             </Alert>
-          ) : (
-            grantAccessMutation.isError && (
-              <Alert variant="error">
-
-                <p>
-                  Oops, something went wrong while adding an authorized user.
-                </p>
-                <p>
-                  {grantAccessMutation.error.cause
-                    ? grantAccessMutation.error.cause.message.toString()
-                    : grantAccessMutation.error.toString()}
-                </p>
-              </Alert>
-            )
           )}
           <div className="mt-2 flex justify-center gap-5">
             <Button
