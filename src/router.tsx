@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout.tsx';
 import AddProtectedData from './views/myData/addProtectedData.tsx';
-import ProtectedDataList from './views/myData/protectedDataList.tsx';
 import ProtectedData from './views/myData/protectedData.tsx';
+import ProtectedDataList from './views/myData/protectedDataList.tsx';
 
 export const router = createBrowserRouter([
   {
