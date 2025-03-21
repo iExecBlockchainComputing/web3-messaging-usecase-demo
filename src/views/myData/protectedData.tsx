@@ -150,16 +150,7 @@ export default function ProtectedData() {
                   <p>{grantedAccess.error.toString()}</p>
                 </Alert>
               ) : (
-                <div className="space-y-4">
-                  <p>No authorized users yet.</p>
-                  <Button
-                    onClick={() => {
-                      setGrantAccessModalOpen(true);
-                    }}
-                  >
-                    Authorize user
-                  </Button>
-                </div>
+                <p>No authorized users yet.</p>
               )}
             </div>
           ) : (
