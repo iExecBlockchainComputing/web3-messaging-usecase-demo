@@ -31,9 +31,11 @@ export function NavBar() {
         <span className="pointer-events-none block h-0.5 w-[26px] origin-right transform rounded-full bg-white duration-200 group-has-[:checked]/checkbox:rotate-45"></span>
       </label>
       <div className="border-grey-600 bg-grey-900 fixed flex h-dvh w-full -translate-x-full flex-col overflow-auto rounded-r-3xl border-r px-5 pt-10 duration-300 group-has-[:checked]:translate-x-0 lg:w-[255px] lg:translate-x-0">
-        <Link to="/" className="-mx-2 flex items-center p-2">
+        <Link to="/my-data" className="-mx-2 flex items-center p-2">
           <img src={iExecLogo} width="25" height="30" alt="iExec logo" />
-          <div className="ml-3 font-mono leading-5 font-bold">iExec</div>
+          <div className="ml-3 font-mono leading-5 font-bold">
+            WEB3 Messaging
+          </div>
         </Link>
 
         <div className="left-navbar text-grey-400 mt-10 flex grow flex-col">
