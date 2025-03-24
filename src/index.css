@@ -146,8 +146,17 @@ body {
   @apply bg-background text-foreground;
 }
 
+h1,
+h2 {
+  @apply font-anybody;
+}
+
 h1 {
-  @apply font-anybody text-2xl font-extrabold;
+  @apply text-2xl font-extrabold;
+}
+
+h2 {
+  @apply text-xl font-bold;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -172,4 +181,14 @@ input[type='number'] {
 }
 *::-webkit-scrollbar-track {
   @apply bg-grey-800 rounded-full;
+}
+
+.radial-bg {
+  background: radial-gradient(
+    69.42% 69.42% at 76.4% 5.58%,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(102, 102, 102, 0.1) 17%,
+    rgba(102, 102, 102, 0.1) 68%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
 }

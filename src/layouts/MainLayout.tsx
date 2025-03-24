@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { NavBar } from '@/components/NavBar/NavBar.tsx';
-import { TopNavBar } from '@/components/NavBar/TopNavBar.tsx';
+import { NavBar } from '@/components/navBar/NavBar.tsx';
+import { TopNavBar } from '@/components/navBar/TopNavBar.tsx';
 import { useWatchAccount } from '@/hooks/useWatchAccount.ts';
 import useUserStore from '@/stores/useUser.store.ts';
 import { Toaster } from '../components/ui/toaster.tsx';
@@ -13,7 +13,7 @@ export default function MainLayout() {
   return (
     <div className="flex">
       <NavBar />
-      <div className="w-full px-10">
+      <div className="m:px-10 w-full px-6">
         <TopNavBar />
         <div className="mt-10 mb-24 max-w-[1260px] flex-1">
           {!isConnected ? <ConnectWallet /> : <Outlet />}
