@@ -82,7 +82,6 @@ export default function GrantAccessModal({
         title: 'You have successfully authorized a new user.',
         variant: 'success',
       });
-      resetForm();
       setSwitchingModalOpen(false);
     },
   });
