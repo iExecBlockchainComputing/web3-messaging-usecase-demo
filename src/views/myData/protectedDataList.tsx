@@ -150,7 +150,10 @@ export default function ProtectedDataList() {
               )
             </span>
           </h2>
-          <p>Remove Confidentially</p>
+          <p>
+            Confidentially manage your protected data. Easily create, review,
+            authorize, and revoke access.
+          </p>
         </div>
         <div className="flex flex-wrap gap-x-6 gap-y-3">
           {Object.keys(COLOR_CLASSES).map((key) => {
