@@ -1,3 +1,4 @@
+import { Address } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
@@ -39,7 +40,9 @@ const ITEMS_PER_PAGE = 8;
 
 export default function ProtectedData() {
   const { address: userAddress } = useUserStore();
-  const { protectedDataAddress } = useParams();
+  const { protectedDataAddress } = useParams<{
+    protectedDataAddress: Address;
+  }>();
   const [currentPage, setCurrentPage] = useState(0);
   const [isGrantAccessModalOpen, setGrantAccessModalOpen] = useState(false);
 
@@ -92,11 +95,13 @@ export default function ProtectedData() {
 
   return (
     <div className="grid gap-8">
-      <GrantAccessModal
-        isSwitchingModalOpen={isGrantAccessModalOpen}
-        setSwitchingModalOpen={setGrantAccessModalOpen}
-        protectedDataAddress={protectedDataAddress}
-      />
+      {protectedDataAddress && (
+        <GrantAccessModal
+          isSwitchingModalOpen={isGrantAccessModalOpen}
+          setSwitchingModalOpen={setGrantAccessModalOpen}
+          protectedDataAddress={protectedDataAddress}
+        />
+      )}
       <h1 className="relative w-fit text-4xl sm:text-left md:text-center">
         {protectedData.data && (
           <span
