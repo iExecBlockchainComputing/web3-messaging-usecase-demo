@@ -77,12 +77,13 @@ export default function GrantAccessModal({
       queryClient.invalidateQueries({
         queryKey: ['granted access', protectedDataAddress, userAddress],
       });
-      navigate(`/my-data/protected-data/${protectedDataAddress}`);
+      navigate(`/my-data/${protectedDataAddress}`);
       toast({
         title: 'You have successfully authorized a new user.',
         variant: 'success',
       });
       resetForm();
+      setSwitchingModalOpen(false);
     },
   });
 
