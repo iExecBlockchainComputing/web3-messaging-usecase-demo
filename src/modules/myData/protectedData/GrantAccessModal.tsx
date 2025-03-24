@@ -57,7 +57,7 @@ export default function GrantAccessModal({
   };
 
   const grantAccessMutation = useMutation({
-    mutationKey: ['grantAccess', protectedDataAddress],
+    mutationKey: ['grantAccess', protectedDataAddress, formData.userAddress],
     mutationFn: async () => {
       const dataProtectorCore = await getDataProtectorCoreClient();
       const grantedAccess = await dataProtectorCore.grantAccess({
@@ -171,7 +171,9 @@ export default function GrantAccessModal({
               <p>Oops, something went wrong while adding an authorized user.</p>
               <p>
                 {grantAccessMutation.error.cause
-                  ? grantAccessMutation.error.cause.message.toString()
+                  ? (
+                      grantAccessMutation.error.cause as Error
+                    ).message.toString()
                   : grantAccessMutation.error.toString()}
               </p>
               {grantAccessMutation.error.message ===
