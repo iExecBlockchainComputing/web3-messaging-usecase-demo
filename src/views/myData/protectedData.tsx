@@ -7,6 +7,7 @@ import { CircularLoader } from '@/components/CircularLoader';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import RevokeAccess from '@/modules/myData/RevokeAccess';
 import GrantAccessModal from '@/modules/myData/protectedData/GrantAccessModal';
 import { ProtectedDataDetails } from '@/modules/myData/protectedData/ProtectedDataDetails';
 import useUserStore from '@/stores/useUser.store';
@@ -175,9 +176,7 @@ export default function ProtectedData() {
                   </div>
                   <div className="truncate">{grantedAccess.volume}</div>
                   <div className="justify-end">
-                    <Button variant="outline" className="">
-                      Revoke access
-                    </Button>
+                    <RevokeAccess grantAccess={grantedAccess} />
                   </div>
                 </div>
               );
