@@ -76,7 +76,6 @@ export default function ProtectedData() {
       const { grantedAccess } = await dataProtectorCore.getGrantedAccess({
         protectedData: protectedDataAddress,
       });
-      console.log('grantedAccess', grantedAccess);
 
       return chunkArray(grantedAccess, ITEMS_PER_PAGE);
     },
