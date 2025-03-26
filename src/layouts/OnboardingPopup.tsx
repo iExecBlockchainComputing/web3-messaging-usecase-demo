@@ -81,7 +81,7 @@ export default function OnboardingPopup() {
   }
 
   useEffect(() => {
-    if (step === 4) {
+    if (step === steps.length) {
       onPopupOpenChange(false);
     }
   }, [step]);
@@ -96,13 +96,13 @@ export default function OnboardingPopup() {
         <div className="flex flex-col items-center gap-6">
           <StepContent {...steps[step]} />
           <div className="flex gap-4">
-            <div className="flex gap-4">
+            <div className="flex">
               {Array.from({ length: steps.length }).map((_, index) => (
                 <button
                   key={index}
                   className={cn(
-                    'bg-grey-400 size-2 rounded-full',
-                    step === index && 'bg-primary'
+                    'before:bg-grey-400 relative -my-2 size-6 before:absolute before:top-1/2 before:left-1/2 before:size-2 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full',
+                    step === index && 'before:bg-primary'
                   )}
                   onClick={() => setStep(index)}
                 />
@@ -110,7 +110,7 @@ export default function OnboardingPopup() {
             </div>
           </div>
           <div className="flex gap-3">
-            {step !== 3 && (
+            {step !== steps.length - 1 && (
               <Button
                 onClick={() => onPopupOpenChange(false)}
                 className="mx-auto"
@@ -124,7 +124,7 @@ export default function OnboardingPopup() {
               className="mx-auto"
               autoFocus
             >
-              {step === 3 ? 'Start Earning' : 'Next'}
+              {step === steps.length - 1 ? 'Start Earning' : 'Next'}
               <ArrowRight />
             </Button>
           </div>
