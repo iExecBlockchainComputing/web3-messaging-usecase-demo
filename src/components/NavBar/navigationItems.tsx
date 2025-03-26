@@ -1,3 +1,5 @@
+import { MessageSquare } from 'react-feather';
+
 // navigationItems.js
 export const navigationItems = [
   {
@@ -41,5 +43,10 @@ export const navigationItems = [
         />
       </svg>
     ),
+  },
+  {
+    name: 'Send Messages',
+    path: '/contacts',
+    icon: <MessageSquare />,
   },
 ];

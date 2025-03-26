@@ -36,7 +36,7 @@ const getDataType = (schema: { [key: string]: unknown }) => {
   if (schema.email) {
     return 'mail';
   }
-  if (schema.telegramChatId || schema.chatId) {
+  if (schema.telegram_chatId) {
     return 'telegram';
   }
 };

@@ -3,11 +3,15 @@ import {
   IExecDataProtectorCore,
   IExecDataProtectorSharing,
 } from '@iexec/dataprotector';
+import { IExecWeb3mail } from '@iexec/web3mail';
+import { IExecWeb3telegram } from '@iexec/web3telegram';
 import { IExec, IExecConfig } from 'iexec';
 import { type Connector } from 'wagmi';
 
 let iExecDataProtectorCore: IExecDataProtectorCore | null = null;
 let iExecDataProtectorSharing: IExecDataProtectorSharing | null = null;
+let iExecWeb3mail: IExecWeb3mail | null = null;
+let iExecWeb3telegram: IExecWeb3telegram | null = null;
 let iExec: IExec | null = null;
 
 // Basic promise queue for pending getDataProtectorCoreClient() requests
@@ -20,11 +24,17 @@ const DATA_PROTECTOR_SHARING_CLIENT_RESOLVES: Array<
 > = [];
 // Basic promise queue for pending getIExec() requests
 const IEXEC_CLIENT_RESOLVES: Array<Promise<IExec>> = [];
+// Basic promise queue for pending getWeb3mailClient() requests
+const WEB3MAIL_CLIENT_RESOLVES: Array<Promise<IExecWeb3mail>> = [];
+// Basic promise queue for pending getWeb3telegramClient() requests
+const WEB3TELEGRAM_CLIENT_RESOLVES: Array<Promise<IExecWeb3telegram>> = [];
 
 // Clean both SDKs
 export function cleanIExecSDKs() {
   iExecDataProtectorCore = null;
   iExecDataProtectorSharing = null;
+  iExecWeb3mail = null;
+  iExecWeb3telegram = null;
   iExec = null;
 }
 
@@ -40,11 +50,7 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return;
   }
 
-  const dataProtectorParent = new IExecDataProtector(provider, {
-    iexecOptions: {
-      smsURL: 'https://sms.scone-debug.v8-bellecour.iex.ec/',
-    },
-  });
+  const dataProtectorParent = new IExecDataProtector(provider);
 
   iExecDataProtectorCore = dataProtectorParent.core;
   iExecDataProtectorSharing = dataProtectorParent.sharing;
@@ -67,6 +73,18 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return resolve(iExec);
   });
   IEXEC_CLIENT_RESOLVES.length = 0;
+
+  iExecWeb3mail = new IExecWeb3mail(provider);
+  WEB3MAIL_CLIENT_RESOLVES.forEach((resolve) => {
+    return resolve(iExecWeb3mail);
+  });
+  WEB3MAIL_CLIENT_RESOLVES.length = 0;
+
+  iExecWeb3telegram = new IExecWeb3telegram(provider);
+  WEB3TELEGRAM_CLIENT_RESOLVES.forEach((resolve) => {
+    return resolve(iExecWeb3telegram);
+  });
+  WEB3TELEGRAM_CLIENT_RESOLVES.length = 0;
 }
 
 export async function getDataProtectorCoreClient(): Promise<IExecDataProtectorCore> {
@@ -78,13 +96,18 @@ export async function getDataProtectorCoreClient(): Promise<IExecDataProtectorCo
   return iExecDataProtectorCore;
 }
 
-export async function getDataProtectorSharingClient(): Promise<IExecDataProtectorSharing> {
-  if (!iExecDataProtectorSharing) {
-    return new Promise((resolve) =>
-      DATA_PROTECTOR_SHARING_CLIENT_RESOLVES.push(resolve)
-    );
+export async function getWeb3telegramClient(): Promise<IExecWeb3telegram> {
+  if (!iExecWeb3telegram) {
+    return new Promise((resolve) => WEB3TELEGRAM_CLIENT_RESOLVES.push(resolve));
   }
-  return iExecDataProtectorSharing;
+  return iExecWeb3telegram;
+}
+
+export async function getWeb3mailClient(): Promise<IExecWeb3mail> {
+  if (!iExecWeb3mail) {
+    return new Promise((resolve) => WEB3MAIL_CLIENT_RESOLVES.push(resolve));
+  }
+  return iExecWeb3mail;
 }
 
 export function getIExec(): Promise<IExec> {

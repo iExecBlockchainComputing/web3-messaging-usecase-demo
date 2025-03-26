@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout.tsx';
+import ContactList from './views/contact/contactList.tsx';
 import AddProtectedData from './views/myData/addProtectedData.tsx';
 import ProtectedData from './views/myData/protectedData.tsx';
 import ProtectedDataList from './views/myData/protectedDataList.tsx';
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
       {
         path: '/my-data/:protectedDataAddress',
         element: <ProtectedData />,
+      },
+      {
+        path: '/contacts',
+        element: <ContactList />,
       },
     ],
   },

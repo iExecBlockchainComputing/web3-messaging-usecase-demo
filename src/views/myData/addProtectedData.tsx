@@ -108,7 +108,7 @@ export default function AddProtectedData() {
     mutationKey: ['protectData', userAddress],
     mutationFn: async (isMail: boolean) => {
       const dataProtectorCore = await getDataProtectorCoreClient();
-      const key = isMail ? 'email' : 'telegramChatId';
+      const key = isMail ? 'email' : 'telegram_chatId';
 
       const protectedData = await dataProtectorCore.protectData({
         data: {
