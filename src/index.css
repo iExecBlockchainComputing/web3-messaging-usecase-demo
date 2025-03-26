@@ -159,6 +159,10 @@ h2 {
   @apply text-xl font-bold;
 }
 
+button {
+  @apply cursor-pointer;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

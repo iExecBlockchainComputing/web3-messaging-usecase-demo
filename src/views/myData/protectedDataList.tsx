@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'react-feather';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
@@ -237,12 +237,15 @@ export default function ProtectedDataList() {
                   variant="text"
                   size="none"
                   className="group mt-auto w-fit text-lg font-bold"
+                  asChild
                 >
-                  Manage Access{' '}
-                  <ArrowRight
-                    size="20"
-                    className="duration-300 group-hover:translate-x-1"
-                  />
+                  <Link to={`/my-data/${protectedData.address}`}>
+                    Manage Access{' '}
+                    <ArrowRight
+                      size="20"
+                      className="duration-300 group-hover:translate-x-1"
+                    />
+                  </Link>
                 </Button>
               </div>
             );

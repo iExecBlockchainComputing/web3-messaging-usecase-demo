@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout.tsx';
 import AddProtectedData from './views/myData/addProtectedData.tsx';
+import ProtectedData from './views/myData/protectedData.tsx';
 import ProtectedDataList from './views/myData/protectedDataList.tsx';
 
 export const router = createBrowserRouter([
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: '/my-data/add-protected-data',
         element: <AddProtectedData />,
+      },
+      {
+        path: '/my-data/:protectedDataAddress',
+        element: <ProtectedData />,
       },
     ],
   },
