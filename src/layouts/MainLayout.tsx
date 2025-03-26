@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { NavBar } from '@/components/navBar/NavBar.tsx';
 import { TopNavBar } from '@/components/navBar/TopNavBar.tsx';
 import { useWatchAccount } from '@/hooks/useWatchAccount.ts';
+import OnboardingPopup from '@/layouts/OnboardingPopup.tsx';
 import useUserStore from '@/stores/useUser.store.ts';
 import { Toaster } from '../components/ui/toaster.tsx';
 import ConnectWallet from './ConnectWallet.tsx';
@@ -19,6 +20,7 @@ export default function MainLayout() {
           {!isConnected ? <ConnectWallet /> : <Outlet />}
         </div>
       </div>
+      {isConnected && <OnboardingPopup />}
       <Toaster />
     </div>
   );

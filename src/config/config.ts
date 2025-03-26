@@ -1,5 +1,7 @@
 export const ITEMS_PER_PAGE = 6;
 
+export const LOCAL_STORAGE_PREFIX = 'Web3Messaging';
+
 /**
  * See smart-contract transactions:
  * https://blockscout-bellecour.iex.ec/address/0x781482C39CcE25546583EaC4957Fb7Bf04C277D2
