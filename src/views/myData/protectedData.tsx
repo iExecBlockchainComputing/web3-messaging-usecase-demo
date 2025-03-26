@@ -95,11 +95,11 @@ export default function ProtectedData() {
 
   return (
     <div className="grid gap-8">
-      {protectedDataAddress && (
+      {protectedData.data && (
         <GrantAccessModal
           isSwitchingModalOpen={isGrantAccessModalOpen}
           setSwitchingModalOpen={setGrantAccessModalOpen}
-          protectedDataAddress={protectedDataAddress}
+          protectedData={protectedData.data}
         />
       )}
       <h1 className="relative w-fit text-4xl sm:text-left md:text-center">

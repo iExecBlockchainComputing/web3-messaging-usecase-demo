@@ -1,5 +1,8 @@
-import { WEB3MAIL_IDAPPS_WHITELIST_SC } from '@/config/config';
-import { Address } from '@/types';
+import {
+  WEB3MAIL_IDAPPS_WHITELIST_SC,
+  WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
+} from '@/config/config';
+import { ProtectedData } from '@iexec/dataprotector';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -13,11 +16,11 @@ import useUserStore from '@/stores/useUser.store';
 export default function GrantAccessModal({
   isSwitchingModalOpen,
   setSwitchingModalOpen,
-  protectedDataAddress,
+  protectedData,
 }: {
   isSwitchingModalOpen: boolean;
   setSwitchingModalOpen: (openState: boolean) => void;
-  protectedDataAddress: Address;
+  protectedData: ProtectedData;
 }) {
   const { address: userAddress } = useUserStore();
   const navigate = useNavigate();
@@ -46,6 +49,16 @@ export default function GrantAccessModal({
     return null;
   };
 
+  const getDataType = (schema: { [key: string]: unknown }) => {
+    if (schema.email) {
+      return 'mail';
+    }
+    if (schema.telegramChatId || schema.chatId) {
+      return 'telegram';
+    }
+    return 'other';
+  };
+
   const handleGrantAccess = async () => {
     const errorMessage = validateFormData();
     if (errorMessage) {
@@ -57,13 +70,16 @@ export default function GrantAccessModal({
   };
 
   const grantAccessMutation = useMutation({
-    mutationKey: ['grantAccess', protectedDataAddress, formData.userAddress],
+    mutationKey: ['grantAccess', protectedData.address, formData.userAddress],
     mutationFn: async () => {
       const dataProtectorCore = await getDataProtectorCoreClient();
       const grantedAccess = await dataProtectorCore.grantAccess({
-        protectedData: protectedDataAddress,
+        protectedData: protectedData.address,
         authorizedUser: formData.userAddress,
-        authorizedApp: WEB3MAIL_IDAPPS_WHITELIST_SC,
+        authorizedApp:
+          getDataType(protectedData.schema) === 'mail'
+            ? WEB3MAIL_IDAPPS_WHITELIST_SC
+            : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
         pricePerAccess: 0,
         numberOfAccess: formData.accessNumber,
       });
@@ -75,9 +91,9 @@ export default function GrantAccessModal({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['granted access', protectedDataAddress, userAddress],
+        queryKey: ['granted access', protectedData.address, userAddress],
       });
-      navigate(`/my-data/${protectedDataAddress}`);
+      navigate(`/my-data/${protectedData.address}`);
       toast({
         title: 'You have successfully authorized a new user.',
         variant: 'success',
