@@ -114,7 +114,7 @@ export default function ProtectedData() {
             {protectedData.data.schema.email ? 'MAIL' : 'TELEGRAM'}
           </span>
         )}
-        {protectedData.data?.name}
+        {protectedData.data?.name ? protectedData.data.name : '(No name)'}
       </h1>
       <ProtectedDataDetails
         protectedData={protectedData.data}
