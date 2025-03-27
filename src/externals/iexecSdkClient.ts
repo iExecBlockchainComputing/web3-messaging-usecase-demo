@@ -5,7 +5,7 @@ import {
 } from '@iexec/dataprotector';
 import { IExecWeb3mail } from '@iexec/web3mail';
 import { IExecWeb3telegram } from '@iexec/web3telegram';
-import { IExec, IExecConfig } from 'iexec';
+import { Eip1193Provider, IExec, IExecConfig } from 'iexec';
 import { type Connector } from 'wagmi';
 
 let iExecDataProtectorCore: IExecDataProtectorCore | null = null;
@@ -44,7 +44,7 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return;
   }
 
-  const provider = await connector.getProvider();
+  const provider = (await connector.getProvider()) as Eip1193Provider;
   if (!provider) {
     cleanIExecSDKs();
     return;
