@@ -102,7 +102,7 @@ export default function ProtectedData() {
           protectedData={protectedData.data}
         />
       )}
-      <h1 className="relative w-fit text-4xl sm:text-left md:text-center">
+      <h1 className="relative w-fit text-4xl sm:text-left md:max-w-3/4 md:text-center">
         {protectedData.data && (
           <span
             className={cn(
@@ -114,7 +114,9 @@ export default function ProtectedData() {
             {protectedData.data.schema.email ? 'MAIL' : 'TELEGRAM'}
           </span>
         )}
-        {protectedData.data?.name ? protectedData.data.name : '(No name)'}
+        <span className="line-clamp-2 text-left">
+          {protectedData.data?.name ? protectedData.data.name : '(No name)'}
+        </span>
       </h1>
       <ProtectedDataDetails
         protectedData={protectedData.data}

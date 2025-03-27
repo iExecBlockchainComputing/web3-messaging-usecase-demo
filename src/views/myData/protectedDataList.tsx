@@ -204,7 +204,7 @@ export default function ProtectedDataList() {
             return (
               <div
                 key={protectedData.address}
-                className="radial-bg before:bg-grey-800 rounded-20 relative z-0 flex h-80 flex-col gap-6 overflow-hidden p-8 pt-[calc(--spacing(8)+42px)] before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]"
+                className="radial-bg before:bg-grey-800 rounded-20 relative z-0 flex h-82 flex-col gap-6 overflow-hidden p-8 pt-[calc(--spacing(8)+42px)] before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]"
               >
                 <div
                   className={cn(
@@ -226,7 +226,7 @@ export default function ProtectedDataList() {
                   {dataType && dataType.toUpperCase()}
                 </Button>
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold">
+                  <h3 className="line-clamp-2 text-2xl font-bold">
                     {protectedData.name ? protectedData.name : '(No name)'}
                   </h3>
                   <p className="text-grey-200 text-lg">
