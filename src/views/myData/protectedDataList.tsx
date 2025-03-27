@@ -144,7 +144,7 @@ export default function ProtectedDataList() {
             <span className="text-lg font-normal">
               (
               {pluralize(
-                protectedDataList ? protectedDataList.length : 0,
+                protectedDataList ? getProtectedDataByType('all').length : 0,
                 'item'
               )}
               )
