@@ -142,12 +142,9 @@ export default function ContactList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between gap-2">
-        <div>
-          <h1 className="text-xl font-bold">Send Message to contact</h1>
-          <p>Email or telegram contact info</p>
-        </div>
-        <Button>Add new contact TODO</Button>
+      <div>
+        <h1 className="text-xl font-bold">Send Message to contact</h1>
+        <p>Email or telegram contact info</p>
       </div>
       <div className="flex flex-wrap gap-x-6 gap-y-3">
         {Object.keys(COLOR_CLASSES).map((key) => {
@@ -227,7 +224,13 @@ export default function ContactList() {
                   {getDataType(contact.protectedData.schema)}
                 </div>
                 <div className="justify-end">
-                  <Button variant="discreet_outline">Send TODO</Button>
+                  <Button asChild variant="discreet_outline">
+                    <NavLink
+                      to={`/contacts/${contact.protectedData.address}/send-message`}
+                    >
+                      Send
+                    </NavLink>
+                  </Button>
                 </div>
               </div>
             );
