@@ -204,7 +204,7 @@ export default function ProtectedDataList() {
             return (
               <div
                 key={protectedData.address}
-                className="radial-bg before:bg-grey-800 rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 pt-[calc(--spacing(8)+42px)] before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]"
+                className="radial-bg before:bg-grey-800 rounded-20 relative z-0 flex h-80 flex-col gap-6 overflow-hidden p-8 pt-[calc(--spacing(8)+42px)] before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]"
               >
                 <div
                   className={cn(
