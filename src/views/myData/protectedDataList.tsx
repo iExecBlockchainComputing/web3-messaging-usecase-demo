@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'react-feather';
 import { Link, NavLink } from 'react-router-dom';
+import protectANewData from '@/assets/protect_a_new_data.png';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
@@ -121,10 +122,10 @@ export default function ProtectedDataList() {
 
   return (
     <div className="grid gap-10">
-      <div className="radial-bg before:bg-grey-800 relative z-0 flex flex-col gap-6 overflow-hidden rounded-2xl p-8 before:absolute before:inset-px before:-z-10 before:rounded-[15px]">
+      <div className="radial-bg before:bg-grey-800 relative z-0 grid gap-6 overflow-hidden rounded-2xl p-8 before:absolute before:inset-px before:-z-10 before:rounded-[15px] md:pr-56">
         <div>
           <h1 className="text-center sm:text-left">Protect a new data</h1>
-          <p>
+          <p className="text-pretty">
             Fully encrypt your email address or your Telegram chatID to enable
             confidential messaging.
           </p>
@@ -132,6 +133,11 @@ export default function ProtectedDataList() {
         <Button className="mx-auto sm:ml-0">
           <NavLink to="/my-data/add-protected-data">Create new</NavLink>
         </Button>
+        <img
+          className="h-ful absolute inset-y-0 right-11 hidden md:block"
+          src={protectANewData}
+          alt=""
+        />
         <div className="absolute inset-0 -z-10 blur-2xl sm:blur-[100px] lg:blur-[150px]">
           <div className="absolute top-1/4 right-0 aspect-[23/30] w-1/2 rounded-full bg-[#00115C] sm:-top-12" />
           <div className="absolute top-0 right-0 hidden aspect-square h-full translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FCECC0] sm:block" />
