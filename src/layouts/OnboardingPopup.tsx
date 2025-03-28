@@ -1,5 +1,4 @@
 import { LOCAL_STORAGE_PREFIX } from '@/config/config';
-import { DialogTitle } from '@radix-ui/react-dialog';
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'react-feather';
 import useLocalStorageState from 'use-local-storage-state';
@@ -10,6 +9,8 @@ import step4 from '@/assets/onboarding-popup/step_4.png';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog.tsx';
 import { cn } from '@/utils/style.utils.ts';
+import { DialogTitle } from '@radix-ui/react-dialog';
+import { useNavigate } from 'react-router-dom';
 
 const steps = [
   {
@@ -68,6 +69,7 @@ function StepContent({
 export default function OnboardingPopup() {
   const [step, setStep] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(true);
+  const navigate = useNavigate();
 
   const [isStorageOnboardingViewed, setStorageOnboardingViewed] =
     useLocalStorageState(`${LOCAL_STORAGE_PREFIX}_onboardingViewed`, {
@@ -78,6 +80,7 @@ export default function OnboardingPopup() {
     setDialogOpen(open);
     if (!open) {
       setStorageOnboardingViewed(true);
+      navigate('/my-data');
     }
   }
 
