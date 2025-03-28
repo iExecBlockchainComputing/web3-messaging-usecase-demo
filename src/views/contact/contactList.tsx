@@ -87,8 +87,8 @@ export default function ContactList() {
     refetchOnWindowFocus: true,
   });
 
-  // detch detailed data for each contact
-  const { data: contactDetails, isLoading: detailsLoading } = useQuery({
+  // fetch detailed data for each contact
+  const { data: contactDetails, isLoading: detailsLoading, error: detailsError } = useQuery({
     queryKey: ['contactDetails', contacts],
     queryFn: async () => {
       const details = await Promise.all(
@@ -163,10 +163,10 @@ export default function ContactList() {
           <div className="text-text-2 border-grey-600 col-span-6 flex h-48 items-center justify-center border-t text-center">
             {isContactLoading || detailsLoading ? (
               <CircularLoader />
-            ) : isError ? (
+            ) : isError || detailsError ? (
               <Alert variant="error">
                 <p>Oops, something went wrong while fetching contact list.</p>
-                <p>{error.toString()}</p>
+                <p>{error?.toString() || detailsError?.toString()}</p>
               </Alert>
             ) : (
               <p>There are no contact yet.</p>
