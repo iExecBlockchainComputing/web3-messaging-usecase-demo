@@ -2,10 +2,6 @@ import * as SwitchPrimitives from '@radix-ui/react-switch';
 import * as React from 'react';
 import { cn } from '@/utils/style.utils.ts';
 
-// bg should be 240 6% 39%
-// Unknown grey
-// Using bg-grey-500 for now
-
 const Switch = React.forwardRef<
   React.ElementRef<typeof SwitchPrimitives.Root>,
   React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
