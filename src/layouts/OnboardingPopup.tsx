@@ -1,4 +1,5 @@
 import { LOCAL_STORAGE_PREFIX } from '@/config/config';
+import { DialogTitle } from '@radix-ui/react-dialog';
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'react-feather';
 import useLocalStorageState from 'use-local-storage-state';
@@ -9,7 +10,6 @@ import step4 from '@/assets/onboarding-popup/step_4.png';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog.tsx';
 import { cn } from '@/utils/style.utils.ts';
-import { DialogTitle } from '@radix-ui/react-dialog';
 
 const steps = [
   {
@@ -93,7 +93,7 @@ export default function OnboardingPopup() {
 
   return (
     <Dialog open={dialogOpen} onOpenChange={onPopupOpenChange}>
-      <DialogContent hideCloseButton className="px-7 py-6" >
+      <DialogContent hideCloseButton className="px-7 py-6">
         <DialogTitle></DialogTitle>
         <div className="flex flex-col items-center gap-6">
           <StepContent {...steps[step]} />
