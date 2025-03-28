@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import iExecLogo from '../../assets/iexec-logo.svg';
 import { cn } from '../../utils/style.utils.ts';
 import { Button } from '../ui/button.tsx';
-import { navigationItems } from './navigationItems';
+import { navigationItems } from './navigationItems.tsx';
 
 export function NavBar() {
   const [isMenuOpen, setMenuOpen] = useState(false);
