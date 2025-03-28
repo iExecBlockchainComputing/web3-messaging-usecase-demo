@@ -47,6 +47,6 @@ export const navigationItems = [
   {
     name: 'Send Messages',
     path: '/contacts',
-    icon: <MessageSquare />,
+    icon: <MessageSquare size={20} />,
   },
 ];
