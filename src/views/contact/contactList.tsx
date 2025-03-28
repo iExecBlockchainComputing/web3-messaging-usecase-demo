@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ITEMS_PER_PAGE,
   WEB3MAIL_IDAPPS_WHITELIST_SC,
   WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
 } from '@/config/config';
-import { Address } from '@/types';
-import { ProtectedData } from '@iexec/dataprotector';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
@@ -40,105 +39,85 @@ const COLOR_CLASSES: {
   },
 };
 
+const fetchContacts = async (userAddress: string) => {
+  if (!userAddress) { throw new Error('User address is undefined'); }
+
+  const web3mail = await getWeb3mailClient();
+  const myEmailContacts = await web3mail.fetchMyContacts({ isUserStrict: true });
+
+  const web3telegram = await getWeb3telegramClient();
+  const myTelegramContacts = await web3telegram.fetchMyContacts();
+
+  return [...myEmailContacts, ...myTelegramContacts].sort(
+    (a, b) => new Date(a.accessGrantTimestamp).getTime() - new Date(b.accessGrantTimestamp).getTime()
+  );
+};
+
+const fetchContactDetails = async (contact: any, userAddress: string) => {
+  const dataProtectorCore = await getDataProtectorCoreClient();
+
+  const contactProtectedData = await dataProtectorCore.getProtectedData({
+    protectedDataAddress: contact.address,
+  });
+
+  const grantedAccess = await dataProtectorCore.getGrantedAccess({
+    protectedData: contact.address,
+    authorizedUser: userAddress,
+    authorizedApp:
+      contactProtectedData[0].schema.email
+        ? WEB3MAIL_IDAPPS_WHITELIST_SC
+        : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
+  });
+  return {
+    ...contactProtectedData[0],
+    volume: grantedAccess.grantedAccess[0].volume,
+  };
+};
+
 export default function ContactList() {
   const { address: userAddress } = useUserStore();
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedTab, setSelectedTab] = useState<'all' | 'telegram' | 'mail'>(
-    'all'
-  );
+  const [selectedTab, setSelectedTab] = useState<'all' | 'telegram' | 'mail'>('all');
 
-  const contactList = useQuery({
-    queryKey: ['fetchContact', userAddress],
-    queryFn: async () => {
-      if (!userAddress) {
-        throw new Error('User address is undefined');
-      }
-
-      const web3mail = await getWeb3mailClient();
-      const myEmailContacts = await web3mail.fetchMyContacts({
-        isUserStrict: true,
-      });
-
-      const web3telegram = await getWeb3telegramClient();
-      const myTelegramContacts = await web3telegram.fetchMyContacts();
-
-      const mergedContacts = [...myEmailContacts, ...myTelegramContacts];
-
-      const sortedContacts = mergedContacts.sort(
-        (a, b) =>
-          new Date(a.accessGrantTimestamp).getTime() -
-          new Date(b.accessGrantTimestamp).getTime()
-      );
-
-      const contactsWithProtectedDataAndGrantedAccess = await Promise.all(
-        sortedContacts.map(async (contact) => {
-          const contactProtectedData = await oneProtectedData.mutateAsync(
-            contact.address as Address
-          );
-          const contactGrantedAccess =
-            await oneGrantedAccess.mutateAsync(contactProtectedData);
-          return {
-            ...contact,
-            protectedData: contactProtectedData,
-            grantedAccess: contactGrantedAccess,
-          };
-        })
-      );
-      return contactsWithProtectedDataAndGrantedAccess;
-    },
+  // fetch contacts list
+  const { data: contacts, isLoading: isContactLoading, isError, error } = useQuery({
+    queryKey: ['fetchContacts', userAddress],
+    queryFn: () => fetchContacts(userAddress as string),
     enabled: !!userAddress,
     refetchOnWindowFocus: true,
   });
 
-  const oneProtectedData = useMutation({
-    mutationFn: async (protectedDataAddress: Address) => {
-      const dataProtectorCore = await getDataProtectorCoreClient();
-      const oneProtectedData = await dataProtectorCore.getProtectedData({
-        protectedDataAddress: protectedDataAddress,
-      });
-      return oneProtectedData[0];
+  // detch detailed data for each contact
+  const { data: contactDetails, isLoading: detailsLoading } = useQuery({
+    queryKey: ['contactDetails', contacts],
+    queryFn: async () => {
+      const details = await Promise.all(
+        contacts?.map((contact) => fetchContactDetails(contact, userAddress as string)) || []
+      );
+      return details;
     },
-  });
-
-  const oneGrantedAccess = useMutation({
-    mutationFn: async (protectedData: ProtectedData) => {
-      const dataProtectorCore = await getDataProtectorCoreClient();
-      const oneGrantedAccess = await dataProtectorCore.getGrantedAccess({
-        protectedData: protectedData.address,
-        authorizedUser: userAddress,
-        authorizedApp:
-          getDataType(protectedData.schema) === 'mail'
-            ? WEB3MAIL_IDAPPS_WHITELIST_SC
-            : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
-      });
-      return oneGrantedAccess.grantedAccess[0];
-    },
+    enabled: !!contacts, // only run when contacts are fetched
+    refetchOnWindowFocus: true,
   });
 
   const getDataType = (schema: { [key: string]: unknown }) => {
-    if (schema.email) {
-      return 'mail';
-    }
-    if (schema.telegram_chatId) {
-      return 'telegram';
-    }
+    if (schema.email) { return 'mail'; }
+    if (schema.telegram_chatId) { return 'telegram'; }
+    return 'unknown';
   };
 
-  const getProtectedDataByType = (type: 'all' | 'telegram' | 'mail') => {
+  const getFilteredContacts = (type: 'all' | 'telegram' | 'mail') => {
+
     return (
-      contactList.data?.filter((contact) =>
+      contactDetails?.filter((contact) =>
         type === 'all'
-          ? ['telegram', 'mail'].includes(
-              getDataType(contact.protectedData.schema) || ''
-            )
-          : getDataType(contact.protectedData.schema) === type
+          ? ['telegram', 'mail'].includes(getDataType(contact.schema))
+          : getDataType(contact.schema) === type
       ) || []
     );
   };
 
-  const pagesOfContacts =
-    contactList &&
-    chunkArray(getProtectedDataByType(selectedTab) || [], ITEMS_PER_PAGE);
+  const pagesOfContacts = chunkArray(getFilteredContacts(selectedTab), ITEMS_PER_PAGE);
 
   return (
     <div className="space-y-6">
@@ -182,12 +161,12 @@ export default function ContactList() {
         </div>
         {!pagesOfContacts || pagesOfContacts?.length === 0 ? (
           <div className="text-text-2 border-grey-600 col-span-6 flex h-48 items-center justify-center border-t text-center">
-            {contactList.isLoading ? (
+            {isContactLoading || detailsLoading ? (
               <CircularLoader />
-            ) : contactList.isError ? (
+            ) : isError ? (
               <Alert variant="error">
                 <p>Oops, something went wrong while fetching contact list.</p>
-                <p>{contactList.error.toString()}</p>
+                <p>{error.toString()}</p>
               </Alert>
             ) : (
               <p>There are no contact yet.</p>
@@ -203,9 +182,7 @@ export default function ContactList() {
                 )}
               >
                 <div className="truncate">
-                  {contact.protectedData.name
-                    ? contact.protectedData.name
-                    : '(No name)'}
+                  {contact.name || '(No name)'}
                 </div>
                 <div className="truncate">
                   <span className="truncate whitespace-nowrap">
@@ -218,15 +195,15 @@ export default function ContactList() {
                   </span>
                 </div>
                 <div className="truncate">
-                  {contact.grantedAccess && contact.grantedAccess.volume}
+                  {contact.volume}
                 </div>
                 <div className="text-primary truncate uppercase">
-                  {getDataType(contact.protectedData.schema)}
+                  {getDataType(contact.schema)}
                 </div>
                 <div className="justify-end">
                   <Button asChild variant="discreet_outline">
                     <NavLink
-                      to={`/contacts/${contact.protectedData.address}/send-message`}
+                      to={`/contacts/${contact.address}/send-message`}
                     >
                       Send
                     </NavLink>
@@ -236,6 +213,7 @@ export default function ContactList() {
             );
           })
         )}
+
         {pagesOfContacts && pagesOfContacts?.length > 1 && (
           <PaginatedNavigation
             className=""
