@@ -25,7 +25,6 @@ import useUserStore from '@/stores/useUser.store';
 import { pluralize } from '@/utils/pluralize';
 
 export default function SendMessage() {
-  const { address: userAddress } = useUserStore();
   const navigate = useNavigate();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
@@ -39,20 +38,16 @@ export default function SendMessage() {
   });
 
   const protectedData = useQuery({
-    queryKey: ['protectedData', protectedDataAddress, userAddress],
+    queryKey: ['protectedData', protectedDataAddress],
     queryFn: async () => {
-      if (!userAddress) {
-        throw new Error('User address is undefined');
-      }
       const dataProtectorCore = await getDataProtectorCoreClient();
       // TODO check protectedDataList before
       const protectedDatas = await dataProtectorCore.getProtectedData({
         protectedDataAddress: protectedDataAddress,
-        owner: userAddress,
       });
       return protectedDatas[0];
     },
-    enabled: !!userAddress && !!protectedDataAddress,
+    enabled: !!protectedDataAddress,
     refetchOnWindowFocus: true,
   });
 
