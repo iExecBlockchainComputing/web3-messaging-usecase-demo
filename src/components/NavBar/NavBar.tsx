@@ -47,9 +47,7 @@ export function NavBar() {
                 className={({ isActive }) =>
                   cn(
                     'flex items-center gap-x-3 px-2 py-2 duration-200 hover:text-white md:py-3',
-                    isActive
-                      ? 'text-primary underline underline-offset-4'
-                      : ''
+                    isActive ? 'text-primary underline underline-offset-4' : ''
                   )
                 }
                 onClick={handleMenuToggle}
