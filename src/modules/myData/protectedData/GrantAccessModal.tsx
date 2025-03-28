@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
+import { DocLink } from '@/components/DocLink';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTitle, DialogContent } from '@/components/ui/dialog.tsx';
 import { toast } from '@/components/ui/use-toast';
@@ -80,7 +81,6 @@ export default function GrantAccessModal({
           getDataType(protectedData.schema) === 'mail'
             ? WEB3MAIL_IDAPPS_WHITELIST_SC
             : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
-        pricePerAccess: 0,
         numberOfAccess: formData.accessNumber,
       });
 
@@ -204,6 +204,34 @@ export default function GrantAccessModal({
                 )}
             </Alert>
           )}
+          <DocLink className="bg-grey-600 border-grey-500">
+            dataprotector-sdk / Method called:{' '}
+            <a
+              href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/grantAccess"
+              target="_blank"
+              rel="noreferrer"
+              className="text-primary whitespace-pre hover:underline"
+            >
+              <br />
+              grantAccess({'{'}
+              <br />
+              {'  '}protectedData: "{protectedData.address}",
+              <br />
+              {'  '}authorizedUser: "
+              {formData.userAddress ? formData.userAddress : 'undefined'}",
+              <br />
+              {'  '}authorizedApp: "
+              {getDataType(protectedData.schema) === 'mail'
+                ? WEB3MAIL_IDAPPS_WHITELIST_SC
+                : WEB3TELEGRAM_IDAPPS_WHITELIST_SC}
+              " ,
+              <br />
+              {'  '}numberOfAccess: "
+              {formData.accessNumber ? formData.accessNumber : 'undefined'},"
+              <br />
+              {'}'});
+            </a>
+          </DocLink>
           <div className="mt-2 flex justify-center gap-5">
             <Button
               variant="outline"

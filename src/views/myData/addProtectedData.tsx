@@ -4,6 +4,7 @@ import { JSX, useEffect, useState } from 'react';
 import { ArrowRight, Info, Mail, User } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
+import { DocLink } from '@/components/DocLink';
 import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
@@ -347,6 +348,34 @@ export default function AddProtectedData() {
             </Button>
           </div>
         </form>
+        <DocLink>
+          dataprotector-sdk / Method called:{' '}
+          <a
+            href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/protectData"
+            target="_blank"
+            rel="noreferrer"
+            className="text-primary whitespace-pre hover:underline"
+          >
+            <br />
+            protectData({'{'}
+            <br />
+            {'  '}data: {'{'}
+            <br />
+            {'    '}
+            {formData.dataType === 'mail'
+              ? 'email'
+              : formData.dataType === 'telegram'
+                ? 'telegram_chatId'
+                : 'undefined'}
+            : "{formData.encryptedDataContent}",
+            <br />
+            {'  }'}
+            <br />
+            {'  '}name: {formData.encryptedDataName},
+            <br />
+            {'}'});
+          </a>
+        </DocLink>
       </div>
     </div>
   );
