@@ -5,14 +5,13 @@ import {
 } from '@iexec/dataprotector';
 import { IExecWeb3mail } from '@iexec/web3mail';
 import { IExecWeb3telegram } from '@iexec/web3telegram';
-import { Eip1193Provider, IExec, IExecConfig } from 'iexec';
+import { Eip1193Provider } from 'iexec';
 import { type Connector } from 'wagmi';
 
 let iExecDataProtectorCore: IExecDataProtectorCore | null = null;
 let iExecDataProtectorSharing: IExecDataProtectorSharing | null = null;
 let iExecWeb3mail: IExecWeb3mail | null = null;
 let iExecWeb3telegram: IExecWeb3telegram | null = null;
-let iExec: IExec | null = null;
 
 // Basic promise queue for pending getDataProtectorCoreClient() requests
 const DATA_PROTECTOR_CORE_CLIENT_RESOLVES: Array<
@@ -22,20 +21,17 @@ const DATA_PROTECTOR_CORE_CLIENT_RESOLVES: Array<
 const DATA_PROTECTOR_SHARING_CLIENT_RESOLVES: Array<
   Promise<IExecDataProtectorSharing>
 > = [];
-// Basic promise queue for pending getIExec() requests
-const IEXEC_CLIENT_RESOLVES: Array<Promise<IExec>> = [];
 // Basic promise queue for pending getWeb3mailClient() requests
 const WEB3MAIL_CLIENT_RESOLVES: Array<Promise<IExecWeb3mail>> = [];
 // Basic promise queue for pending getWeb3telegramClient() requests
 const WEB3TELEGRAM_CLIENT_RESOLVES: Array<Promise<IExecWeb3telegram>> = [];
 
-// Clean both SDKs
+// Clean SDKs
 export function cleanIExecSDKs() {
   iExecDataProtectorCore = null;
   iExecDataProtectorSharing = null;
   iExecWeb3mail = null;
   iExecWeb3telegram = null;
-  iExec = null;
 }
 
 export async function initIExecSDKs({ connector }: { connector?: Connector }) {
@@ -56,8 +52,6 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
   iExecDataProtectorSharing = dataProtectorParent.sharing;
 
   // Initialize
-  const config = new IExecConfig({ ethProvider: provider });
-  iExec = new IExec(config);
 
   DATA_PROTECTOR_CORE_CLIENT_RESOLVES.forEach((resolve) => {
     return resolve(iExecDataProtectorCore);
@@ -68,11 +62,6 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return resolve(iExecDataProtectorSharing);
   });
   DATA_PROTECTOR_SHARING_CLIENT_RESOLVES.length = 0;
-
-  IEXEC_CLIENT_RESOLVES.forEach((resolve) => {
-    return resolve(iExec);
-  });
-  IEXEC_CLIENT_RESOLVES.length = 0;
 
   iExecWeb3mail = new IExecWeb3mail(provider);
   WEB3MAIL_CLIENT_RESOLVES.forEach((resolve) => {
@@ -108,13 +97,4 @@ export async function getWeb3mailClient(): Promise<IExecWeb3mail> {
     return new Promise((resolve) => WEB3MAIL_CLIENT_RESOLVES.push(resolve));
   }
   return iExecWeb3mail;
-}
-
-export function getIExec(): Promise<IExec> {
-  if (!iExec) {
-    return new Promise((resolve) => {
-      IEXEC_CLIENT_RESOLVES.push(resolve);
-    });
-  }
-  return Promise.resolve(iExec);
 }
