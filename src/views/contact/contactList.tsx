@@ -40,16 +40,22 @@ const COLOR_CLASSES: {
 };
 
 const fetchContacts = async (userAddress: string) => {
-  if (!userAddress) { throw new Error('User address is undefined'); }
+  if (!userAddress) {
+    throw new Error('User address is undefined');
+  }
 
   const web3mail = await getWeb3mailClient();
-  const myEmailContacts = await web3mail.fetchMyContacts({ isUserStrict: true });
+  const myEmailContacts = await web3mail.fetchMyContacts({
+    isUserStrict: true,
+  });
 
   const web3telegram = await getWeb3telegramClient();
   const myTelegramContacts = await web3telegram.fetchMyContacts();
 
   return [...myEmailContacts, ...myTelegramContacts].sort(
-    (a, b) => new Date(a.accessGrantTimestamp).getTime() - new Date(b.accessGrantTimestamp).getTime()
+    (a, b) =>
+      new Date(a.accessGrantTimestamp).getTime() -
+      new Date(b.accessGrantTimestamp).getTime()
   );
 };
 
@@ -63,10 +69,9 @@ const fetchContactDetails = async (contact: any, userAddress: string) => {
   const grantedAccess = await dataProtectorCore.getGrantedAccess({
     protectedData: contact.address,
     authorizedUser: userAddress,
-    authorizedApp:
-      contactProtectedData[0].schema.email
-        ? WEB3MAIL_IDAPPS_WHITELIST_SC
-        : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
+    authorizedApp: contactProtectedData[0].schema.email
+      ? WEB3MAIL_IDAPPS_WHITELIST_SC
+      : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
   });
   return {
     ...contactProtectedData[0],
@@ -77,10 +82,17 @@ const fetchContactDetails = async (contact: any, userAddress: string) => {
 export default function ContactList() {
   const { address: userAddress } = useUserStore();
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedTab, setSelectedTab] = useState<'all' | 'telegram' | 'mail'>('all');
+  const [selectedTab, setSelectedTab] = useState<'all' | 'telegram' | 'mail'>(
+    'all'
+  );
 
   // fetch contacts list
-  const { data: contacts, isLoading: isContactLoading, isError, error } = useQuery({
+  const {
+    data: contacts,
+    isLoading: isContactLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ['fetchContacts', userAddress],
     queryFn: () => fetchContacts(userAddress as string),
     enabled: !!userAddress,
@@ -88,11 +100,17 @@ export default function ContactList() {
   });
 
   // fetch detailed data for each contact
-  const { data: contactDetails, isLoading: detailsLoading, error: detailsError } = useQuery({
+  const {
+    data: contactDetails,
+    isLoading: detailsLoading,
+    error: detailsError,
+  } = useQuery({
     queryKey: ['contactDetails', contacts],
     queryFn: async () => {
       const details = await Promise.all(
-        contacts?.map((contact) => fetchContactDetails(contact, userAddress as string)) || []
+        contacts?.map((contact) =>
+          fetchContactDetails(contact, userAddress as string)
+        ) || []
       );
       return details;
     },
@@ -101,13 +119,16 @@ export default function ContactList() {
   });
 
   const getDataType = (schema: { [key: string]: unknown }) => {
-    if (schema.email) { return 'mail'; }
-    if (schema.telegram_chatId) { return 'telegram'; }
+    if (schema.email) {
+      return 'mail';
+    }
+    if (schema.telegram_chatId) {
+      return 'telegram';
+    }
     return 'unknown';
   };
 
   const getFilteredContacts = (type: 'all' | 'telegram' | 'mail') => {
-
     return (
       contactDetails?.filter((contact) =>
         type === 'all'
@@ -117,7 +138,10 @@ export default function ContactList() {
     );
   };
 
-  const pagesOfContacts = chunkArray(getFilteredContacts(selectedTab), ITEMS_PER_PAGE);
+  const pagesOfContacts = chunkArray(
+    getFilteredContacts(selectedTab),
+    ITEMS_PER_PAGE
+  );
 
   return (
     <div className="space-y-6">
@@ -181,9 +205,7 @@ export default function ContactList() {
                   'bg-grey-50 even:*:bg-grey-800 *:border-grey-600 contents text-sm *:flex *:h-full *:items-center *:border-t *:px-5 *:py-3 odd:[a]:bg-red-300'
                 )}
               >
-                <div className="truncate">
-                  {contact.name || '(No name)'}
-                </div>
+                <div className="truncate">{contact.name || '(No name)'}</div>
                 <div className="truncate">
                   <span className="truncate whitespace-nowrap">
                     {contact.address}
@@ -194,17 +216,13 @@ export default function ContactList() {
                     {contact.owner === userAddress ? 'Me' : contact.owner}
                   </span>
                 </div>
-                <div className="truncate">
-                  {contact.volume}
-                </div>
+                <div className="truncate">{contact.volume}</div>
                 <div className="text-primary truncate uppercase">
                   {getDataType(contact.schema)}
                 </div>
                 <div className="justify-end">
                   <Button asChild variant="discreet_outline">
-                    <NavLink
-                      to={`/contacts/${contact.address}/send-message`}
-                    >
+                    <NavLink to={`/contacts/${contact.address}/send-message`}>
                       Send
                     </NavLink>
                   </Button>
