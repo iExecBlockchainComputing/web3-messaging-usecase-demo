@@ -1,6 +1,8 @@
 import { LOCAL_STORAGE_PREFIX } from '@/config/config';
+import { DialogTitle } from '@radix-ui/react-dialog';
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 import useLocalStorageState from 'use-local-storage-state';
 import step1 from '@/assets/onboarding-popup/step_1.png';
 import step2 from '@/assets/onboarding-popup/step_2.png';
@@ -9,8 +11,6 @@ import step4 from '@/assets/onboarding-popup/step_4.png';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent } from '@/components/ui/dialog.tsx';
 import { cn } from '@/utils/style.utils.ts';
-import { DialogTitle } from '@radix-ui/react-dialog';
-import { useNavigate } from 'react-router-dom';
 
 const steps = [
   {

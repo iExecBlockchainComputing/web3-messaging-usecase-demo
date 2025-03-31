@@ -134,10 +134,11 @@ export default function SendMessage() {
     onSuccess: () => {
       navigate('/contacts');
       toast({
-        title: `You have successfully sent a ${protectedData.data?.schema
-          ? getDataType(protectedData.data.schema)
-          : 'unknown'
-          }.`,
+        title: `You have successfully sent a ${
+          protectedData.data?.schema
+            ? getDataType(protectedData.data.schema)
+            : 'unknown'
+        }.`,
         variant: 'success',
       });
     },
