@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ITEMS_PER_PAGE,
   WEB3MAIL_IDAPPS_WHITELIST_SC,
   WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
 } from '@/config/config';
+import { Contact as Web3telegramContact } from '@iexec/web3mail';
+import { Contact as Web3mailContact } from '@iexec/web3telegram';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -59,7 +60,10 @@ const fetchContacts = async (userAddress: string) => {
   );
 };
 
-const fetchContactDetails = async (contact: any, userAddress: string) => {
+const fetchContactDetails = async (
+  contact: Web3telegramContact | Web3mailContact,
+  userAddress: string
+) => {
   const dataProtectorCore = await getDataProtectorCoreClient();
 
   const contactProtectedData = await dataProtectorCore.getProtectedData({
@@ -114,7 +118,7 @@ export default function ContactList() {
       );
       return details;
     },
-    enabled: !!contacts, // only run when contacts are fetched
+    enabled: !!contacts,
     refetchOnWindowFocus: true,
   });
 
