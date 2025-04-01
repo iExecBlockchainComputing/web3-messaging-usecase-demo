@@ -131,7 +131,7 @@ export default function ProtectedDataList() {
             confidential messaging.
           </p>
         </div>
-        <Button className="mx-auto sm:ml-0">
+        <Button asChild className="mx-auto sm:ml-0">
           <Link to="/my-data/add-protected-data">Create new</Link>
         </Button>
         <img
