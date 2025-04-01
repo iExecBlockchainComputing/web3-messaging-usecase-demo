@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import iExecLogo from '../../assets/iexec-logo.svg';
-import { cn } from '../../utils/style.utils.ts';
 import { Button } from '../ui/button.tsx';
 import { navigationItems } from './navigationItems.tsx';
 
@@ -44,12 +43,7 @@ export function NavBar() {
               <NavLink
                 key={index}
                 to={item.path}
-                className={({ isActive }) =>
-                  cn(
-                    'flex items-center gap-x-3 px-2 py-2 duration-200 hover:text-white md:py-3',
-                    isActive ? 'text-yellow-500' : ''
-                  )
-                }
+                className="aria-current:text-primary aria-current:bg-grey-800 flex items-center gap-x-3 rounded-lg py-3 pr-2 pl-6 duration-200 hover:text-white aria-current:hover:text-white md:py-3"
                 onClick={handleMenuToggle}
               >
                 {item.icon}
@@ -58,7 +52,7 @@ export function NavBar() {
             ))}
           </div>
 
-          <hr className="border-grey-700 mt-6 border-t" />
+          <hr className="border-grey-600 mt-6 border-t" />
 
           <div className="mt-10 mb-16">
             <Button
