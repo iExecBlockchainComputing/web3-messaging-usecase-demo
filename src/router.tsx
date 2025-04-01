@@ -1,3 +1,4 @@
+import Resources from '@/views/resources';
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout.tsx';
 import ContactList from './views/contact/contactList.tsx';
@@ -11,8 +12,9 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
+        index: true,
         path: '*',
-        element: <Navigate to="/" />,
+        element: <Navigate to="/my-data" />,
       },
       {
         path: '/my-data',
@@ -33,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: '/contacts/:protectedDataAddress/send-message',
         element: <SendMessage />,
+      },
+      {
+        path: '/resources',
+        element: <Resources />,
       },
     ],
   },

@@ -6,16 +6,18 @@ import { cn } from '../utils/style.utils.ts';
 export function DocLink({
   children,
   className,
+  forceActive = false,
 }: {
   children: React.ReactNode;
   className?: string;
+  forceActive?: boolean;
 }) {
   const { isDevMode } = useDevModeStore();
 
   return (
     <div
       className={
-        isDevMode
+        isDevMode || forceActive
           ? cn(
               'bg-grey-700 text-grey-100 border-grey-600 visible flex items-start overflow-x-auto rounded-lg border px-4 py-3 font-mono text-sm font-normal tracking-tighter',
               className

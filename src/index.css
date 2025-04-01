@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import 'tailwindcss/preflight' @plugin 'tailwindcss-animate';
 
+@custom-variant aria-current (&[aria-current="page"]);
+
 @theme {
   --color-*: initial;
 
@@ -124,7 +126,7 @@
   --color-info-foreground: var(--color-blue-600);
   --color-info-border: var(--color-blue-600);
 
-  --font-sans: 'Mulish', sans-serif;
+  --font-sans: 'Mulish Variable', sans-serif;
   --font-inter: 'Inter', sans-serif;
   --font-anybody: 'Anybody Variable', sans-serif;
   --font-anybody--font-variation-settings: 'wdth' 120;

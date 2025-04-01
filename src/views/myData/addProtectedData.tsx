@@ -261,8 +261,18 @@ export default function AddProtectedData() {
                 </div>
                 <div>
                   <p>
-                    Initiate a conversation with the bot @Web3Telegram_Bot to
-                    get your Chat ID and receive messages.
+                    Initiate a conversation with the bot{' '}
+                    <Button asChild variant="text" size="none">
+                      <a
+                        href="https://t.me/IExecWeb3TelegramBot"
+                        target="_blank"
+                        className="underline"
+                        rel="noopener noreferrer"
+                      >
+                        @IExecWeb3TelegramBot
+                      </a>
+                    </Button>{' '}
+                    to get your Chat ID and receive messages.
                   </p>
                   <p>
                     Once open, copy your chat ID and paste it in the Telegram

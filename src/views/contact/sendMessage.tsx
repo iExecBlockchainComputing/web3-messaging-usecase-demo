@@ -108,11 +108,6 @@ export default function SendMessage() {
           senderName: formData.senderName,
           contentType: formData.contentType,
           emailContent: formData.messageContent,
-          /**
-           * this demo uses a workerpool offering free computing power dedicated to learning
-           * this resource is shared and may be throttled, it should not be used for production applications
-           * remove the `workerpoolAddressOrEns` option to switch back to a production ready workerpool
-           */
           workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
         });
         return sendMail;
@@ -123,11 +118,6 @@ export default function SendMessage() {
           protectedData: protectedDataAddress!,
           senderName: formData.senderName,
           telegramContent: formData.messageContent,
-          /**
-           * this demo uses a workerpool offering free computing power dedicated to learning
-           * this resource is shared and may be throttled, it should not be used for production applications
-           * remove the `workerpoolAddressOrEns` option to switch back to a production ready workerpool
-           */
           workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
         });
         return sendTelegram;
