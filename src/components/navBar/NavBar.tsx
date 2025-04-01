@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import iExecLogo from '../../assets/iexec-logo.svg';
 import { cn } from '../../utils/style.utils.ts';
 import { Button } from '../ui/button.tsx';
-import { navigationItems } from './navigationItems';
+import { navigationItems } from './navigationItems.tsx';
 
 export function NavBar() {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -47,7 +47,7 @@ export function NavBar() {
                 className={({ isActive }) =>
                   cn(
                     'flex items-center gap-x-3 px-2 py-2 duration-200 hover:text-white md:py-3',
-                    isActive ? 'text-primary underline underline-offset-4' : ''
+                    isActive ? 'text-yellow-500' : ''
                   )
                 }
                 onClick={handleMenuToggle}

@@ -1,6 +1,8 @@
 import { LOCAL_STORAGE_PREFIX } from '@/config/config';
+import { DialogTitle } from '@radix-ui/react-dialog';
 import { useEffect, useState } from 'react';
 import { ArrowRight } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 import useLocalStorageState from 'use-local-storage-state';
 import step1 from '@/assets/onboarding-popup/step_1.png';
 import step2 from '@/assets/onboarding-popup/step_2.png';
@@ -67,6 +69,7 @@ function StepContent({
 export default function OnboardingPopup() {
   const [step, setStep] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(true);
+  const navigate = useNavigate();
 
   const [isStorageOnboardingViewed, setStorageOnboardingViewed] =
     useLocalStorageState(`${LOCAL_STORAGE_PREFIX}_onboardingViewed`, {
@@ -77,6 +80,7 @@ export default function OnboardingPopup() {
     setDialogOpen(open);
     if (!open) {
       setStorageOnboardingViewed(true);
+      navigate('/my-data');
     }
   }
 
@@ -93,6 +97,7 @@ export default function OnboardingPopup() {
   return (
     <Dialog open={dialogOpen} onOpenChange={onPopupOpenChange}>
       <DialogContent hideCloseButton className="px-7 py-6">
+        <DialogTitle></DialogTitle>
         <div className="flex flex-col items-center gap-6">
           <StepContent {...steps[step]} />
           <div className="flex gap-4">
