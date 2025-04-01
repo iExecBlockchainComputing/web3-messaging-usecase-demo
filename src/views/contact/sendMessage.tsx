@@ -2,7 +2,7 @@ import { WORKERPOOL_ADDRESS_OR_ENS } from '@/config/config';
 import { Address } from '@/types';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { DocLink } from '@/components/DocLink';
 import { Button } from '@/components/ui/button';
@@ -253,7 +253,7 @@ export default function SendMessage() {
         )}
         <div className="mt-2 flex justify-end gap-5">
           <Button asChild variant="outline">
-            <NavLink to="/contacts">Cancel</NavLink>
+            <Link to="/contacts">Cancel</Link>
           </Button>
           <Button type="submit" isLoading={sendMessageMutation.isPending}>
             Send message

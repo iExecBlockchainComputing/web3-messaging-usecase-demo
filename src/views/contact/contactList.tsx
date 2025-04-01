@@ -7,7 +7,7 @@ import { Contact as Web3telegramContact } from '@iexec/web3mail';
 import { Contact as Web3mailContact } from '@iexec/web3telegram';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
 import { DocLink } from '@/components/DocLink';
@@ -227,9 +227,9 @@ export default function ContactList() {
                 </div>
                 <div className="justify-end">
                   <Button asChild variant="discreet_outline">
-                    <NavLink to={`/contacts/${contact.address}/send-message`}>
+                    <Link to={`/contacts/${contact.address}/send-message`}>
                       Send
-                    </NavLink>
+                    </Link>
                   </Button>
                 </div>
               </div>

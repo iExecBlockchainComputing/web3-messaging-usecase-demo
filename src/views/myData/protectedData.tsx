@@ -1,7 +1,7 @@
 import { Address } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
 import { DocLink } from '@/components/DocLink';
@@ -195,7 +195,7 @@ export default function ProtectedData() {
         </div>
       </div>
       <Button asChild variant="outline" className="ml-auto w-fit">
-        <NavLink to="/my-data">Back to my data</NavLink>
+        <Link to="/my-data">Back to my data</Link>
       </Button>
       <DocLink>
         dataprotector-sdk / Method called:{' '}

@@ -132,7 +132,7 @@ export default function ProtectedDataList() {
           </p>
         </div>
         <Button className="mx-auto sm:ml-0">
-          <NavLink to="/my-data/add-protected-data">Create new</NavLink>
+          <Link to="/my-data/add-protected-data">Create new</Link>
         </Button>
         <img
           className="h-ful absolute inset-y-0 right-11 hidden md:block"
