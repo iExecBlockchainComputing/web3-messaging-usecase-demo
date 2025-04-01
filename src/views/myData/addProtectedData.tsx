@@ -108,7 +108,7 @@ export default function AddProtectedData() {
     mutationKey: ['protectData', userAddress],
     mutationFn: async (isMail: boolean) => {
       const dataProtectorCore = await getDataProtectorCoreClient();
-      const key = isMail ? 'email' : 'telegramChatId';
+      const key = isMail ? 'email' : 'telegram_chatId';
 
       const protectedData = await dataProtectorCore.protectData({
         data: {
@@ -298,8 +298,8 @@ export default function AddProtectedData() {
                   }}
                   placeholder={
                     formData.dataType === 'mail'
-                      ? 'Ex: Frank Wallet email address'
-                      : 'Ex: Frank Wallet telegram'
+                      ? 'Ex: Antoine Wallet email address'
+                      : 'Ex: Antoine Wallet telegram'
                   }
                   className="focus:border-primary border-grey-300 mt-2 max-w-xl rounded-lg border bg-transparent p-3 transition duration-200 focus:outline-none"
                   type="text"

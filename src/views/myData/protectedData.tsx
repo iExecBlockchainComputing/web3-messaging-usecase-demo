@@ -87,7 +87,7 @@ export default function ProtectedData() {
     if (schema.email) {
       return 'mail';
     }
-    if (schema.telegramChatId || schema.chatId) {
+    if (schema.telegram_chatId) {
       return 'telegram';
     }
     return 'other';
