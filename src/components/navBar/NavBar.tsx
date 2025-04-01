@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useDevModeStore } from '@/stores/useDevMode.store.ts';
 import iExecLogo from '../../assets/iexec-logo.svg';
 import { Button } from '../ui/button.tsx';
+import { Label } from '../ui/label.tsx';
+import { Switch } from '../ui/switch.tsx';
 import { navigationItems } from './navigationItems.tsx';
 
 export function NavBar() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const { isDevMode, setDevMode } = useDevModeStore();
   const handleMenuToggle = () => {
     setMenuOpen((prevState) => !prevState);
   };
@@ -37,7 +41,7 @@ export function NavBar() {
           </div>
         </Link>
 
-        <div className="left-navbar text-grey-400 mt-10 flex grow flex-col">
+        <div className="left-navbar text-grey-400 mt-10 flex grow flex-col gap-10">
           <div className="mt-0.5 grow">
             {navigationItems.map((item, index) => (
               <NavLink
@@ -52,9 +56,21 @@ export function NavBar() {
             ))}
           </div>
 
-          <hr className="border-grey-600 mt-6 border-t" />
+          <Label
+            htmlFor="dev-mode"
+            className="flex items-center space-x-2 py-1"
+          >
+            <Switch
+              id="dev-mode"
+              checked={isDevMode}
+              onCheckedChange={setDevMode}
+            />
+            <span>Dev Mode</span>
+          </Label>
 
-          <div className="mt-10 mb-16">
+          <hr className="border-grey-700 border-t" />
+
+          <div className="mb-16">
             <Button
               asChild
               size="lg"

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
+import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
@@ -196,6 +197,56 @@ export default function ProtectedData() {
       <Button asChild variant="outline" className="ml-auto w-fit">
         <NavLink to="/my-data">Back to my data</NavLink>
       </Button>
+      <DocLink>
+        dataprotector-sdk / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getProtectedData"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          getProtectedData({'{'}
+          <br />
+          {'  '}protectedDataAddress: "{protectedDataAddress}",
+          <br />
+          {'  '}owner: "{userAddress}",
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
+      <DocLink>
+        dataprotector-sdk / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getGrantedAccess"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          getGrantedAccess({'{'}
+          <br />
+          {'  '}protectedData: "{protectedDataAddress}",
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
+      <DocLink>
+        dataprotector-sdk / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/revokeOneAccess"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          revokeOneAccess({'{'}
+          <br />
+          {'  '}grantAccess: {'{}'},
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
     </div>
   );
 }

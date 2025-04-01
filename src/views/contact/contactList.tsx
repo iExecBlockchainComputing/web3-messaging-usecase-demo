@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
+import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -245,6 +246,70 @@ export default function ContactList() {
           />
         )}
       </div>
+      <DocLink>
+        web3mail / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/web3mail/methods/fetchMyContacts"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          fetchMyContacts({'{'}
+          <br />
+          {'  '}isUserStrict: true,
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
+      <DocLink>
+        web3telegram / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/web3telegram/methods/fetchMyContacts"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          fetchMyContacts();
+        </a>
+      </DocLink>
+      <DocLink>
+        dataprotector-sdk / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getProtectedData"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          getProtectedData({'{'}
+          <br />
+          {'  '}protectedDataAddress: "0x123abc...",
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
+      <DocLink>
+        dataprotector-sdk / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getGrantedAccess"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          getGrantedAccess({'{'}
+          <br />
+          {'  '}protectedData: "0x123abc...",
+          <br />
+          {'  '}authorizedUser: "{userAddress}",
+          <br />
+          {'  '}authorizedApp: "{WEB3MAIL_IDAPPS_WHITELIST_SC}",
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import protectANewData from '@/assets/protect_a_new_data.png';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
+import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
@@ -266,6 +267,22 @@ export default function ProtectedDataList() {
           />
         )}
       </div>
+      <DocLink>
+        dataprotector-sdk / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getProtectedData"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          getProtectedData({'{'}
+          <br />
+          {'  '}owner: "{userAddress}",
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
     </div>
   );
 }

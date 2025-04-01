@@ -4,6 +4,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
+import { DocLink } from '@/components/DocLink';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -21,11 +22,9 @@ import {
   getWeb3mailClient,
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
-import useUserStore from '@/stores/useUser.store';
 import { pluralize } from '@/utils/pluralize';
 
 export default function SendMessage() {
-  const { address: userAddress } = useUserStore();
   const navigate = useNavigate();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
@@ -39,20 +38,16 @@ export default function SendMessage() {
   });
 
   const protectedData = useQuery({
-    queryKey: ['protectedData', protectedDataAddress, userAddress],
+    queryKey: ['protectedData', protectedDataAddress],
     queryFn: async () => {
-      if (!userAddress) {
-        throw new Error('User address is undefined');
-      }
       const dataProtectorCore = await getDataProtectorCoreClient();
       // TODO check protectedDataList before
       const protectedDatas = await dataProtectorCore.getProtectedData({
         protectedDataAddress: protectedDataAddress,
-        owner: userAddress,
       });
       return protectedDatas[0];
     },
-    enabled: !!userAddress && !!protectedDataAddress,
+    enabled: !!protectedDataAddress,
     refetchOnWindowFocus: true,
   });
 
@@ -265,6 +260,79 @@ export default function SendMessage() {
           </Button>
         </div>
       </form>
+      <DocLink>
+        dataprotector-sdk / Method called:{' '}
+        <a
+          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getProtectedData"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary whitespace-pre hover:underline"
+        >
+          <br />
+          getProtectedData({'{'}
+          <br />
+          {'  '}protectedDataAddress: "{protectedDataAddress}",
+          <br />
+          {'}'});
+        </a>
+      </DocLink>
+      {isMail ? (
+        <DocLink>
+          web3mail / Method called:{' '}
+          <a
+            href="https://tools.docs.iex.ec/tools/web3mail/methods/sendEmail"
+            target="_blank"
+            rel="noreferrer"
+            className="text-primary whitespace-pre hover:underline"
+          >
+            <br />
+            sendEmail({'{'}
+            <br />
+            {'  '}protectedData: "{protectedDataAddress}",
+            <br />
+            {'  '}emailSubject: "
+            {formData.messageSubject ? formData.messageSubject : 'undefined'}",
+            <br />
+            {'  '}senderName: "
+            {formData.senderName ? formData.senderName : 'undefined'}",
+            <br />
+            {'  '}contentType: "{formData.contentType}",
+            <br />
+            {'  '}emailContent: "
+            <span className="table-cell max-w-52 truncate">
+              {formData.messageContent}
+            </span>
+            ",
+            <br />
+            {'}'});
+          </a>
+        </DocLink>
+      ) : (
+        <DocLink>
+          web3telegram / Method called:{' '}
+          <a
+            href="https://tools.docs.iex.ec/tools/web3telegram/methods/sendTelegram"
+            target="_blank"
+            rel="noreferrer"
+            className="text-primary whitespace-pre hover:underline"
+          >
+            <br />
+            sendTelegram({'{'}
+            <br />
+            {'  '}protectedData: "{protectedDataAddress}",
+            <br />
+            {'  '}senderName: "{formData.senderName}",
+            <br />
+            {'  '}telegramContent: "
+            <span className="table-cell max-w-52 truncate">
+              {formData.messageContent}
+            </span>
+            " ,
+            <br />
+            {'}'});
+          </a>
+        </DocLink>
+      )}
     </div>
   );
 }
