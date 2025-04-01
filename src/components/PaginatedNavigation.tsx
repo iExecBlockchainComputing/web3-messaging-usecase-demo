@@ -152,7 +152,7 @@ export function PaginatedNavigation({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            className="rounded-lg"
+            className="hidden rounded-lg md:flex"
             disabled={currentPage <= 0}
             onClick={() => currentPage > 0 && onPageChange(currentPage - 1)}
           />
@@ -160,7 +160,7 @@ export function PaginatedNavigation({
         {generatePaginationItems(totalPages, currentPage, onPageChange)}
         <PaginationItem>
           <PaginationNext
-            className="rounded-lg"
+            className="hidden rounded-lg md:flex"
             disabled={currentPage >= totalPages - 1}
             onClick={() =>
               currentPage < totalPages - 1 && onPageChange(currentPage + 1)
