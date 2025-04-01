@@ -1,4 +1,4 @@
-import { MessageSquare } from 'react-feather';
+import { BookOpen, MessageSquare } from 'react-feather';
 import MyDataIcon from '../icons/MyDataIcon';
 
 // navigationItems.js
@@ -12,5 +12,10 @@ export const navigationItems = [
     name: 'Send Messages',
     path: '/contacts',
     icon: <MessageSquare />,
+  },
+  {
+    name: 'Resources',
+    path: '/resources',
+    icon: <BookOpen />,
   },
 ];
