@@ -16,6 +16,6 @@ export const navigationItems = [
   {
     name: 'Resources',
     path: '/resources',
-    icon: <BookOpen />,
+    icon: <BookOpen size={20} />,
   },
 ];
