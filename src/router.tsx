@@ -7,39 +7,44 @@ import AddProtectedData from './views/myData/addProtectedData.tsx';
 import ProtectedData from './views/myData/protectedData.tsx';
 import ProtectedDataList from './views/myData/protectedDataList.tsx';
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      element: <MainLayout />,
+      children: [
+        {
+          index: true,
+          path: '*',
+          element: <Navigate to="/my-data" />,
+        },
+        {
+          path: '/my-data',
+          element: <ProtectedDataList />,
+        },
+        {
+          path: '/my-data/add-protected-data',
+          element: <AddProtectedData />,
+        },
+        {
+          path: '/my-data/:protectedDataAddress',
+          element: <ProtectedData />,
+        },
+        {
+          path: '/contacts',
+          element: <ContactList />,
+        },
+        {
+          path: '/contacts/:protectedDataAddress/send-message',
+          element: <SendMessage />,
+        },
+        {
+          path: '/resources',
+          element: <Resources />,
+        },
+      ],
+    },
+  ],
   {
-    element: <MainLayout />,
-    children: [
-      {
-        index: true,
-        path: '*',
-        element: <Navigate to="/my-data" />,
-      },
-      {
-        path: '/my-data',
-        element: <ProtectedDataList />,
-      },
-      {
-        path: '/my-data/add-protected-data',
-        element: <AddProtectedData />,
-      },
-      {
-        path: '/my-data/:protectedDataAddress',
-        element: <ProtectedData />,
-      },
-      {
-        path: '/contacts',
-        element: <ContactList />,
-      },
-      {
-        path: '/contacts/:protectedDataAddress/send-message',
-        element: <SendMessage />,
-      },
-      {
-        path: '/resources',
-        element: <Resources />,
-      },
-    ],
-  },
-]);
+    basename: '/web3messaging', // Remplacez '/votre-basepath' par le chemin de base souhaité
+  }
+);
