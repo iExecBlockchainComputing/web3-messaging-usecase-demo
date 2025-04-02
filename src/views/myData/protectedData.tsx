@@ -139,7 +139,7 @@ export default function ProtectedData() {
             Authorize new user
           </Button>
         </div>
-        <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_1fr] items-center overflow-hidden rounded-3xl border [&>div]:px-5 [&>div]:py-5">
+        <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_1fr] items-center overflow-auto rounded-3xl border [&>div]:px-5 [&>div]:py-5">
           <div className="text-grey-300 text-xs font-semibold">
             User address
           </div>
