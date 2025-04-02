@@ -124,7 +124,7 @@ export default function ProtectedData() {
         userAddress={userAddress}
       />
       <div className="space-x-2">
-        <div className="flex flex-col items-center justify-between gap-2 text-center text-pretty md:flex-row md:text-left">
+        <div className="flex flex-col items-center justify-between gap-2 text-center text-pretty sm:flex-row sm:text-left">
           <div>
             <h2 className="text-xl font-bold">Authorized users</h2>
             <p>
@@ -194,7 +194,7 @@ export default function ProtectedData() {
           )}
         </div>
       </div>
-      <Button asChild variant="outline" className="ml-auto w-fit">
+      <Button asChild variant="outline" className="mx-auto w-fit sm:mr-0">
         <Link to="/my-data">Back to my data</Link>
       </Button>
       <DocLink>
