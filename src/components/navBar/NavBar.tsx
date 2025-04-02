@@ -62,7 +62,7 @@ export function NavBar() {
 
           <Label
             htmlFor="dev-mode"
-            className="flex items-center space-x-2 py-1"
+            className="flex items-center space-x-2 py-1 text-white"
           >
             <Switch
               id="dev-mode"
@@ -72,7 +72,7 @@ export function NavBar() {
             <span>Dev Mode</span>
           </Label>
 
-          <hr className="border-grey-700 border-t" />
+          <hr className="border-grey-600 border-t" />
 
           <div className="mb-16">
             <Button
