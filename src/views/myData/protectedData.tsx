@@ -103,7 +103,7 @@ export default function ProtectedData() {
           protectedData={protectedData.data}
         />
       )}
-      <h1 className="relative w-fit text-4xl sm:text-left md:max-w-3/4 md:text-center">
+      <h1 className="relative mt-9 w-fit text-4xl sm:text-left md:mt-0 md:max-w-3/4 md:text-center">
         {protectedData.data && (
           <span
             className={cn(
