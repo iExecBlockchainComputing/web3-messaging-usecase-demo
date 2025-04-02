@@ -218,7 +218,9 @@ export default function ContactList() {
                 </div>
                 <div className="truncate">
                   <span className="truncate whitespace-nowrap">
-                    {contact.owner === userAddress ? 'Me' : contact.owner}
+                    {contact.owner === userAddress
+                      ? `(Mine) ${contact.owner}`
+                      : contact.owner}
                   </span>
                 </div>
                 <div className="truncate">{contact.volume}</div>
