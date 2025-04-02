@@ -124,7 +124,7 @@ export default function ProtectedData() {
         userAddress={userAddress}
       />
       <div className="space-x-2">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col items-center justify-between gap-2 text-center text-pretty md:flex-row md:text-left">
           <div>
             <h2 className="text-xl font-bold">Authorized users</h2>
             <p>
