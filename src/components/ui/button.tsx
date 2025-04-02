@@ -14,8 +14,7 @@ const buttonVariants = cva(
         white: 'hover:bg-grey-400 bg-white text-black',
         danger: 'bg-[#BF3131] text-white hover:bg-[#BF3131]/40',
         outline: 'border-grey-50 border hover:bg-white/10 hover:text-white',
-        discreet_outline:
-          'border-grey-600 hover:bg-grey-800 border hover:text-white',
+        discreet_outline: 'border-grey-600 hover:bg-grey-800 border text-white',
         chip: 'from-grey-500 hover:before:bg-background relative z-0 overflow-hidden bg-gradient-to-b to-transparent before:absolute before:inset-px before:-z-10 before:rounded-[29px] before:bg-[#14141a] before:duration-300',
         text: '',
       },
