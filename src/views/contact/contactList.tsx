@@ -154,7 +154,7 @@ export default function ContactList() {
         <h1 className="text-xl font-bold">Send Message to contact</h1>
         <p>Email or telegram contact info</p>
       </div>
-      <div className="flex flex-wrap gap-x-6 gap-y-3">
+      <div className="-mb-2 flex gap-x-6 gap-y-3 overflow-auto pb-2">
         {Object.keys(COLOR_CLASSES).map((key) => {
           return (
             <Button
