@@ -210,7 +210,9 @@ export default function AddProtectedData() {
                     <div className="rounded-lg bg-yellow-300/10 p-2.5 text-yellow-300">
                       {COLOR_CLASSES[key].icon}
                     </div>
-                    <p className="font-anybody capitalize">{key}</p>
+                    <p className="font-anybody font-extrabold capitalize">
+                      {key}
+                    </p>
                   </div>
                   <p>{COLOR_CLASSES[key].dataReadableType}</p>
                 </div>
