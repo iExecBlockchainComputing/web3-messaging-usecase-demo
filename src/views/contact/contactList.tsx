@@ -176,16 +176,20 @@ export default function ContactList() {
           );
         })}
       </div>
-      <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_2fr_2fr_2fr_1fr] items-center overflow-auto rounded-3xl border [&>div]:px-5 [&>div]:py-5">
-        <div className="text-grey-300 text-xs font-semibold">Name</div>
-        <div className="text-grey-300 text-xs font-semibold">
+      <div className="border-grey-600 my-5 grid grid-cols-[2fr_2fr_2fr_2fr_2fr_1fr] items-center overflow-auto rounded-3xl border [&>div]:px-5 [&>div]:py-5">
+        <div className="text-grey-300 min-w-32 text-xs font-semibold text-nowrap uppercase">
+          Name
+        </div>
+        <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
           Protected data address
         </div>
-        <div className="text-grey-300 text-xs font-semibold">Owner address</div>
-        <div className="text-grey-300 text-xs font-semibold">
+        <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
+          Owner address
+        </div>
+        <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
           Remaining access
         </div>
-        <div className="text-grey-300 col-span-2 text-xs font-semibold">
+        <div className="text-grey-300 col-span-2 min-w-52 text-xs font-semibold text-nowrap uppercase">
           TYPE (Telegram/Mail)
         </div>
         {!pagesOfContacts || pagesOfContacts?.length === 0 ? (

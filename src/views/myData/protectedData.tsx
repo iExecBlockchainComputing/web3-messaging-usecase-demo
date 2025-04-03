@@ -140,10 +140,10 @@ export default function ProtectedData() {
           </Button>
         </div>
         <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_1fr] items-center overflow-auto rounded-3xl border [&>div]:px-5 [&>div]:py-5">
-          <div className="text-grey-300 text-xs font-semibold">
+          <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
             User address
           </div>
-          <div className="text-grey-300 col-span-2 text-xs font-semibold">
+          <div className="text-grey-300 col-span-2 text-xs font-semibold text-nowrap uppercase">
             Number of Access
           </div>
           {!grantedAccess.data || grantedAccess.data?.length === 0 ? (
