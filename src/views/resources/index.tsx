@@ -26,8 +26,13 @@ export default function Resources() {
           {steps.length} steps
         </p>
         {steps.map((step, index) => (
-          <div key={index} className="flex gap-4">
-            <div className="flex flex-col items-center">
+          <div key={index} className="flex min-h-16 gap-4">
+            <Button
+              onClick={() => setCurrentStep(index)}
+              className="flex flex-col items-center justify-normal gap-0"
+              variant="text"
+              size="none"
+            >
               <span
                 className={cn(
                   'flex size-10 items-center justify-center rounded-full border',
@@ -46,25 +51,17 @@ export default function Resources() {
                   )}
                 />
               )}
-            </div>
-            <div className="flex flex-col justify-end space-y-4 py-2">
-              <h2 className="text-base!">{step.title}</h2>
-              {currentStep === index && <div>{step.content}</div>}
-              <div className="mt-2 flex justify-end gap-5">
-                {currentStep === index && currentStep > 0 && (
-                  <Button
-                    variant="outline"
-                    onClick={() => setCurrentStep((prev) => prev - 1)}
-                  >
-                    Previous step
-                  </Button>
-                )}
-                {currentStep === index && currentStep !== steps.length - 1 && (
-                  <Button onClick={() => setCurrentStep((prev) => prev + 1)}>
-                    Next step
-                  </Button>
-                )}
-              </div>
+            </Button>
+            <div className="flex max-w-full grow flex-col space-y-4.5 py-2">
+              <Button
+                variant="text"
+                size="none"
+                className="justify-normal text-left"
+                onClick={() => setCurrentStep(index)}
+              >
+                <h2 className="text-base! text-wrap!">{step.title}</h2>
+              </Button>
+              {currentStep === index && <>{step.content}</>}
             </div>
           </div>
         ))}
