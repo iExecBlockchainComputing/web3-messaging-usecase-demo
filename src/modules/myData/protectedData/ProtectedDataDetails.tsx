@@ -15,7 +15,7 @@ export function ProtectedDataDetails({
     <div className="grid gap-6 md:grid-cols-3">
       <div className="radial-bg before:bg-grey-800 md:before:bg-grey-900 rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]">
         <div className="z-30 grid gap-6">
-          <div className="flex items-center gap-4">
+          <div className="font-anybody flex items-center gap-4 font-extrabold">
             <div className="rounded-lg bg-yellow-300/10 p-2.5 text-yellow-300">
               <ProtectedDataIcon size={20} />
             </div>
@@ -39,7 +39,7 @@ export function ProtectedDataDetails({
       </div>
       <div className="radial-bg before:bg-grey-800 md:before:bg-grey-900 rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]">
         <div className="z-30 grid gap-6">
-          <div className="flex items-center gap-4">
+          <div className="font-anybody flex items-center gap-4 font-extrabold">
             <div className="rounded-lg bg-yellow-300/10 p-2.5 text-yellow-300">
               <User size={20} />
             </div>
@@ -63,7 +63,7 @@ export function ProtectedDataDetails({
       </div>
       <div className="radial-bg before:bg-grey-800 md:before:bg-grey-900 rounded-20 relative z-0 flex flex-col gap-6 overflow-hidden p-8 before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)]">
         <div className="z-30 grid gap-6">
-          <div className="flex items-center gap-4">
+          <div className="font-anybody flex items-center gap-4 font-extrabold">
             <div className="rounded-lg bg-yellow-300/10 p-2.5 text-yellow-300">
               <Link size={20} />
             </div>
