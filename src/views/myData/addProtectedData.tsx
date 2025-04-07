@@ -222,6 +222,7 @@ export default function AddProtectedData() {
             <div className="grid gap-2 sm:col-span-2">
               <label htmlFor="email_address">Email Address *</label>
               <input
+                value={formData.encryptedDataContent}
                 onChange={(e) => {
                   setFormData((prevData) => ({
                     ...prevData,
@@ -240,6 +241,7 @@ export default function AddProtectedData() {
               <div className="grid gap-2">
                 <label htmlFor="telegram_chat_id">Telegram Chat Id *</label>
                 <input
+                  value={formData.encryptedDataContent}
                   onChange={(e) => {
                     setFormData((prevData) => ({
                       ...prevData,
@@ -303,6 +305,7 @@ export default function AddProtectedData() {
                   Name of your Protected Data *
                 </label>
                 <input
+                  value={formData.encryptedDataName}
                   onChange={(e) => {
                     setFormData((prevData) => ({
                       ...prevData,
