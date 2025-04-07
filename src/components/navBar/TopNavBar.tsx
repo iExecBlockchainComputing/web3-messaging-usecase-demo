@@ -1,6 +1,8 @@
 import { LogOut } from 'react-feather';
+import { Link } from 'react-router-dom';
 import { useLoginLogout } from '@/hooks/useLoginLogout';
 import useUserStore from '@/stores/useUser.store';
+import iExecLogo from '../../assets/iexec-logo.svg';
 import { AddressChip } from './AddressChip';
 
 export function TopNavBar() {
@@ -8,9 +10,12 @@ export function TopNavBar() {
   const { logout } = useLoginLogout();
 
   return (
-    <>
+    <div className="flex items-center justify-between pt-5 lg:pt-10">
+      <Link to="/my-data" className="-m-2 flex items-center p-2 lg:invisible">
+        <img src={iExecLogo} width="25" height="25" alt="iExec logo" />
+      </Link>
       {isConnected && (
-        <div className="flex w-full max-w-[1260px] items-center justify-end pt-5 pr-9 lg:pt-10 lg:pr-0">
+        <div className="flex max-w-[1260px] items-center pr-10 lg:pr-0">
           <AddressChip address={address!} className="ml-6" />
           <button
             type="button"
@@ -21,6 +26,6 @@ export function TopNavBar() {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }

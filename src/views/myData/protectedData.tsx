@@ -103,7 +103,7 @@ export default function ProtectedData() {
           protectedData={protectedData.data}
         />
       )}
-      <h1 className="relative w-fit text-4xl sm:text-left md:max-w-3/4 md:text-center">
+      <h1 className="relative mt-9 w-fit text-4xl sm:text-left md:mt-0 md:max-w-3/4 md:text-center">
         {protectedData.data && (
           <span
             className={cn(
@@ -124,7 +124,7 @@ export default function ProtectedData() {
         userAddress={userAddress}
       />
       <div className="space-x-2">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col items-center justify-between gap-2 text-center text-pretty sm:flex-row sm:text-left">
           <div>
             <h2 className="text-xl font-bold">Authorized users</h2>
             <p>
@@ -139,11 +139,11 @@ export default function ProtectedData() {
             Authorize new user
           </Button>
         </div>
-        <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_1fr] items-center overflow-hidden rounded-3xl border [&>div]:px-5 [&>div]:py-5">
-          <div className="text-grey-300 text-xs font-semibold">
+        <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_1fr] items-center overflow-auto rounded-3xl border [&>div]:px-5 [&>div]:py-5">
+          <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
             User address
           </div>
-          <div className="text-grey-300 col-span-2 text-xs font-semibold">
+          <div className="text-grey-300 col-span-2 text-xs font-semibold text-nowrap uppercase">
             Number of Access
           </div>
           {!grantedAccess.data || grantedAccess.data?.length === 0 ? (
@@ -194,7 +194,7 @@ export default function ProtectedData() {
           )}
         </div>
       </div>
-      <Button asChild variant="outline" className="ml-auto w-fit">
+      <Button asChild variant="outline" className="mx-auto w-fit sm:mr-0">
         <Link to="/my-data">Back to my data</Link>
       </Button>
       <DocLink>

@@ -45,6 +45,6 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/web3messaging', // Remplacez '/votre-basepath' par le chemin de base souhaité
+    basename: '/web3messaging',
   }
 );

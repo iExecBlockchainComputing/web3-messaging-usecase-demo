@@ -50,7 +50,7 @@ export default function AddProtectedData() {
   });
 
   const updateStep = (step: number) => {
-    navigate(`${location.pathname}?step=${step}`);
+    navigate(`/my-data/add-protected-data?step=${step}`);
     setCurrentStep(step);
   };
 
@@ -85,7 +85,7 @@ export default function AddProtectedData() {
 
   const handleBackClick = () => {
     if (currentStep === 0) {
-      navigate('/my-data');
+      // navigate('/my-data');
     } else {
       updateStep(currentStep - 1);
     }
@@ -130,7 +130,7 @@ export default function AddProtectedData() {
       queryClient.invalidateQueries({
         queryKey: ['apps', userAddress],
       });
-      navigate('/my-data');
+      // navigate('/my-data');
       toast({
         title: 'You have successfully add a new protected data.',
         variant: 'success',
@@ -210,7 +210,9 @@ export default function AddProtectedData() {
                     <div className="rounded-lg bg-yellow-300/10 p-2.5 text-yellow-300">
                       {COLOR_CLASSES[key].icon}
                     </div>
-                    <p className="font-anybody capitalize">{key}</p>
+                    <p className="font-anybody font-extrabold capitalize">
+                      {key}
+                    </p>
                   </div>
                   <p>{COLOR_CLASSES[key].dataReadableType}</p>
                 </div>
