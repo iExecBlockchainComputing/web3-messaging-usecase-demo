@@ -122,7 +122,7 @@ export default function ProtectedDataList() {
     chunkArray(getProtectedDataByType(selectedTab) || [], itemsPerPage);
 
   return (
-    <div className="grid gap-10">
+    <div className="flex flex-col gap-10">
       <div className="radial-bg before:bg-grey-800 relative z-0 grid gap-6 overflow-hidden rounded-2xl p-8 before:absolute before:inset-px before:-z-10 before:rounded-[15px] md:pr-56">
         <div>
           <h1 className="text-center sm:text-left">Protect a new data</h1>
@@ -162,7 +162,7 @@ export default function ProtectedDataList() {
             authorize, and revoke access.
           </p>
         </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-3">
+        <div className="-mb-2 flex gap-x-6 gap-y-3 overflow-auto pb-2">
           {Object.keys(COLOR_CLASSES).map((key) => {
             return (
               <Button

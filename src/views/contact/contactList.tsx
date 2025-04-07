@@ -154,7 +154,7 @@ export default function ContactList() {
         <h1 className="text-xl font-bold">Send Message to contact</h1>
         <p>Email or telegram contact info</p>
       </div>
-      <div className="flex flex-wrap gap-x-6 gap-y-3">
+      <div className="-mb-2 flex gap-x-6 gap-y-3 overflow-auto pb-2">
         {Object.keys(COLOR_CLASSES).map((key) => {
           return (
             <Button
@@ -176,16 +176,20 @@ export default function ContactList() {
           );
         })}
       </div>
-      <div className="border-grey-600 my-5 grid w-full grid-cols-[2fr_2fr_2fr_2fr_2fr_1fr] items-center overflow-hidden rounded-3xl border [&>div]:px-5 [&>div]:py-5">
-        <div className="text-grey-300 text-xs font-semibold">Name</div>
-        <div className="text-grey-300 text-xs font-semibold">
+      <div className="border-grey-600 my-5 grid grid-cols-[2fr_2fr_2fr_2fr_2fr_1fr] items-center overflow-auto rounded-3xl border [&>div]:px-5 [&>div]:py-5">
+        <div className="text-grey-300 min-w-32 text-xs font-semibold text-nowrap uppercase">
+          Name
+        </div>
+        <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
           Protected data address
         </div>
-        <div className="text-grey-300 text-xs font-semibold">Owner address</div>
-        <div className="text-grey-300 text-xs font-semibold">
+        <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
+          Owner address
+        </div>
+        <div className="text-grey-300 text-xs font-semibold text-nowrap uppercase">
           Remaining access
         </div>
-        <div className="text-grey-300 col-span-2 text-xs font-semibold">
+        <div className="text-grey-300 col-span-2 min-w-52 text-xs font-semibold text-nowrap uppercase">
           TYPE (Telegram/Mail)
         </div>
         {!pagesOfContacts || pagesOfContacts?.length === 0 ? (
@@ -218,7 +222,9 @@ export default function ContactList() {
                 </div>
                 <div className="truncate">
                   <span className="truncate whitespace-nowrap">
-                    {contact.owner === userAddress ? 'Me' : contact.owner}
+                    {contact.owner === userAddress
+                      ? `(Mine) ${contact.owner}`
+                      : contact.owner}
                   </span>
                 </div>
                 <div className="truncate">{contact.volume}</div>

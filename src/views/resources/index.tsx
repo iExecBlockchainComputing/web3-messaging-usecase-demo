@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import telegram_visual from '@/assets/telegram_visual.png';
+import lock_file_visual from '@/assets/steps/lock_file_visual.png';
+import lock_visual from '@/assets/steps/lock_visual.png';
+import send_visual from '@/assets/steps/send_visual.png';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/style.utils';
 import { steps } from './steps';
@@ -7,12 +9,14 @@ import { steps } from './steps';
 export default function Resources() {
   const [currentStep, setCurrentStep] = useState(0);
 
+  const stepsVisual = [send_visual, lock_visual, lock_file_visual];
+
   return (
     <div className="flex flex-col gap-16 md:flex-row">
-      <div className="radial-bg relative max-h-52 min-h-52 overflow-hidden rounded-2xl p-px md:max-h-136 md:w-2/5">
+      <div className="radial-bg relative max-h-52 min-h-52 min-w-72 overflow-hidden rounded-2xl p-px md:max-h-136 md:w-2/5">
         <div className="bg-background absolute inset-px z-0 overflow-hidden rounded-[calc(16px-1px)] before:absolute before:right-0 before:z-0 before:aspect-square before:h-1/3 before:scale-110 before:rounded-full before:bg-[#BC70FD] before:blur-[100px] after:absolute after:top-0 after:right-0 after:-z-10 after:aspect-[1/2] after:h-full after:scale-125 after:rounded-full after:bg-[#00115C]/70 after:blur-3xl md:before:translate-x-1/2 md:after:translate-x-1/3 md:after:-translate-y-1/3">
           <img
-            src={telegram_visual}
+            src={stepsVisual[currentStep]}
             className="z-30 mx-auto mt-8 w-4/5 max-w-64 md:mt-20"
             alt=""
           />
@@ -26,8 +30,13 @@ export default function Resources() {
           {steps.length} steps
         </p>
         {steps.map((step, index) => (
-          <div key={index} className="flex gap-4">
-            <div className="flex flex-col items-center">
+          <div key={index} className="flex min-h-16 gap-4">
+            <Button
+              onClick={() => setCurrentStep(index)}
+              className="flex flex-col items-center justify-normal gap-0"
+              variant="text"
+              size="none"
+            >
               <span
                 className={cn(
                   'flex size-10 items-center justify-center rounded-full border',
@@ -46,25 +55,17 @@ export default function Resources() {
                   )}
                 />
               )}
-            </div>
-            <div className="flex flex-col justify-end space-y-4 py-2">
-              <h2 className="text-base!">{step.title}</h2>
-              {currentStep === index && <div>{step.content}</div>}
-              <div className="mt-2 flex justify-end gap-5">
-                {currentStep === index && currentStep > 0 && (
-                  <Button
-                    variant="outline"
-                    onClick={() => setCurrentStep((prev) => prev - 1)}
-                  >
-                    Previous step
-                  </Button>
-                )}
-                {currentStep === index && currentStep !== steps.length - 1 && (
-                  <Button onClick={() => setCurrentStep((prev) => prev + 1)}>
-                    Next step
-                  </Button>
-                )}
-              </div>
+            </Button>
+            <div className="flex max-w-full grow flex-col space-y-4.5 py-2">
+              <Button
+                variant="text"
+                size="none"
+                className="justify-normal text-left"
+                onClick={() => setCurrentStep(index)}
+              >
+                <h2 className="text-base! text-wrap!">{step.title}</h2>
+              </Button>
+              {currentStep === index && <>{step.content}</>}
             </div>
           </div>
         ))}

@@ -5,7 +5,9 @@ export const steps = [
     title: 'Create a protected data',
     content: (
       <>
-        Type: <strong>Telegram</strong>
+        <p>
+          Type: <strong>Telegram</strong>
+        </p>
         <DocLink className="w-full" forceActive={true}>
           dataprotector-sdk / Method called:{' '}
           <a
@@ -29,9 +31,9 @@ export const steps = [
             {'}'});
           </a>
         </DocLink>
-        OR
-        <br />
-        Type: <strong>Mail</strong>
+        <p>
+          Or type: <strong>Mail</strong>
+        </p>
         <DocLink className="w-full" forceActive={true}>
           dataprotector-sdk / Method called:{' '}
           <a
@@ -91,9 +93,10 @@ export const steps = [
     title: 'Send a message',
     content: (
       <>
-        Send a message with granted access wallet
-        <br />
-        Type : <strong>Telegram</strong>
+        <p>Send a message with granted access wallet</p>
+        <p>
+          Type: <strong>Telegram</strong>
+        </p>
         <DocLink forceActive={true}>
           web3telegram / Method called:{' '}
           <a
@@ -114,9 +117,9 @@ export const steps = [
             {'}'});
           </a>
         </DocLink>
-        OR
-        <br />
-        Type : <strong>Mail</strong>
+        <p>
+          Or type: <strong>Mail</strong>
+        </p>
         <DocLink forceActive={true}>
           web3mail / Method called:{' '}
           <a

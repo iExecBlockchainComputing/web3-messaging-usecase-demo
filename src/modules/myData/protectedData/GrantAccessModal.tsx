@@ -204,6 +204,17 @@ export default function GrantAccessModal({
                 )}
             </Alert>
           )}
+          <div className="mt-2 flex justify-center gap-5">
+            <Button
+              variant="outline"
+              onClick={() => setSwitchingModalOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" isLoading={grantAccessMutation.isPending}>
+              Add User
+            </Button>
+          </div>
           <DocLink className="bg-grey-600 border-grey-500">
             dataprotector-sdk / Method called:{' '}
             <a
@@ -232,17 +243,6 @@ export default function GrantAccessModal({
               {'}'});
             </a>
           </DocLink>
-          <div className="mt-2 flex justify-center gap-5">
-            <Button
-              variant="outline"
-              onClick={() => setSwitchingModalOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" isLoading={grantAccessMutation.isPending}>
-              Add User
-            </Button>
-          </div>
         </form>
       </DialogContent>
     </Dialog>
