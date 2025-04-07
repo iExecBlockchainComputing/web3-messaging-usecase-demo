@@ -152,7 +152,7 @@ export default function ContactList() {
     <div className="space-y-6">
       <div>
         <h1 className="text-xl font-bold">Send Message to contact</h1>
-        <p>Email or telegram contact info</p>
+        <p>Email or telegram that people have authorized us to access</p>
       </div>
       <div className="-mb-2 flex gap-x-6 gap-y-3 overflow-auto pb-2">
         {Object.keys(COLOR_CLASSES).map((key) => {
