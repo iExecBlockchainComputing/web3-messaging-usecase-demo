@@ -245,7 +245,7 @@ export default function ContactList() {
 
         {pagesOfContacts && pagesOfContacts?.length > 1 && (
           <PaginatedNavigation
-            className=""
+            className="border-grey-600 col-span-6 border-t"
             pages={pagesOfContacts}
             currentPage={currentPage}
             onPageChange={setCurrentPage}
