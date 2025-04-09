@@ -55,7 +55,7 @@ export default function SendMessage() {
     if (schema.email) {
       return 'mail';
     }
-    if (schema.telegramChatId || schema.chatId) {
+    if (schema.telegram_chatId || schema.chatId) {
       return 'telegram';
     }
     return 'other';
