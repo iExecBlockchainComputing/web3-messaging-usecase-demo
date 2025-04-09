@@ -56,8 +56,8 @@ const fetchContacts = async (userAddress: string) => {
 
   return [...myEmailContacts, ...myTelegramContacts].sort(
     (a, b) =>
-      new Date(a.accessGrantTimestamp).getTime() -
-      new Date(b.accessGrantTimestamp).getTime()
+      new Date(b.accessGrantTimestamp).getTime() -
+      new Date(a.accessGrantTimestamp).getTime()
   );
 };
 
