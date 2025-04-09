@@ -18,5 +18,10 @@
     { "type": "test", "section": "🧪 Tests", "hidden": false },
     { "type": "docs", "section": "📚 Documentation", "hidden": true }
   ],
-  "release-type": "node"
+  "packages": {
+    ".": {
+      "release-type": "node",
+      "changelog-path": "CHANGELOG.md"
+    }
+  }
 }
