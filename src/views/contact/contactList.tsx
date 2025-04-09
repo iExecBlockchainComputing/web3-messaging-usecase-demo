@@ -52,6 +52,7 @@ const fetchContacts = async (userAddress: string) => {
   });
 
   const web3telegram = await getWeb3telegramClient();
+  // TODO use isUserStrict: true when web3telegram supports it
   const myTelegramContacts = await web3telegram.fetchMyContacts();
 
   return [...myEmailContacts, ...myTelegramContacts].sort(
