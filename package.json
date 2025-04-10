@@ -8,7 +8,6 @@
     "dev:prod": "vite --mode prod",
     "dev:staging": "vite --mode staging",
     "build": "vite build --mode prod",
-    "codegen": "graphql-codegen --config codegenPoco.ts",
     "check-types": "tsc --noEmit",
     "check-format": "prettier --check src",
     "format": "prettier --write src",
