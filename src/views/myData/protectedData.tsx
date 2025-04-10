@@ -1,20 +1,14 @@
 import { Address } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { AlertCircle } from 'react-feather';
 import { Link, useParams } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
 import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button, buttonVariants } from '@/components/ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import CheckSMSRequestSuccess from '@/modules/myData/CheckSMSRequestSuccess';
 import RevokeAccess from '@/modules/myData/RevokeAccess';
 import GrantAccessModal from '@/modules/myData/protectedData/GrantAccessModal';
 import { ProtectedDataDetails } from '@/modules/myData/protectedData/ProtectedDataDetails';
@@ -91,22 +85,6 @@ export default function ProtectedData() {
     refetchOnWindowFocus: true,
   });
 
-  const {
-    data: hasSmsSecret,
-    isSuccess: isSmsRequestSuccess,
-    isError: isCheckSmsSecretError,
-  } = useQuery({
-    queryKey: ['oneProtectedDataSmsSecret', protectedDataAddress],
-    queryFn: async () => {
-      const dataProtectorCore = await getDataProtectorCoreClient();
-      // @ts-expect-error 'iexec' is a protected field but that's fine
-      return dataProtectorCore.iexec.dataset.checkDatasetSecretExists(
-        protectedDataAddress!
-      );
-    },
-    enabled: !!protectedDataAddress,
-  });
-
   const getDataType = (schema: { [key: string]: unknown }) => {
     if (schema.email) {
       return 'mail';
@@ -139,23 +117,7 @@ export default function ProtectedData() {
           </span>
         )}
         <span className="line-clamp-2 flex gap-2 text-left">
-          {isSmsRequestSuccess && !hasSmsSecret && !isCheckSmsSecretError && (
-            <TooltipProvider delayDuration={0}>
-              <Tooltip>
-                <TooltipTrigger className="cursor-default">
-                  <AlertCircle size="24" className="text-red-400" />
-                </TooltipTrigger>
-                <TooltipContent side="left">
-                  This protected data is probably unusable as{' '}
-                  <strong>
-                    its secret encryption key was
-                    <br /> not found
-                  </strong>{' '}
-                  in the iExec Secret Management Service (SMS).
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          )}
+          <CheckSMSRequestSuccess protectedDataAddress={protectedDataAddress} />
           {protectedData.data?.name ? protectedData.data.name : '(No name)'}
         </span>
       </h1>
