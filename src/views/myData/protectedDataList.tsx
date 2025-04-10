@@ -1,3 +1,4 @@
+import { Address } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'react-feather';
@@ -9,6 +10,7 @@ import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import CheckSMSRequestSuccess from '@/modules/myData/CheckSMSRequestSuccess';
 import useUserStore from '@/stores/useUser.store';
 import { chunkArray } from '@/utils/chunkArray';
 import { formatTimestamp } from '@/utils/formatTimestamp';
@@ -218,7 +220,12 @@ export default function ProtectedDataList() {
                     'absolute inset-x-px top-px h-[42px] rounded-t-[calc(20px-1px)] bg-gradient-to-r from-[#14141B] from-25%',
                     colorConfig.gradientTo
                   )}
-                />
+                >
+                  <CheckSMSRequestSuccess
+                    className="absolute top-2 right-2"
+                    protectedDataAddress={protectedData.address as Address}
+                  />
+                </div>
                 <Button
                   variant="chip"
                   size="sm"
