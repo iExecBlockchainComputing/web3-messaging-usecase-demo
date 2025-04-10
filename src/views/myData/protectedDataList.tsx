@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState, useEffect } from 'react';
 import { ArrowRight } from 'react-feather';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import protectANewData from '@/assets/protect_a_new_data.png';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
