@@ -1,17 +1,19 @@
 import { Address } from '@/types';
-import {
-  TooltipProvider,
-  Tooltip,
-  TooltipTrigger,
-  TooltipContent,
-} from '@radix-ui/react-tooltip';
 import { useQuery } from '@tanstack/react-query';
 import { AlertCircle } from 'react-feather';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 
 export default function CheckSMSRequestSuccess({
   protectedDataAddress,
+  className,
 }: {
+  className?: string;
   protectedDataAddress: Address | undefined;
 }) {
   const {
@@ -31,7 +33,7 @@ export default function CheckSMSRequestSuccess({
   });
 
   return (
-    <>
+    <div className={className}>
       {isSmsRequestSuccess && !hasSmsSecret && !isCheckSmsSecretError && (
         <TooltipProvider delayDuration={0}>
           <Tooltip>
@@ -49,6 +51,6 @@ export default function CheckSMSRequestSuccess({
           </Tooltip>
         </TooltipProvider>
       )}
-    </>
+    </div>
   );
 }
