@@ -47,7 +47,7 @@ export default function ProtectedData() {
     protectedDataAddress: Address;
   }>();
   const [currentPage, setCurrentPage] = useState(0);
-  const [isGrantAccessModalOpen, setGrantAccessModalOpen] = useState(false);
+  const [isGrantAccessModalOpen, setIsGrantAccessModalOpen] = useState(false);
 
   const protectedData = useQuery({
     queryKey: ['protectedData', protectedDataAddress, userAddress],
@@ -100,7 +100,7 @@ export default function ProtectedData() {
       {protectedData.data && (
         <GrantAccessModal
           isSwitchingModalOpen={isGrantAccessModalOpen}
-          setSwitchingModalOpen={setGrantAccessModalOpen}
+          setSwitchingModalOpen={setIsGrantAccessModalOpen}
           protectedData={protectedData.data}
         />
       )}
@@ -135,7 +135,7 @@ export default function ProtectedData() {
           </div>
           <Button
             onClick={() => {
-              setGrantAccessModalOpen(true);
+              setIsGrantAccessModalOpen(true);
             }}
           >
             Authorize new user
