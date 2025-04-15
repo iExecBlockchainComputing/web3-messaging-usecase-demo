@@ -17,7 +17,7 @@ export default function CheckSMSRequestSuccess({
   protectedDataAddress: Address | undefined;
 }) {
   const {
-    data: hasSmsSecret,
+    data: smsSecretExists,
     isSuccess: isSmsRequestSuccess,
     isError: isCheckSmsSecretError,
   } = useQuery({
@@ -34,7 +34,7 @@ export default function CheckSMSRequestSuccess({
 
   return (
     <div className={className}>
-      {isSmsRequestSuccess && !hasSmsSecret && !isCheckSmsSecretError && (
+      {isSmsRequestSuccess && !smsSecretExists && !isCheckSmsSecretError && (
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger className="cursor-default">
