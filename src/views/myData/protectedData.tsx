@@ -57,11 +57,11 @@ export default function ProtectedData() {
       }
       const dataProtectorCore = await getDataProtectorCoreClient();
       // TODO check protectedDataList before
-      const protectedDatas = await dataProtectorCore.getProtectedData({
+      const protectedDataItems = await dataProtectorCore.getProtectedData({
         protectedDataAddress: protectedDataAddress,
         owner: userAddress,
       });
-      return protectedDatas[0];
+      return protectedDataItems[0];
     },
     enabled: !!userAddress && !!protectedDataAddress,
     refetchOnWindowFocus: true,

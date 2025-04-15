@@ -42,10 +42,10 @@ export default function SendMessage() {
     queryFn: async () => {
       const dataProtectorCore = await getDataProtectorCoreClient();
       // TODO check protectedDataList before
-      const protectedDatas = await dataProtectorCore.getProtectedData({
+      const protectedDataItems = await dataProtectorCore.getProtectedData({
         protectedDataAddress: protectedDataAddress,
       });
-      return protectedDatas[0];
+      return protectedDataItems[0];
     },
     enabled: !!protectedDataAddress,
     refetchOnWindowFocus: true,
