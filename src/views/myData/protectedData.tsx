@@ -8,6 +8,7 @@ import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import CheckSMSRequestSuccess from '@/modules/myData/CheckSMSRequestSuccess';
 import RevokeAccess from '@/modules/myData/RevokeAccess';
 import GrantAccessModal from '@/modules/myData/protectedData/GrantAccessModal';
 import { ProtectedDataDetails } from '@/modules/myData/protectedData/ProtectedDataDetails';
@@ -46,7 +47,7 @@ export default function ProtectedData() {
     protectedDataAddress: Address;
   }>();
   const [currentPage, setCurrentPage] = useState(0);
-  const [isGrantAccessModalOpen, setGrantAccessModalOpen] = useState(false);
+  const [isGrantAccessModalOpen, setIsGrantAccessModalOpen] = useState(false);
 
   const protectedData = useQuery({
     queryKey: ['protectedData', protectedDataAddress, userAddress],
@@ -56,11 +57,11 @@ export default function ProtectedData() {
       }
       const dataProtectorCore = await getDataProtectorCoreClient();
       // TODO check protectedDataList before
-      const protectedDatas = await dataProtectorCore.getProtectedData({
+      const protectedDataItems = await dataProtectorCore.getProtectedData({
         protectedDataAddress: protectedDataAddress,
         owner: userAddress,
       });
-      return protectedDatas[0];
+      return protectedDataItems[0];
     },
     enabled: !!userAddress && !!protectedDataAddress,
     refetchOnWindowFocus: true,
@@ -99,7 +100,7 @@ export default function ProtectedData() {
       {protectedData.data && (
         <GrantAccessModal
           isSwitchingModalOpen={isGrantAccessModalOpen}
-          setSwitchingModalOpen={setGrantAccessModalOpen}
+          setSwitchingModalOpen={setIsGrantAccessModalOpen}
           protectedData={protectedData.data}
         />
       )}
@@ -115,7 +116,8 @@ export default function ProtectedData() {
             {protectedData.data.schema.email ? 'MAIL' : 'TELEGRAM'}
           </span>
         )}
-        <span className="line-clamp-2 text-left">
+        <span className="line-clamp-2 flex gap-2 text-left">
+          <CheckSMSRequestSuccess protectedDataAddress={protectedDataAddress} />
           {protectedData.data?.name ? protectedData.data.name : '(No name)'}
         </span>
       </h1>
@@ -133,7 +135,7 @@ export default function ProtectedData() {
           </div>
           <Button
             onClick={() => {
-              setGrantAccessModalOpen(true);
+              setIsGrantAccessModalOpen(true);
             }}
           >
             Authorize new user

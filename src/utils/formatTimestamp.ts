@@ -1,5 +1,5 @@
 export function formatTimestamp(timestamp: string | number): string {
-  const date = new Date(timestamp * 1000);
+  const date = new Date(Number(timestamp) * 1000);
   return new Intl.DateTimeFormat('en-US', {
     year: 'numeric',
     month: '2-digit',
