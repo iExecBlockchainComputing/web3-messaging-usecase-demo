@@ -24,7 +24,7 @@
     "@graphql-codegen/introspection": "^4.0.3",
     "@iexec/dataprotector": "^2.0.0-beta.12",
     "@iexec/web3mail": "^1.2.0",
-    "@iexec/web3telegram": "^0.0.2-alpha",
+    "@iexec/web3telegram": "^0.0.3-alpha",
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-select": "^2.1.6",
