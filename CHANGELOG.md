@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.0.0...web3-messaging-usecase-demo-v1.1.0) (2025-04-22)
+
+
+### 🚀 Features
+
+* add broken protectedData indicator ([#106](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/106)) ([84d9461](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/84d9461b6e68efaa0e9ca42af5defca3489ab6d9))
+
+
+### 🧰 Other
+
+* update @iexec/web3telegram version to 0.0.3-alpha ([#108](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/108)) ([b73386e](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/b73386ede9dec213c2dcfd2abc1285f8dfb43a44))
+
 ## [1.0.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.0.0...web3-messaging-usecase-demo-v1.0.0) (2025-04-10)
 
 
