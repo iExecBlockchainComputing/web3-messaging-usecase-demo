@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.1.0...web3-messaging-usecase-demo-v1.2.0) (2025-06-11)
+
+
+### 🚀 Features
+
+* add Google Tag Manager integration to index.html ([#115](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/115)) ([65db1a7](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/65db1a79c6863adb3c11cf99627747dad9dd2d36))
+
 ## [1.1.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.0.0...web3-messaging-usecase-demo-v1.1.0) (2025-04-22)
 
 
