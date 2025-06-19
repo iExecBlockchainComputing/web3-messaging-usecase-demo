@@ -18,6 +18,7 @@ import {
   getWeb3mailClient,
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
+import DialogSendMessageConfirmation from '@/modules/myData/DialogSendMessageConfirmation';
 import useUserStore from '@/stores/useUser.store';
 import { chunkArray } from '@/utils/chunkArray';
 import { cn } from '@/utils/style.utils';
@@ -151,6 +152,7 @@ export default function ContactList() {
 
   return (
     <div className="space-y-6">
+      <DialogSendMessageConfirmation />
       <div>
         <h1 className="text-xl font-bold">Send Message to contact</h1>
         <p>Email or telegram that people have authorized you to access</p>
