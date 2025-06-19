@@ -130,7 +130,7 @@ export default function ProtectedData() {
           <div>
             <h2 className="text-xl font-bold">Authorized users</h2>
             <p>
-              These are the users who you allowed to access this protected data.
+              These are the users you allowed to access this protected data.
             </p>
           </div>
           <Button

@@ -22,10 +22,12 @@ import {
   getWeb3mailClient,
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
+import { useSendMessageStore } from '@/stores/useSendMessage.store';
 import { pluralize } from '@/utils/pluralize';
 
 export default function SendMessage() {
   const navigate = useNavigate();
+  const { setLastRecipient, setIsMessageSend } = useSendMessageStore();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
   }>();
@@ -127,15 +129,9 @@ export default function SendMessage() {
       console.error(err);
     },
     onSuccess: () => {
+      setLastRecipient(protectedDataAddress!);
+      setIsMessageSend(protectedDataAddress!);
       navigate('/contacts');
-      toast({
-        title: `You have successfully sent a ${
-          protectedData.data?.schema
-            ? getDataType(protectedData.data.schema)
-            : 'unknown'
-        }.`,
-        variant: 'success',
-      });
     },
   });
 
