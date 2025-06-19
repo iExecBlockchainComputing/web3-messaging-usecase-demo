@@ -1,3 +1,4 @@
+import { CONTACT_URL } from '@/config/config.ts';
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useDevModeStore } from '@/stores/useDevMode.store.ts';
@@ -84,11 +85,7 @@ export function NavBar() {
               Interested by Confidential Messaging?
             </p>
             <Button variant="outline" asChild className="w-full max-w-44">
-              <a
-                href="http://airtable.com/appDiKrXe5wJgGpdP/pagm2GF2eNdX2ysw3/form"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={CONTACT_URL} target="_blank" rel="noopener noreferrer">
                 Connect with us
               </a>
             </Button>

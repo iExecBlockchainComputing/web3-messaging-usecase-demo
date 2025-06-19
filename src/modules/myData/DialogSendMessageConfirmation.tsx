@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_PREFIX } from '@/config/config';
+import { CONTACT_URL, LOCAL_STORAGE_PREFIX } from '@/config/config';
 import { useState } from 'react';
 import useLocalStorageState from 'use-local-storage-state';
 import { Button } from '@/components/ui/button';
@@ -62,11 +62,7 @@ export default function DialogSendMessageConfirmation() {
         </div>
         <DialogFooter>
           <Button asChild className="mx-auto w-full max-w-44">
-            <a
-              href="http://airtable.com/appDiKrXe5wJgGpdP/pagm2GF2eNdX2ysw3/form"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={CONTACT_URL} target="_blank" rel="noopener noreferrer">
               Connect with us
             </a>
           </Button>

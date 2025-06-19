@@ -1,6 +1,8 @@
 export const ITEMS_PER_PAGE = 6;
 
 export const LOCAL_STORAGE_PREFIX = 'Web3Messaging';
+export const CONTACT_URL =
+  'https://airtable.com/appDiKrXe5wJgGpdP/pagm2GF2eNdX2ysw3/form';
 
 /**
  * See smart-contract transactions:
