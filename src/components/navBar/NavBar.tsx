@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useDevModeStore } from '@/stores/useDevMode.store.ts';
+import { cn } from '@/utils/style.utils.ts';
 import iExecLogo from '../../assets/iexec-logo.svg';
 import { Button } from '../ui/button.tsx';
 import { Label } from '../ui/label.tsx';
@@ -15,7 +16,7 @@ export function NavBar() {
   };
 
   return (
-    <div className="group relative z-30 h-full flex-none lg:w-[255px]">
+    <div className="group relative z-30 h-full flex-none lg:w-[280px]">
       <label
         className="group/checkbox fixed top-7 right-7 z-30 flex size-5 w-[26px] origin-center transform flex-col justify-between lg:hidden"
         htmlFor="menu"
@@ -33,7 +34,7 @@ export function NavBar() {
         <span className="pointer-events-none block h-0.5 w-[26px] origin-top-right transform rounded-full bg-white duration-200 group-has-[:checked]/checkbox:scale-x-0"></span>
         <span className="pointer-events-none block h-0.5 w-[26px] origin-right transform rounded-full bg-white duration-200 group-has-[:checked]/checkbox:rotate-45"></span>
       </label>
-      <div className="border-grey-600 bg-grey-900 fixed flex h-dvh w-full -translate-x-full flex-col overflow-auto rounded-r-3xl border-r px-5 pt-10 duration-300 group-has-[:checked]:translate-x-0 lg:w-[255px] lg:translate-x-0">
+      <div className="border-grey-600 bg-grey-900 fixed flex h-dvh w-full -translate-x-full flex-col overflow-auto rounded-r-3xl border-r px-5 pt-10 pb-5 duration-300 group-has-[:checked]:translate-x-0 lg:w-[280px] lg:translate-x-0">
         <Link
           to="/my-data"
           className="-mx-2 flex items-center p-2"
@@ -72,35 +73,21 @@ export function NavBar() {
             <span>Dev Mode</span>
           </Label>
 
-          <hr className="border-grey-600 border-t" />
-
-          <div className="mb-16">
-            <Button
-              asChild
-              size="lg"
-              variant="discreet_outline"
-              className="w-full"
-            >
+          <div
+            className={cn(
+              'radial-bg rounded-20 relative z-0 space-y-6 overflow-hidden p-6 text-white',
+              'before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)] before:bg-[#161a2a]',
+              'after:from-grey-800 after:absolute after:inset-px after:-z-10 after:rounded-[calc(20px-1px)] after:bg-gradient-to-br after:from-50% after:to-[#00115C]'
+            )}
+          >
+            <p className="font-bold">Interested by Confidential Messaging?</p>
+            <Button variant="outline">
               <a
-                href="https://iexecproject.atlassian.net/servicedesk/customer/portal/4"
+                href="http://airtable.com/appDiKrXe5wJgGpdP/pagm2GF2eNdX2ysw3/form"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Contact Support
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="discreet_outline"
-              className="mt-4 w-full"
-            >
-              <a
-                href="https://iexecproject.atlassian.net/servicedesk/customer/portal/4/group/9/create/71"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Feedback
+                Connect with us
               </a>
             </Button>
           </div>
