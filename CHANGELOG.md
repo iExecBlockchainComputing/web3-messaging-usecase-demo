@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.2.0...web3-messaging-usecase-demo-v1.3.0) (2025-06-19)
+
+
+### 🚀 Features
+
+* add Mava Widget, replace IPFS by Encrypted Content, add send message confirmation modale ([#118](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/118)) ([01fbbaf](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/01fbbaf39db957ed9b15f6d6453f5268ae556a1c))
+
 ## [1.2.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.1.0...web3-messaging-usecase-demo-v1.2.0) (2025-06-11)
 
 
