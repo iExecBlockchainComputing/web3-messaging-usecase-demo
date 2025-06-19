@@ -75,13 +75,15 @@ export function NavBar() {
 
           <div
             className={cn(
-              'radial-bg rounded-20 relative z-0 space-y-6 overflow-hidden p-6 text-white',
+              'radial-bg rounded-20 relative z-0 flex flex-col items-center gap-6 overflow-hidden p-6 text-white',
               'before:absolute before:inset-px before:-z-10 before:rounded-[calc(20px-1px)] before:bg-[#161a2a]',
               'after:from-grey-800 after:absolute after:inset-px after:-z-10 after:rounded-[calc(20px-1px)] after:bg-gradient-to-br after:from-50% after:to-[#00115C]'
             )}
           >
-            <p className="font-bold">Interested by Confidential Messaging?</p>
-            <Button variant="outline">
+            <p className="text-center font-bold md:text-left">
+              Interested by Confidential Messaging?
+            </p>
+            <Button variant="outline" asChild className="w-full max-w-44">
               <a
                 href="http://airtable.com/appDiKrXe5wJgGpdP/pagm2GF2eNdX2ysw3/form"
                 target="_blank"
