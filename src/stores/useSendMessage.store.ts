@@ -9,7 +9,9 @@ type SendMessageState = {
 
 export const useSendMessageStore = create<SendMessageState>((set) => ({
   lastRecipient: '',
-  setLastRecipient: (sendMessage: string) => set({ lastRecipient: sendMessage }),
+  setLastRecipient: (sendMessage: string) =>
+    set({ lastRecipient: sendMessage }),
   isMessageSend: false,
-  setIsMessageSend: (isMessageSend: boolean) => set({ isMessageSend: isMessageSend }),
+  setIsMessageSend: (isMessageSend: boolean) =>
+    set({ isMessageSend: isMessageSend }),
 }));
