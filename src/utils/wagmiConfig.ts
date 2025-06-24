@@ -1,7 +1,7 @@
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
 import { createAppKit } from '@reown/appkit/react';
 import { http, CreateConnectorFn } from 'wagmi';
-import { injected, walletConnect } from 'wagmi/connectors';
+import { injected } from 'wagmi/connectors';
 import { bellecour } from './bellecourChainConfig.ts';
 import { InjectedWalletProvider } from './injected-wallet-provider/injected-wallet-provider.ts';
 import { EIP6963ProviderDetail } from './injected-wallet-provider/types.ts';
@@ -13,19 +13,8 @@ if (!import.meta.env.VITE_REOWN_PROJECT_ID) {
 
 export const projectId = import.meta.env.VITE_REOWN_PROJECT_ID!;
 
-// WalletConnect metadata
-const metadata = {
-  name: 'Web3 Messaging Usecase Demo',
-  description: 'Web3 Messaging Usecase Demo',
-  url: '',
-  icons: [
-    'https://cdn.prod.website-files.com/6646148828eddb19c172bf2a/665db3ba85a625628c353a64_Logo-RLC-Yellow.png',
-  ],
-};
-
 // Connectors initialization
 const connectors: CreateConnectorFn[] = [];
-connectors.push(walletConnect({ projectId, metadata, showQrModal: false }));
 
 // Injected wallet provider management
 const injectedWalletProvider = new InjectedWalletProvider();
