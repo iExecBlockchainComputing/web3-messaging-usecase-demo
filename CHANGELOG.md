@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.3.0...web3-messaging-usecase-demo-v1.3.1) (2025-06-24)
+
+
+### 🐞 Bug Fixes
+
+* remove WalletConnect integration from wagmiConfig using reown instead ([#120](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/120)) ([4261e37](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/4261e37d058564985896cbc3e6e1c5ce4675323a))
+
 ## [1.3.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.2.0...web3-messaging-usecase-demo-v1.3.0) (2025-06-19)
 
 
