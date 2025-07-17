@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.3.1...web3-messaging-usecase-demo-v1.3.2) (2025-07-17)
+
+
+### 🐞 Bug Fixes
+
+* update error message for protected data creation failure ([#122](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/122)) ([9af1b1d](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/9af1b1db190a505cd816f1f97a26a7d339c617a6))
+
 ## [1.3.1](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.3.0...web3-messaging-usecase-demo-v1.3.1) (2025-06-24)
 
 
