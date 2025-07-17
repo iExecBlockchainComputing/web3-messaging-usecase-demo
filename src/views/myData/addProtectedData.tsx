@@ -340,7 +340,10 @@ export default function AddProtectedData() {
               </div>
               {CreateProtectedDataMutation.isError && (
                 <Alert variant="error">
-                  <p>Oops, something went wrong while fetching all creators.</p>
+                  <p>
+                    Oops, something went wrong while creating your protected
+                    data.
+                  </p>
                   <p>{CreateProtectedDataMutation.error.toString()}</p>
                 </Alert>
               )}
