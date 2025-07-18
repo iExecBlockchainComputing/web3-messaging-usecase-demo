@@ -6,7 +6,7 @@ import { Contact as Web3mailContact } from '@iexec/web3mail';
 import { Contact as Web3telegramContact } from '@iexec/web3telegram';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { CircularLoader } from '@/components/CircularLoader';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Button } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import useUserStore from '@/stores/useUser.store';
@@ -61,17 +61,7 @@ export default function ContactItem({ contact }: ContactItemProps) {
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 
-  if (isLoading) {
-    return (
-      <div className="contents">
-        <div className="col-span-6 flex items-center justify-center py-4">
-          <CircularLoader />
-        </div>
-      </div>
-    );
-  }
-
-  if (isError || !contactDetails) {
+  if (isError) {
     return (
       <div className="contents">
         <div className="col-span-6 flex items-center justify-center py-4 text-red-500">
@@ -87,28 +77,28 @@ export default function ContactItem({ contact }: ContactItemProps) {
         'bg-grey-50 even:*:bg-grey-800 *:border-grey-600 contents text-sm *:flex *:h-full *:items-center *:border-t *:px-5 *:py-3'
       )}
     >
-      <div className="truncate">{contactDetails.name || '(No name)'}</div>
       <div className="truncate">
-        <span className="truncate whitespace-nowrap">
-          {contactDetails.address}
-        </span>
+        {isLoading ? <LoadingSpinner /> : contactDetails?.name || '(No name)'}
+      </div>
+      <div className="truncate">
+        <span className="truncate whitespace-nowrap">{contact.address}</span>
       </div>
       <div className="truncate">
         <span className="truncate whitespace-nowrap">
-          {contactDetails.owner === userAddress
-            ? `(Mine) ${contactDetails.owner}`
-            : contactDetails.owner}
+          {contact.owner === userAddress
+            ? `(Mine) ${contact.owner}`
+            : contact.owner}
         </span>
       </div>
-      <div className="truncate">{contactDetails.volume}</div>
+      <div className="truncate">
+        {isLoading ? <LoadingSpinner /> : contactDetails?.volume || 'N/A'}
+      </div>
       <div className="text-primary truncate uppercase">
-        {contactDetails.contactType}
+        {contact.contactType}
       </div>
       <div className="justify-end">
         <Button asChild variant="discreet_outline">
-          <Link to={`/contacts/${contactDetails.address}/send-message`}>
-            Send
-          </Link>
+          <Link to={`/contacts/${contact.address}/send-message`}>Send</Link>
         </Button>
       </div>
     </div>
