@@ -89,7 +89,7 @@ export default function ContactItem({ contact }: ContactItemProps) {
       )}
     >
       <div className="truncate">
-        {contactDetails.name ? contactDetails.name : '(No name)'}
+        {contactDetails.name || '(No name)'}
       </div>
       <div className="truncate">
         <span className="truncate whitespace-nowrap">
