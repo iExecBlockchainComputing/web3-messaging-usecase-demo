@@ -87,9 +87,7 @@ export default function ContactItem({ contact }: ContactItemProps) {
         'bg-grey-50 even:*:bg-grey-800 *:border-grey-600 contents text-sm *:flex *:h-full *:items-center *:border-t *:px-5 *:py-3'
       )}
     >
-      <div className="truncate">
-        {contactDetails.name || '(No name)'}
-      </div>
+      <div className="truncate">{contactDetails.name || '(No name)'}</div>
       <div className="truncate">
         <span className="truncate whitespace-nowrap">
           {contactDetails.address}
