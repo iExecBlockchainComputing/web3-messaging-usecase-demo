@@ -24,7 +24,6 @@ const fetchContactDetails = async (
   },
   userAddress: string
 ) => {
-  console.log('Fetching contact details...');
   const dataProtectorCore = await getDataProtectorCoreClient();
 
   const contactProtectedData = await dataProtectorCore.getProtectedData({
