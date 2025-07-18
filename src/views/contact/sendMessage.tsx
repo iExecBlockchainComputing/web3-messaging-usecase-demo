@@ -1,6 +1,6 @@
 import { WORKERPOOL_ADDRESS_OR_ENS } from '@/config/config';
 import { Address } from '@/types';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
@@ -27,6 +27,7 @@ import { pluralize } from '@/utils/pluralize';
 
 export default function SendMessage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { setLastRecipient, setIsMessageSend } = useSendMessageStore();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
@@ -130,7 +131,10 @@ export default function SendMessage() {
     },
     onSuccess: () => {
       setLastRecipient(protectedDataAddress!);
-      setIsMessageSend(protectedDataAddress!);
+      setIsMessageSend(true);
+      queryClient.invalidateQueries({
+        queryKey: ['contactDetails', protectedDataAddress],
+      });
       navigate('/contacts');
     },
   });

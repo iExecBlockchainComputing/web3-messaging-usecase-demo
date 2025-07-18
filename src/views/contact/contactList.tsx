@@ -1,20 +1,12 @@
-import {
-  ITEMS_PER_PAGE,
-  WEB3MAIL_IDAPPS_WHITELIST_SC,
-  WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
-} from '@/config/config';
-import { Contact as Web3telegramContact } from '@iexec/web3mail';
-import { Contact as Web3mailContact } from '@iexec/web3telegram';
+import { ITEMS_PER_PAGE } from '@/config/config';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
 import { CircularLoader } from '@/components/CircularLoader';
 import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button } from '@/components/ui/button';
 import {
-  getDataProtectorCoreClient,
   getWeb3mailClient,
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
@@ -22,6 +14,7 @@ import DialogSendMessageConfirmation from '@/modules/myData/DialogSendMessageCon
 import useUserStore from '@/stores/useUser.store';
 import { chunkArray } from '@/utils/chunkArray';
 import { cn } from '@/utils/style.utils';
+import ContactItem from './ContactItem';
 
 const COLOR_CLASSES: {
   [key: string]: {
@@ -53,37 +46,25 @@ const fetchContacts = async (userAddress: string) => {
   });
 
   const web3telegram = await getWeb3telegramClient();
-  // TODO use isUserStrict: true when web3telegram supports it
-  const myTelegramContacts = await web3telegram.fetchMyContacts();
+  const myTelegramContacts = await web3telegram.fetchMyContacts({
+    isUserStrict: true,
+  });
 
-  return [...myEmailContacts, ...myTelegramContacts].sort(
+  const emailContactsWithType = myEmailContacts.map((contact) => ({
+    ...contact,
+    contactType: 'mail' as const,
+  }));
+
+  const telegramContactsWithType = myTelegramContacts.map((contact) => ({
+    ...contact,
+    contactType: 'telegram' as const,
+  }));
+
+  return [...emailContactsWithType, ...telegramContactsWithType].sort(
     (a, b) =>
       new Date(b.accessGrantTimestamp).getTime() -
       new Date(a.accessGrantTimestamp).getTime()
   );
-};
-
-const fetchContactDetails = async (
-  contact: Web3telegramContact | Web3mailContact,
-  userAddress: string
-) => {
-  const dataProtectorCore = await getDataProtectorCoreClient();
-
-  const contactProtectedData = await dataProtectorCore.getProtectedData({
-    protectedDataAddress: contact.address,
-  });
-
-  const grantedAccess = await dataProtectorCore.getGrantedAccess({
-    protectedData: contact.address,
-    authorizedUser: userAddress,
-    authorizedApp: contactProtectedData[0].schema.email
-      ? WEB3MAIL_IDAPPS_WHITELIST_SC
-      : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
-  });
-  return {
-    ...contactProtectedData[0],
-    volume: grantedAccess.grantedAccess[0].volume,
-  };
 };
 
 export default function ContactList() {
@@ -106,41 +87,12 @@ export default function ContactList() {
     refetchOnWindowFocus: true,
   });
 
-  // fetch detailed data for each contact
-  const {
-    data: contactDetails,
-    isLoading: detailsLoading,
-    error: detailsError,
-  } = useQuery({
-    queryKey: ['contactDetails', contacts],
-    queryFn: async () => {
-      const details = await Promise.all(
-        contacts?.map((contact) =>
-          fetchContactDetails(contact, userAddress as string)
-        ) || []
-      );
-      return details;
-    },
-    enabled: !!contacts,
-    refetchOnWindowFocus: true,
-  });
-
-  const getDataType = (schema: { [key: string]: unknown }) => {
-    if (schema.email) {
-      return 'mail';
-    }
-    if (schema.telegram_chatId) {
-      return 'telegram';
-    }
-    return 'unknown';
-  };
-
   const getFilteredContacts = (type: 'all' | 'telegram' | 'mail') => {
     return (
-      contactDetails?.filter((contact) =>
+      contacts?.filter((contact) =>
         type === 'all'
-          ? ['telegram', 'mail'].includes(getDataType(contact.schema))
-          : getDataType(contact.schema) === type
+          ? ['telegram', 'mail'].includes(contact.contactType)
+          : contact.contactType === type
       ) || []
     );
   };
@@ -197,53 +149,21 @@ export default function ContactList() {
         </div>
         {!pagesOfContacts || pagesOfContacts?.length === 0 ? (
           <div className="text-text-2 border-grey-600 col-span-6 flex h-48 items-center justify-center border-t text-center">
-            {isContactLoading || detailsLoading ? (
+            {isContactLoading ? (
               <CircularLoader />
-            ) : isError || detailsError ? (
+            ) : isError ? (
               <Alert variant="error">
                 <p>Oops, something went wrong while fetching contact list.</p>
-                <p>{error?.toString() || detailsError?.toString()}</p>
+                <p>{error?.toString()}</p>
               </Alert>
             ) : (
               <p>There are no contact yet.</p>
             )}
           </div>
         ) : (
-          pagesOfContacts[currentPage].map((contact) => {
-            return (
-              <div
-                key={contact.address}
-                className={cn(
-                  'bg-grey-50 even:*:bg-grey-800 *:border-grey-600 contents text-sm *:flex *:h-full *:items-center *:border-t *:px-5 *:py-3 odd:[a]:bg-red-300'
-                )}
-              >
-                <div className="truncate">{contact.name || '(No name)'}</div>
-                <div className="truncate">
-                  <span className="truncate whitespace-nowrap">
-                    {contact.address}
-                  </span>
-                </div>
-                <div className="truncate">
-                  <span className="truncate whitespace-nowrap">
-                    {contact.owner === userAddress
-                      ? `(Mine) ${contact.owner}`
-                      : contact.owner}
-                  </span>
-                </div>
-                <div className="truncate">{contact.volume}</div>
-                <div className="text-primary truncate uppercase">
-                  {getDataType(contact.schema)}
-                </div>
-                <div className="justify-end">
-                  <Button asChild variant="discreet_outline">
-                    <Link to={`/contacts/${contact.address}/send-message`}>
-                      Send
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            );
-          })
+          pagesOfContacts[currentPage].map((contact) => (
+            <ContactItem key={contact.address} contact={contact} />
+          ))
         )}
 
         {pagesOfContacts && pagesOfContacts?.length > 1 && (
@@ -314,7 +234,7 @@ export default function ContactList() {
           <br />
           {'  '}authorizedUser: "{userAddress}",
           <br />
-          {'  '}authorizedApp: "{WEB3MAIL_IDAPPS_WHITELIST_SC}",
+          {'  '}authorizedApp: "[WEB3MAIL_OR_TELEGRAM_IDAPPS_WHITELIST_SC]",
           <br />
           {'}'});
         </a>
