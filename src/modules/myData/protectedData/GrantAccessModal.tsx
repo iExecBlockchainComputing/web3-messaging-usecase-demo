@@ -93,6 +93,9 @@ export default function GrantAccessModal({
       queryClient.invalidateQueries({
         queryKey: ['granted access', protectedData.address, userAddress],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['fetchContacts', userAddress],
+      });
       navigate(`/my-data/${protectedData.address}`);
       toast({
         title: 'You have successfully authorized a new user.',
