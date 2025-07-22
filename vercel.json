@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/dist/styles.css",
+      "destination": "/index.html"
+    },
+    {
       "source": "/web3messaging/assets/(.*)",
       "destination": "/assets/$1"
     },
