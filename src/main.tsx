@@ -4,7 +4,7 @@ import '@fontsource/inter/latin-400.css';
 import { QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider } from 'react-router-dom';
+
 import { WagmiProvider } from 'wagmi';
 import { initQueryClient } from '@/utils/initQueryClient.ts';
 import { initRollbarAlerting } from '@/utils/initRollbarAlerting.ts';
@@ -12,6 +12,7 @@ import './index.css';
 import { router } from './router.tsx';
 import { wagmiAdapter } from './utils/wagmiConfig.ts';
 import { ErrorBoundary } from './components/ErrorBoundary.tsx';
+import { TestRouter } from './components/TestRouter.tsx';
 
 console.log('Starting app initialization...');
 
@@ -38,7 +39,7 @@ try {
       <ErrorBoundary>
         <WagmiProvider config={wagmiAdapter.wagmiConfig}>
           <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
+            <TestRouter />
           </QueryClientProvider>
         </WagmiProvider>
       </ErrorBoundary>
