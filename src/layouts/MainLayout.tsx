@@ -9,8 +9,10 @@ import ConnectWallet from './ConnectWallet.tsx';
 import { DebugRouter } from '@/components/DebugRouter.tsx';
 
 export default function MainLayout() {
+  console.log('MainLayout: Component rendering...');
   useWatchAccount();
   const { isConnected } = useUserStore();
+  console.log('MainLayout: isConnected =', isConnected);
 
   return (
     <div className="flex">

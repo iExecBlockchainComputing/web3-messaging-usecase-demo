@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useLoginLogout } from '@/hooks/useLoginLogout';
 
 export default function ConnectWallet() {
+  console.log('ConnectWallet: Component rendering...');
   const { login } = useLoginLogout();
 
   return (
