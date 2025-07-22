@@ -62,13 +62,8 @@ export default function ContactItem({ contact }: ContactItemProps) {
   });
 
   if (isError) {
-    return (
-      <div className="contents">
-        <div className="col-span-6 flex items-center justify-center py-4 text-red-500">
-          Error loading contact details
-        </div>
-      </div>
-    );
+    // TODO: Handle error more gracefully. Do not display error in the UI.
+    console.error('Error loading contact details:', contact.address);
   }
 
   return (
