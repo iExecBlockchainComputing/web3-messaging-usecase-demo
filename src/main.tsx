@@ -14,22 +14,42 @@ import './index.css';
 import { router } from './router.tsx';
 import { wagmiAdapter } from './utils/wagmiConfig.ts';
 
+console.log('Starting app initialization...');
+
 const { rollbar, rollbarConfig } = initRollbarAlerting();
+console.log('Rollbar initialized:', { rollbar: !!rollbar, rollbarConfig: !!rollbarConfig });
 
 const queryClient = initQueryClient({ rollbar });
+console.log('Query client initialized');
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <ConditionalRollbarWrapper
-          rollbar={rollbar}
-          rollbarConfig={rollbarConfig}
-        >
-          <RouterProvider router={router} />
-        </ConditionalRollbarWrapper>
-      </QueryClientProvider>
-    </WagmiProvider>
-    <Toaster />
-  </React.StrictMode>
-);
+console.log('Wagmi adapter config:', wagmiAdapter);
+console.log('Router:', router);
+
+try {
+  console.log('Attempting to render app...');
+  const rootElement = document.getElementById('root');
+  console.log('Root element:', rootElement);
+  
+  if (!rootElement) {
+    throw new Error('Root element not found');
+  }
+  
+  ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+      <WagmiProvider config={wagmiAdapter.wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <ConditionalRollbarWrapper
+            rollbar={rollbar}
+            rollbarConfig={rollbarConfig}
+          >
+            <RouterProvider router={router} />
+          </ConditionalRollbarWrapper>
+        </QueryClientProvider>
+      </WagmiProvider>
+      <Toaster />
+    </React.StrictMode>
+  );
+  console.log('App rendered successfully');
+} catch (error) {
+  console.error('Error rendering app:', error);
+}
