@@ -69,6 +69,7 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
   });
   WEB3MAIL_CLIENT_RESOLVES.length = 0;
 
+  //TODO: Remove hardcoded IPFS node when new IExecWeb3telegram version is released
   iExecWeb3telegram = new IExecWeb3telegram(provider, {
     ipfsNode: 'https://ipfs-upload.v8-bellecour.iex.ec',
   });
