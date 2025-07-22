@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/web3messaging/assets/(.*)",
-      "destination": "/web3messaging/assets/$1"
+      "destination": "/assets/$1"
     },
     {
       "source": "/web3messaging/(.*)",
-      "destination": "/web3messaging/index.html"
+      "destination": "/index.html"
     }
   ]
 }
