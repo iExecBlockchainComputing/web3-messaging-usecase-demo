@@ -15,7 +15,7 @@ export const router = createBrowserRouter(
         {
           index: true,
           path: '*',
-          element: <Navigate to="/my-data" />,
+          element: <Navigate to="/my-data" replace />,
         },
         {
           path: '/my-data',
