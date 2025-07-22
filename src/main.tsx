@@ -39,7 +39,9 @@ try {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <ErrorBoundary>
-        <SimpleFallback />
+        <WagmiProvider config={wagmiAdapter.wagmiConfig}>
+          <SimpleFallback />
+        </WagmiProvider>
       </ErrorBoundary>
     </React.StrictMode>
   );
