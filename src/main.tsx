@@ -40,7 +40,7 @@ try {
     <React.StrictMode>
       <ErrorBoundary>
         <WagmiProvider config={wagmiAdapter.wagmiConfig}>
-          <SimpleFallback />
+          <RouterProvider router={router} />
         </WagmiProvider>
       </ErrorBoundary>
     </React.StrictMode>
