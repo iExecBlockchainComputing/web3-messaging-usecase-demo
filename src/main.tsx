@@ -13,6 +13,8 @@ import { Toaster } from './components/ui/toaster.tsx';
 import './index.css';
 import { router } from './router.tsx';
 import { wagmiAdapter } from './utils/wagmiConfig.ts';
+import { ErrorBoundary } from './components/ErrorBoundary.tsx';
+import { SimpleFallback } from './components/SimpleFallback.tsx';
 
 console.log('Starting app initialization...');
 
@@ -36,17 +38,9 @@ try {
   
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
-      <WagmiProvider config={wagmiAdapter.wagmiConfig}>
-        <QueryClientProvider client={queryClient}>
-          <ConditionalRollbarWrapper
-            rollbar={rollbar}
-            rollbarConfig={rollbarConfig}
-          >
-            <RouterProvider router={router} />
-          </ConditionalRollbarWrapper>
-        </QueryClientProvider>
-      </WagmiProvider>
-      <Toaster />
+      <ErrorBoundary>
+        <SimpleFallback />
+      </ErrorBoundary>
     </React.StrictMode>
   );
   console.log('App rendered successfully');
