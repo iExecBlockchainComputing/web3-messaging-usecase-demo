@@ -6,15 +6,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { WagmiProvider } from 'wagmi';
-import { ConditionalRollbarWrapper } from '@/components/ConditionalRollbarWrapper.tsx';
 import { initQueryClient } from '@/utils/initQueryClient.ts';
 import { initRollbarAlerting } from '@/utils/initRollbarAlerting.ts';
-import { Toaster } from './components/ui/toaster.tsx';
 import './index.css';
 import { router } from './router.tsx';
 import { wagmiAdapter } from './utils/wagmiConfig.ts';
 import { ErrorBoundary } from './components/ErrorBoundary.tsx';
-import { SimpleFallback } from './components/SimpleFallback.tsx';
 
 console.log('Starting app initialization...');
 
@@ -40,7 +37,9 @@ try {
     <React.StrictMode>
       <ErrorBoundary>
         <WagmiProvider config={wagmiAdapter.wagmiConfig}>
-          <RouterProvider router={router} />
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+          </QueryClientProvider>
         </WagmiProvider>
       </ErrorBoundary>
     </React.StrictMode>
