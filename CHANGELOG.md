@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.4.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.3.2...web3-messaging-usecase-demo-v1.4.0) (2025-07-23)
+
+
+### 🚀 Features
+
+* code refactor and request fetching optimisation ([a1eadf4](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/a1eadf4b353df253da0cf7408fd5e97f9b0a13e3))
+* implement ContactItem component for displaying contact details and improve fetching ([37da14d](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/37da14d45b40308b48d9d9e9e0eb0c0574828698))
+
+
+### 🐞 Bug Fixes
+
+* add IPFS node configuration to Web3Telegram client initialization ([1c98054](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/1c98054f660e444c7d21ebe733825b4472ccf12f))
+* add IPFS node configuration to Web3Telegram client initialization ([e32baeb](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/e32baeb14456eb9ce56cddb6db0a3bf1d8074b58))
+* add TODO comment to remove hardcoded IPFS node in Web3telegram initialization ([2475a96](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/2475a96c19020379c67ca92e4e0c4654f2db08dc))
+* consolidate contact name display into a single line ([9b2249d](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/9b2249d3e1a894f2001e70f64b1a2317c49b9ec7))
+* enable strict user fetching for Telegram contacts ([08141de](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/08141def78ac2e0a388dbb6015108436713cc84d))
+* improve error handling in ContactItem component ([21d7cfb](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/21d7cfbceb0a7df33255403bd04b4e59f54a1fc2))
+* invalidate queries for fetching contacts and contact details after granting access and sending message ([e8148a3](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/e8148a3ab3d157ec1213161ec81d764ae7672745))
+* remove debug log from fetchContactDetails function ([b0d83b1](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/b0d83b1db91026bf3259541f0ba93848f1449be9))
+* replace CircularLoader with LoadingSpinner and improve loading state handling in ContactItem ([2832655](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/2832655fa325e60848115029fb611a5a9244327c))
+* update @iexec/web3mail dependency to version 1.2.2 ([c3664dc](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/c3664dc7ca79264804bf767a1b6a59045d81e2cf))
+* update @iexec/web3telegram to version 0.1.0-alpha.1 ([1e9fc75](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/1e9fc75075b2f474532b46087ca9ffdcf690d1b3))
+
+
+### ✨ Polish
+
+* simplify code ([2dc504d](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/2dc504d3daeb3a28606f67646360b69c9984df36))
+
+
+### 🧰 Other
+
+* update @iexec/web3telegram to version 0.1.0-alpha.1 ([037538a](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/037538aa471f19a393b81a5e5bc9baa9c2490fd4))
+
 ## [1.3.2](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.3.1...web3-messaging-usecase-demo-v1.3.2) (2025-07-17)
 
 
