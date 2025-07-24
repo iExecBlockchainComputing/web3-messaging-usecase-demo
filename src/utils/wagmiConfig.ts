@@ -1,4 +1,5 @@
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
+import { arbitrumSepolia } from '@reown/appkit/networks';
 import { createAppKit } from '@reown/appkit/react';
 import { http, CreateConnectorFn } from 'wagmi';
 import { injected } from 'wagmi/connectors';
@@ -58,10 +59,10 @@ preservedAvailableProviderDetails.forEach((providerDetails) => {
 });
 
 export const wagmiAdapter = new WagmiAdapter({
-  networks: [bellecour],
+  networks: [arbitrumSepolia],
   multiInjectedProviderDiscovery: false,
   transports: {
-    [bellecour.id]: http(),
+    [arbitrumSepolia.id]: http(),
   },
   projectId,
   connectors,
@@ -79,9 +80,9 @@ const featuredWalletIds = [
 // Create modal
 createAppKit({
   adapters: [wagmiAdapter],
-  networks: [bellecour],
+  networks: [arbitrumSepolia],
   projectId,
-  defaultNetwork: bellecour,
+  defaultNetwork: arbitrumSepolia,
   featuredWalletIds,
   features: {
     email: false,
