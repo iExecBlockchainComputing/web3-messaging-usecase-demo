@@ -19,8 +19,8 @@ export const WEB3MAIL_IDAPPS_WHITELIST_SC =
 export const WEB3TELEGRAM_IDAPPS_WHITELIST_SC =
   '0x5EB4D71371a067572C6c5b4E05606bd2b127580b'; // arbitrum-sepolia dev
 
-export const WEB3MAIL_ADDRESS = '0x1228c4FC030046Dc7212F4d13961212A3e53DB02'; // arbitrum-sepolia dev
+export const WEB3MAIL_ADDRESS = '0x51efB0e4d8518e6267153fa9a40889652dC583f9'; // arbitrum-sepolia dev
 export const WEB3TELEGRAM_ADDRESS =
-  '0x93C4738623408955c5c7cdfC0df2322a0f664659'; // arbitrum-sepolia dev
+  '0xF7146D040E18d14A3c569E441B2A70BC2aa2e9A9'; // arbitrum-sepolia dev
 
 export const WORKERPOOL_MAX_PRICE = 0.1 * 1e9; // arbitrum-sepolia dev
