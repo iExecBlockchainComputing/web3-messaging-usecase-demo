@@ -1,4 +1,7 @@
-import { WORKERPOOL_ADDRESS_OR_ENS } from '@/config/config';
+import {
+  WORKERPOOL_ADDRESS_OR_ENS,
+  WORKERPOOL_MAX_PRICE,
+} from '@/config/config';
 import { Address } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -112,6 +115,7 @@ export default function SendMessage() {
           contentType: formData.contentType,
           emailContent: formData.messageContent,
           workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
+          workerpoolMaxPrice: WORKERPOOL_MAX_PRICE,
         });
         return sendMail;
       } else {
@@ -122,6 +126,7 @@ export default function SendMessage() {
           senderName: formData.senderName,
           telegramContent: formData.messageContent,
           workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
+          workerpoolMaxPrice: WORKERPOOL_MAX_PRICE,
         });
         return sendTelegram;
       }
