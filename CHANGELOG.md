@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.4.0...web3-messaging-usecase-demo-v1.5.0) (2025-07-29)
+
+
+### 🚀 Features
+
+* add dynamic basepath ([#129](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/129)) ([1bc04e9](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/1bc04e9d88c2fa53c4286f1005b24122805af6bc))
+
 ## [1.4.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.3.2...web3-messaging-usecase-demo-v1.4.0) (2025-07-23)
 
 
