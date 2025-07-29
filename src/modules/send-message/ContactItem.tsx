@@ -62,6 +62,7 @@ export default function ContactItem({ contact }: ContactItemProps) {
   });
 
   if (isError) {
+    // TODO: Handle error more gracefully. Do not display error in the UI.
     console.error('Error loading contact details:', contact.address);
   }
 
