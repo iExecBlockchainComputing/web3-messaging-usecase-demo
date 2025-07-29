@@ -63,7 +63,6 @@ export default function ContactItem({ contact }: ContactItemProps) {
 
   if (isError) {
     console.error('Error loading contact details:', contact.address);
-    return <p>Error loading contact details</p>;
   }
 
   return (
