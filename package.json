@@ -22,7 +22,7 @@
     "@fontsource/space-grotesk": "^5.2.5",
     "@fontsource/space-mono": "^5.2.5",
     "@graphql-codegen/introspection": "^4.0.3",
-    "@iexec/dataprotector": "^2.0.0-beta.12",
+    "@iexec/dataprotector": "^2.0.0-beta.17",
     "@iexec/web3mail": "^1.2.2",
     "@iexec/web3telegram": "^0.1.0-alpha.1",
     "@radix-ui/react-dialog": "^1.1.6",
