@@ -11,10 +11,10 @@ import {
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
 import DialogSendMessageConfirmation from '@/modules/myData/DialogSendMessageConfirmation';
+import ContactItem from '@/modules/send-message/ContactItem';
 import useUserStore from '@/stores/useUser.store';
 import { chunkArray } from '@/utils/chunkArray';
 import { cn } from '@/utils/style.utils';
-import ContactItem from './ContactItem';
 
 const COLOR_CLASSES: {
   [key: string]: {
