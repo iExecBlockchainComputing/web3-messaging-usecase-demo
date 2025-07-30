@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.1](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.5.0...web3-messaging-usecase-demo-v1.5.1) (2025-07-30)
+
+
+### 🐞 Bug Fixes
+
+* update SDKs to prevent fetchUserContacts error when user has no contact ([#131](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/131)) ([c7a4622](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/c7a4622d5ab4c0c83f0796537cdb51e52f9b8aa8))
+* update SDKs to prevent fetchUserContacts error when user has no contacts ([c7a4622](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/c7a4622d5ab4c0c83f0796537cdb51e52f9b8aa8))
+
 ## [1.5.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.4.0...web3-messaging-usecase-demo-v1.5.0) (2025-07-29)
 
 
