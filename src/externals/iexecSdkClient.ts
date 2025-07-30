@@ -1,10 +1,4 @@
 import {
-  WEB3MAIL_ADDRESS,
-  WEB3MAIL_IDAPPS_WHITELIST_SC,
-  WEB3TELEGRAM_ADDRESS,
-  WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
-} from '@/config/config';
-import {
   IExecDataProtector,
   IExecDataProtectorCore,
   IExecDataProtectorSharing,
@@ -73,8 +67,8 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
 
   iExecWeb3mail = new IExecWeb3mail(provider, {
     allowExperimentalNetworks: true,
-    dappAddressOrENS: WEB3MAIL_ADDRESS,
-    dappWhitelistAddress: WEB3MAIL_IDAPPS_WHITELIST_SC,
+    // dappAddressOrENS: WEB3MAIL_ADDRESS,
+    // dappWhitelistAddress: WEB3MAIL_IDAPPS_WHITELIST_SC,
   });
   WEB3MAIL_CLIENT_RESOLVES.forEach((resolve) => {
     return resolve(iExecWeb3mail);
@@ -84,8 +78,8 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
   //TODO: Remove hardcoded IPFS node when new IExecWeb3telegram version is released
   iExecWeb3telegram = new IExecWeb3telegram(provider, {
     allowExperimentalNetworks: true,
-    dappAddressOrENS: WEB3TELEGRAM_ADDRESS,
-    dappWhitelistAddress: WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
+    // dappAddressOrENS: WEB3TELEGRAM_ADDRESS,
+    // dappWhitelistAddress: WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
   });
   WEB3TELEGRAM_CLIENT_RESOLVES.forEach((resolve) => {
     return resolve(iExecWeb3telegram);

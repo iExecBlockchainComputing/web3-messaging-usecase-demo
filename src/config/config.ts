@@ -12,15 +12,11 @@ export const CONTACT_URL =
  * https://explorer.iex.ec/bellecour/address/0x0c6c77a11068db9fadfba25182e02863361f58da
  */
 export const WORKERPOOL_ADDRESS_OR_ENS =
-  '0x39c3cdd91a7f1c4ed59108a9da4e79de9a1c1b59';
+  '0xB967057a21dc6A66A29721d96b8Aa7454B7c383F'; // arbitrum-sepolia
 
 export const WEB3MAIL_IDAPPS_WHITELIST_SC =
-  '0xe2563F35cd22F9a1E95Dbd39e9e096D1e693eFd7'; // arbitrum-sepolia dev
+  '0x8d46d40840f1Aa2264F96184Ffadf04e5D573B9B'; // arbitrum-sepolia prod
 export const WEB3TELEGRAM_IDAPPS_WHITELIST_SC =
-  '0x5EB4D71371a067572C6c5b4E05606bd2b127580b'; // arbitrum-sepolia dev
-
-export const WEB3MAIL_ADDRESS = '0x51efB0e4d8518e6267153fa9a40889652dC583f9'; // arbitrum-sepolia dev
-export const WEB3TELEGRAM_ADDRESS =
-  '0xF7146D040E18d14A3c569E441B2A70BC2aa2e9A9'; // arbitrum-sepolia dev
+  '0x7291ff96100DA6CF97933C225B86124ef95aEc9b'; // arbitrum-sepolia prod
 
 export const WORKERPOOL_MAX_PRICE = 0.1 * 1e9; // arbitrum-sepolia dev
