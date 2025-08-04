@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.5.1...web3-messaging-usecase-demo-v1.5.2) (2025-08-04)
+
+
+### 🐞 Bug Fixes
+
+* update Web3mail and Web3telegram to use new returned value and simplify ContactItem components ([#133](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/133)) ([bf91bef](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/bf91bef86fb78305a12657b0ebe58ffffce8d656))
+
 ## [1.5.1](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.5.0...web3-messaging-usecase-demo-v1.5.1) (2025-07-30)
 
 
