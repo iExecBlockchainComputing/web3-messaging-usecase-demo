@@ -82,7 +82,6 @@ export default function ProtectedDataList() {
   } = useQuery({
     queryKey: ['apps', userAddress, chainId],
     queryFn: async () => {
-      console.log('Fetching protected data for address:', userAddress, chainId);
       if (!userAddress) {
         throw new Error('User address is undefined');
       }
