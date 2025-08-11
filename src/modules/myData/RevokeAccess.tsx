@@ -10,7 +10,7 @@ export default function RevokeAccess({
 }: {
   grantAccess: GrantedAccess;
 }) {
-  const { address: userAddress } = useUserStore();
+  const { address: userAddress, chainId } = useUserStore();
   const queryClient = useQueryClient();
 
   const revokeAccessMutation = useMutation({
@@ -25,7 +25,12 @@ export default function RevokeAccess({
     },
     onSuccess: (grantAccess) => {
       queryClient.invalidateQueries({
-        queryKey: ['granted access', grantAccess.access.dataset, userAddress],
+        queryKey: [
+          'granted access',
+          grantAccess.access.dataset,
+          userAddress,
+          chainId,
+        ],
       });
       toast({
         title: `You have successfully revoke access to ${grantAccess.access.requesterrestrict}`,

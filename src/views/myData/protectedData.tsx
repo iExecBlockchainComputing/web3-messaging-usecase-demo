@@ -42,7 +42,7 @@ const COLOR_CLASSES: {
 const ITEMS_PER_PAGE = 8;
 
 export default function ProtectedData() {
-  const { address: userAddress } = useUserStore();
+  const { address: userAddress, chainId } = useUserStore();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
   }>();
@@ -50,7 +50,7 @@ export default function ProtectedData() {
   const [isGrantAccessModalOpen, setIsGrantAccessModalOpen] = useState(false);
 
   const protectedData = useQuery({
-    queryKey: ['protectedData', protectedDataAddress, userAddress],
+    queryKey: ['protectedData', protectedDataAddress, userAddress, chainId],
     queryFn: async () => {
       if (!userAddress) {
         throw new Error('User address is undefined');
@@ -68,7 +68,7 @@ export default function ProtectedData() {
   });
 
   const grantedAccess = useQuery({
-    queryKey: ['granted access', protectedDataAddress, userAddress],
+    queryKey: ['granted access', protectedDataAddress, userAddress, chainId],
     queryFn: async () => {
       if (!userAddress) {
         throw new Error('User address is undefined');

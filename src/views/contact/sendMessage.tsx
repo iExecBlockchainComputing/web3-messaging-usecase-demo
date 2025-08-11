@@ -23,12 +23,14 @@ import {
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
 import { useSendMessageStore } from '@/stores/useSendMessage.store';
+import useUserStore from '@/stores/useUser.store';
 import { pluralize } from '@/utils/pluralize';
 
 export default function SendMessage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { setLastRecipient, setIsMessageSend } = useSendMessageStore();
+  const { address: userAddress, chainId } = useUserStore();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
   }>();
@@ -133,7 +135,7 @@ export default function SendMessage() {
       setLastRecipient(protectedDataAddress!);
       setIsMessageSend(true);
       queryClient.invalidateQueries({
-        queryKey: ['contactDetails', protectedDataAddress],
+        queryKey: ['fetchContacts', userAddress, chainId],
       });
       navigate('/contacts');
     },

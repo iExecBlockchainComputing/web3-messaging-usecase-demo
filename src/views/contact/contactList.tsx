@@ -68,7 +68,7 @@ const fetchContacts = async (userAddress: string) => {
 };
 
 export default function ContactList() {
-  const { address: userAddress } = useUserStore();
+  const { address: userAddress, chainId } = useUserStore();
   const [currentPage, setCurrentPage] = useState(0);
   const [selectedTab, setSelectedTab] = useState<'all' | 'telegram' | 'mail'>(
     'all'
@@ -81,7 +81,7 @@ export default function ContactList() {
     isError,
     error,
   } = useQuery({
-    queryKey: ['fetchContacts', userAddress],
+    queryKey: ['fetchContacts', userAddress, chainId],
     queryFn: () => fetchContacts(userAddress as string),
     enabled: !!userAddress,
     refetchOnWindowFocus: true,
