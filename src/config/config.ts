@@ -17,11 +17,6 @@ export const CONTACT_URL =
  */
 export const WORKERPOOL_ADDRESS_OR_ENS = 'prod-v8-learn.main.pools.iexec.eth';
 
-export const WEB3MAIL_IDAPPS_WHITELIST_SC =
-  '0x781482c39cce25546583eac4957fb7bf04c277d2';
-export const WEB3TELEGRAM_IDAPPS_WHITELIST_SC =
-  '0x192C6f5AccE52c81Fcc2670f10611a3665AAA98F';
-
 export const SUPPORTED_CHAINS = [
   {
     id: 134,
@@ -36,6 +31,10 @@ export const SUPPORTED_CHAINS = [
       'Move your xRLC in your wallet between bellecour and Ethereum Mainnet with our bridge.',
     wagmiNetwork: bellecour,
     tokenSymbol: 'xRLC',
+    whitelist: {
+      web3mail: '0x781482c39cce25546583eac4957fb7bf04c277d2',
+      web3telegram: '0x192C6f5AccE52c81Fcc2670f10611a3665AAA98F',
+    },
   },
   {
     id: 42161,
@@ -48,5 +47,9 @@ export const SUPPORTED_CHAINS = [
       'https://thegraph.arbitrum.iex.ec/api/subgraphs/id/B1comLe9SANBLrjdnoNTJSubbeC7cY7EoNu6zD82HeKy',
     wagmiNetwork: arbitrum,
     tokenSymbol: 'RLC',
+    whitelist: {
+      web3mail: '0xD5054a18565c4a9E5c1aa3cEB53258bd59d4c78C',
+      web3telegram: '0x53AFc09a647e7D5Fa9BDC784Eb3623385C45eF89',
+    },
   },
-];
+] as const;

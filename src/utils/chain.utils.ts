@@ -14,6 +14,17 @@ export function getSubgraphUrl(chainId: number) {
   return subgraphUrl;
 }
 
+export function getWhitelistAddresses(chainId: number | undefined) {
+  if (chainId === undefined) {
+    throw new Error('Chain ID is required to get whitelist addresses');
+  }
+  const chain = getSupportedChains().find((chain) => chain.id === chainId);
+  if (!chain?.whitelist) {
+    throw new Error(`Whitelist not found for chain ID: ${chainId}`);
+  }
+  return chain.whitelist;
+}
+
 export function getChainFromSlug(slug: string | undefined) {
   return getSupportedChains().find((c) => c.slug === slug);
 }
@@ -26,10 +37,3 @@ export function getBlockExplorerUrl(chainId: number) {
   const chain = getChainFromId(chainId);
   return chain?.blockExplorerUrl ?? 'https://blockscout.com/';
 }
-
-/**
- * initial chain evaluated once against the current location when the app loads
- */
-export const INITIAL_CHAIN =
-  getChainFromSlug(new URL(window.location.href).pathname.split('/')[1]) ||
-  getSupportedChains()[0];
