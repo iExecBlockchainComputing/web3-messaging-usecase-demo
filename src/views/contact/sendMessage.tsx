@@ -22,6 +22,7 @@ import {
   getWeb3mailClient,
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
+import { useChainChangeRedirect } from '@/hooks/useChainChangeRedirect';
 import { useSendMessageStore } from '@/stores/useSendMessage.store';
 import useUserStore from '@/stores/useUser.store';
 import { pluralize } from '@/utils/pluralize';
@@ -34,6 +35,8 @@ export default function SendMessage() {
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
   }>();
+
+  useChainChangeRedirect('/contacts');
 
   const [formData, setFormData] = useState({
     senderName: '',
