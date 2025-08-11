@@ -1,3 +1,7 @@
+import arbitrumIcon from '@/assets/chain-icons/arbitrum.svg';
+import iexecLogo from '@/assets/iexec-logo.svg';
+import { bellecour, arbitrum } from '../utils/wagmiNetworks';
+
 export const ITEMS_PER_PAGE = 6;
 
 export const LOCAL_STORAGE_PREFIX = 'Web3Messaging';
@@ -17,3 +21,32 @@ export const WEB3MAIL_IDAPPS_WHITELIST_SC =
   '0x781482c39cce25546583eac4957fb7bf04c277d2';
 export const WEB3TELEGRAM_IDAPPS_WHITELIST_SC =
   '0x192C6f5AccE52c81Fcc2670f10611a3665AAA98F';
+
+export const SUPPORTED_CHAINS = [
+  {
+    id: 134,
+    name: 'Bellecour',
+    slug: 'bellecour',
+    color: '#F4942566',
+    icon: iexecLogo,
+    blockExplorerUrl: 'https://blockscout-bellecour.iex.ec',
+    subgraphUrl: 'https://thegraph.iex.ec/subgraphs/name/bellecour/poco-v5',
+    bridge: 'https://bridge-bellecour.iex.ec/',
+    bridgeInformation:
+      'Move your xRLC in your wallet between bellecour and Ethereum Mainnet with our bridge.',
+    wagmiNetwork: bellecour,
+    tokenSymbol: 'xRLC',
+  },
+  {
+    id: 42161,
+    name: 'Arbitrum',
+    slug: 'arbitrum-mainnet',
+    color: '#F4942566',
+    icon: arbitrumIcon,
+    blockExplorerUrl: 'https://arbiscan.io/',
+    subgraphUrl:
+      'https://thegraph.arbitrum.iex.ec/api/subgraphs/id/B1comLe9SANBLrjdnoNTJSubbeC7cY7EoNu6zD82HeKy',
+    wagmiNetwork: arbitrum,
+    tokenSymbol: 'RLC',
+  },
+];
