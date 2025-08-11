@@ -1,6 +1,7 @@
-import { useChainSwitch } from '@/hooks/useChainSwitch.ts';
+import { switchChain } from '@wagmi/core';
 import useUserStore from '@/stores/useUser.store.ts';
 import { getSupportedChains } from '@/utils/chain.utils.ts';
+import { wagmiAdapter } from '@/utils/wagmiConfig.ts';
 import {
   Select,
   SelectContent,
@@ -11,13 +12,12 @@ import {
 
 export function ChainSelector({ className }: { className?: string }) {
   const { chainId } = useUserStore();
-  const { requestChainChange } = useChainSwitch();
+  const handleChainChange = async (value: string) => {
+    const chainId = Number(value);
+    await switchChain(wagmiAdapter.wagmiConfig, { chainId });
+  };
 
   const filteredChains = getSupportedChains();
-
-  const handleChainChange = async (value: string) => {
-    requestChainChange(Number(value));
-  };
 
   return (
     <Select
