@@ -1,7 +1,3 @@
-import {
-  WEB3MAIL_IDAPPS_WHITELIST_SC,
-  WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
-} from '@/config/config';
 import { ProtectedData } from '@iexec/dataprotector';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -13,6 +9,7 @@ import { Dialog, DialogTitle, DialogContent } from '@/components/ui/dialog.tsx';
 import { toast } from '@/components/ui/use-toast';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import useUserStore from '@/stores/useUser.store';
+import { getWhitelistAddresses } from '@/utils/chain.utils';
 
 export default function GrantAccessModal({
   isSwitchingModalOpen,
@@ -23,7 +20,8 @@ export default function GrantAccessModal({
   setSwitchingModalOpen: (openState: boolean) => void;
   protectedData: ProtectedData;
 }) {
-  const { address: userAddress } = useUserStore();
+  const { address: userAddress, chainId } = useUserStore();
+  const whitelistAddresses = getWhitelistAddresses(chainId);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -79,8 +77,8 @@ export default function GrantAccessModal({
         authorizedUser: formData.userAddress,
         authorizedApp:
           getDataType(protectedData.schema) === 'mail'
-            ? WEB3MAIL_IDAPPS_WHITELIST_SC
-            : WEB3TELEGRAM_IDAPPS_WHITELIST_SC,
+            ? whitelistAddresses.web3mail
+            : whitelistAddresses.web3telegram,
         numberOfAccess: formData.accessNumber,
       });
 
@@ -91,10 +89,15 @@ export default function GrantAccessModal({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['granted access', protectedData.address, userAddress],
+        queryKey: [
+          'granted access',
+          protectedData.address,
+          userAddress,
+          chainId,
+        ],
       });
       queryClient.invalidateQueries({
-        queryKey: ['fetchContacts', userAddress],
+        queryKey: ['fetchContacts', userAddress, chainId],
       });
       navigate(`/my-data/${protectedData.address}`);
       toast({
@@ -236,8 +239,8 @@ export default function GrantAccessModal({
               <br />
               {'  '}authorizedApp: "
               {getDataType(protectedData.schema) === 'mail'
-                ? WEB3MAIL_IDAPPS_WHITELIST_SC
-                : WEB3TELEGRAM_IDAPPS_WHITELIST_SC}
+                ? whitelistAddresses.web3mail
+                : whitelistAddresses.web3telegram}
               " ,
               <br />
               {'  '}numberOfAccess: "

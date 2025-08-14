@@ -117,7 +117,6 @@ export default function AddProtectedData() {
         },
         name: formData.encryptedDataName,
         onStatusUpdate: (status) => {
-          console.log();
           keepInterestingStatusUpdates(addOrUpdateStatusToStore, status);
         },
       });

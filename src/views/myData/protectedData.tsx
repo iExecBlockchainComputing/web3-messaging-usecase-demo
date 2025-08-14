@@ -8,6 +8,7 @@ import { DocLink } from '@/components/DocLink';
 import { PaginatedNavigation } from '@/components/PaginatedNavigation';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import { useChainChangeRedirect } from '@/hooks/useChainChangeRedirect';
 import CheckSMSRequestSuccess from '@/modules/myData/CheckSMSRequestSuccess';
 import RevokeAccess from '@/modules/myData/RevokeAccess';
 import GrantAccessModal from '@/modules/myData/protectedData/GrantAccessModal';
@@ -42,15 +43,17 @@ const COLOR_CLASSES: {
 const ITEMS_PER_PAGE = 8;
 
 export default function ProtectedData() {
-  const { address: userAddress } = useUserStore();
+  const { address: userAddress, chainId } = useUserStore();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
   }>();
   const [currentPage, setCurrentPage] = useState(0);
   const [isGrantAccessModalOpen, setIsGrantAccessModalOpen] = useState(false);
 
+  useChainChangeRedirect('/my-data');
+
   const protectedData = useQuery({
-    queryKey: ['protectedData', protectedDataAddress, userAddress],
+    queryKey: ['protectedData', protectedDataAddress, userAddress, chainId],
     queryFn: async () => {
       if (!userAddress) {
         throw new Error('User address is undefined');
@@ -68,7 +71,7 @@ export default function ProtectedData() {
   });
 
   const grantedAccess = useQuery({
-    queryKey: ['granted access', protectedDataAddress, userAddress],
+    queryKey: ['granted access', protectedDataAddress, userAddress, chainId],
     queryFn: async () => {
       if (!userAddress) {
         throw new Error('User address is undefined');

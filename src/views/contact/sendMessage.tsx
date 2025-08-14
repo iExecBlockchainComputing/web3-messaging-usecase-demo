@@ -1,4 +1,8 @@
-import { WORKERPOOL_ADDRESS_OR_ENS } from '@/config/config';
+import {
+  WORKERPOOL_ADDRESS_OR_ENS,
+  BELLECOUR_CHAIN_ID,
+  WORKERPOOL_MAX_PRICE,
+} from '@/config/config';
 import { Address } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -22,16 +26,21 @@ import {
   getWeb3mailClient,
   getWeb3telegramClient,
 } from '@/externals/iexecSdkClient';
+import { useChainChangeRedirect } from '@/hooks/useChainChangeRedirect';
 import { useSendMessageStore } from '@/stores/useSendMessage.store';
+import useUserStore from '@/stores/useUser.store';
 import { pluralize } from '@/utils/pluralize';
 
 export default function SendMessage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { setLastRecipient, setIsMessageSend } = useSendMessageStore();
+  const { address: userAddress, chainId } = useUserStore();
   const { protectedDataAddress } = useParams<{
     protectedDataAddress: Address;
   }>();
+
+  useChainChangeRedirect('/contacts');
 
   const [formData, setFormData] = useState({
     senderName: '',
@@ -67,6 +76,13 @@ export default function SendMessage() {
   const isMail =
     protectedData.data?.schema &&
     getDataType(protectedData.data?.schema) === 'mail';
+
+  // Helper function to create workerpool configuration
+  const getWorkerpoolConfig = () => ({
+    workerpoolAddressOrEns:
+      chainId === BELLECOUR_CHAIN_ID ? WORKERPOOL_ADDRESS_OR_ENS : undefined,
+    workerpoolMaxPrice: WORKERPOOL_MAX_PRICE,
+  });
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
@@ -111,7 +127,8 @@ export default function SendMessage() {
           senderName: formData.senderName,
           contentType: formData.contentType,
           emailContent: formData.messageContent,
-          workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
+          workerpoolAddressOrEns: getWorkerpoolConfig().workerpoolAddressOrEns,
+          workerpoolMaxPrice: getWorkerpoolConfig().workerpoolMaxPrice,
         });
         return sendMail;
       } else {
@@ -121,7 +138,8 @@ export default function SendMessage() {
           protectedData: protectedDataAddress!,
           senderName: formData.senderName,
           telegramContent: formData.messageContent,
-          workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
+          workerpoolAddressOrEns: getWorkerpoolConfig().workerpoolAddressOrEns,
+          workerpoolMaxPrice: getWorkerpoolConfig().workerpoolMaxPrice,
         });
         return sendTelegram;
       }
@@ -133,7 +151,7 @@ export default function SendMessage() {
       setLastRecipient(protectedDataAddress!);
       setIsMessageSend(true);
       queryClient.invalidateQueries({
-        queryKey: ['contactDetails', protectedDataAddress],
+        queryKey: ['fetchContacts', userAddress, chainId],
       });
       navigate('/contacts');
     },

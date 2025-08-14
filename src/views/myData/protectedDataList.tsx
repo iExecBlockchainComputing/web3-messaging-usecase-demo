@@ -67,7 +67,7 @@ const useWindowSize = () => {
 };
 
 export default function ProtectedDataList() {
-  const { address: userAddress } = useUserStore();
+  const { address: userAddress, chainId } = useUserStore();
   const [selectedTab, setSelectedTab] = useState<'all' | 'telegram' | 'mail'>(
     'all'
   );
@@ -80,7 +80,7 @@ export default function ProtectedDataList() {
     isError,
     error,
   } = useQuery({
-    queryKey: ['apps', userAddress],
+    queryKey: ['apps', userAddress, chainId],
     queryFn: async () => {
       if (!userAddress) {
         throw new Error('User address is undefined');

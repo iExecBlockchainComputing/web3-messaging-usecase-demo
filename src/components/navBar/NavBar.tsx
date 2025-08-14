@@ -7,6 +7,7 @@ import iExecLogo from '../../assets/iexec-logo.svg';
 import { Button } from '../ui/button.tsx';
 import { Label } from '../ui/label.tsx';
 import { Switch } from '../ui/switch.tsx';
+import { ChainSelector } from './ChainSelector.tsx';
 import { navigationItems } from './navigationItems.tsx';
 
 export function NavBar() {
@@ -46,8 +47,9 @@ export function NavBar() {
             WEB3 Messaging
           </div>
         </Link>
+        <ChainSelector className="border-grey-600 mt-4 w-full" />
 
-        <div className="left-navbar text-grey-400 mt-10 flex grow flex-col gap-10">
+        <div className="left-navbar text-grey-400 mt-6 flex grow flex-col gap-10">
           <div className="mt-0.5 grow">
             {navigationItems.map((item, index) => (
               <NavLink
