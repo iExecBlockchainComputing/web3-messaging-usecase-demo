@@ -15,14 +15,12 @@ export function useWatchAccount() {
     useUserStore();
 
   useEffect(() => {
-    // Update userStore
     setConnector(connector);
     setIsConnected(isConnected);
     setAddress(address);
-    if (accountChain?.id && chainId !== accountChain?.id) {
-      setTimeout(() => {
-        setChainId(accountChain?.id);
-      }, 10);
+
+    if (accountChain?.id && chainId !== accountChain.id) {
+      setChainId(accountChain.id);
     }
 
     // Update dataProtector client
@@ -31,5 +29,16 @@ export function useWatchAccount() {
       return;
     }
     cleanIExecSDKs();
-  }, [connector, status, address, accountChain]);
+  }, [
+    connector,
+    status,
+    address,
+    accountChain,
+    chainId,
+    isConnected,
+    setConnector,
+    setIsConnected,
+    setAddress,
+    setChainId,
+  ]);
 }

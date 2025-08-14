@@ -8,6 +8,14 @@ export const LOCAL_STORAGE_PREFIX = 'Web3Messaging';
 export const CONTACT_URL =
   'https://airtable.com/appDiKrXe5wJgGpdP/pagm2GF2eNdX2ysw3/form';
 
+// Chain ID constants
+export const BELLECOUR_CHAIN_ID = 134;
+export const ARBITRUM_CHAIN_ID = 42161;
+
+// Workerpool configuration
+export const WORKERPOOL_ADDRESS_OR_ENS = 'prod-v8-learn.main.pools.iexec.eth';
+export const WORKERPOOL_MAX_PRICE = 0.1 * 1e9; // 0.1 RLC in wei
+
 /**
  * See smart-contract transactions:
  * https://blockscout-bellecour.iex.ec/address/0x781482C39CcE25546583EaC4957Fb7Bf04C277D2
@@ -15,11 +23,9 @@ export const CONTACT_URL =
  * See all idapps in the whitelist:
  * https://explorer.iex.ec/bellecour/address/0x0c6c77a11068db9fadfba25182e02863361f58da
  */
-export const WORKERPOOL_ADDRESS_OR_ENS = 'prod-v8-learn.main.pools.iexec.eth';
-
 export const SUPPORTED_CHAINS = [
   {
-    id: 134,
+    id: BELLECOUR_CHAIN_ID,
     name: 'Bellecour',
     slug: 'bellecour',
     color: '#F4942566',
@@ -37,7 +43,7 @@ export const SUPPORTED_CHAINS = [
     },
   },
   {
-    id: 42161,
+    id: ARBITRUM_CHAIN_ID,
     name: 'Arbitrum',
     slug: 'arbitrum-mainnet',
     color: '#F4942566',

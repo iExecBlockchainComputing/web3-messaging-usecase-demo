@@ -1,5 +1,5 @@
 export function getUserFriendlyStatues(status: string) {
-  const statusMessages = {
+  const statusMessages: { [key: string]: string } = {
     DEPLOY_PROTECTED_DATA:
       'Create protected data into DataProtector registry smart-contract',
     PUSH_SECRET_TO_SMS: 'Push protected data encryption key to iExec SMS',

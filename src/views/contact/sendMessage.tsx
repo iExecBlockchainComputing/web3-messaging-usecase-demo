@@ -1,4 +1,8 @@
-import { WORKERPOOL_ADDRESS_OR_ENS } from '@/config/config';
+import {
+  WORKERPOOL_ADDRESS_OR_ENS,
+  BELLECOUR_CHAIN_ID,
+  WORKERPOOL_MAX_PRICE,
+} from '@/config/config';
 import { Address } from '@/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -73,6 +77,13 @@ export default function SendMessage() {
     protectedData.data?.schema &&
     getDataType(protectedData.data?.schema) === 'mail';
 
+  // Helper function to create workerpool configuration
+  const getWorkerpoolConfig = () => ({
+    workerpoolAddressOrEns:
+      chainId === BELLECOUR_CHAIN_ID ? WORKERPOOL_ADDRESS_OR_ENS : undefined,
+    workerpoolMaxPrice: WORKERPOOL_MAX_PRICE,
+  });
+
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -116,7 +127,8 @@ export default function SendMessage() {
           senderName: formData.senderName,
           contentType: formData.contentType,
           emailContent: formData.messageContent,
-          workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
+          workerpoolAddressOrEns: getWorkerpoolConfig().workerpoolAddressOrEns,
+          workerpoolMaxPrice: getWorkerpoolConfig().workerpoolMaxPrice,
         });
         return sendMail;
       } else {
@@ -126,7 +138,8 @@ export default function SendMessage() {
           protectedData: protectedDataAddress!,
           senderName: formData.senderName,
           telegramContent: formData.messageContent,
-          workerpoolAddressOrEns: WORKERPOOL_ADDRESS_OR_ENS,
+          workerpoolAddressOrEns: getWorkerpoolConfig().workerpoolAddressOrEns,
+          workerpoolMaxPrice: getWorkerpoolConfig().workerpoolMaxPrice,
         });
         return sendTelegram;
       }
