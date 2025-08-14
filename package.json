@@ -1,7 +1,7 @@
 {
   "name": "web3-messaging-usecase-demo",
   "private": true,
-  "version": "1.5.2",
+  "version": "1.6.0",
   "type": "module",
   "scripts": {
     "dev": "npm run dev:prod",

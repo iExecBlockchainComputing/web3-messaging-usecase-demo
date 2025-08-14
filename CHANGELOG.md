@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.5.2...web3-messaging-usecase-demo-v1.6.0) (2025-08-14)
+
+
+### 🚀 Features
+
+* add chain switch ([#135](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/135)) ([8a1d6d9](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/8a1d6d986373f9e010a030f688f763ebd43a7651))
+
 ## [1.5.2](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.5.1...web3-messaging-usecase-demo-v1.5.2) (2025-08-04)
 
 
