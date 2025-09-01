@@ -11,7 +11,7 @@ export const steps = [
         <DocLink className="w-full" forceActive={true}>
           dataprotector-sdk / Method called:{' '}
           <a
-            href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/protectData"
+            href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/protectData"
             target="_blank"
             rel="noreferrer"
             className="text-primary whitespace-pre hover:underline"
@@ -37,7 +37,7 @@ export const steps = [
         <DocLink className="w-full" forceActive={true}>
           dataprotector-sdk / Method called:{' '}
           <a
-            href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/protectData"
+            href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/protectData"
             target="_blank"
             rel="noreferrer"
             className="text-primary whitespace-pre hover:underline"
@@ -67,7 +67,7 @@ export const steps = [
         <DocLink forceActive={true}>
           dataprotector-sdk / Method called:{' '}
           <a
-            href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/grantAccess"
+            href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/grantAccess"
             target="_blank"
             rel="noreferrer"
             className="text-primary whitespace-pre hover:underline"
@@ -100,7 +100,7 @@ export const steps = [
         <DocLink forceActive={true}>
           web3telegram / Method called:{' '}
           <a
-            href="https://tools.docs.iex.ec/tools/web3telegram/methods/sendTelegram"
+            href="https://docs.iex.ec/references/web3telegram/methods/sendTelegram"
             target="_blank"
             rel="noreferrer"
             className="text-primary whitespace-pre hover:underline"
@@ -123,7 +123,7 @@ export const steps = [
         <DocLink forceActive={true}>
           web3mail / Method called:{' '}
           <a
-            href="https://tools.docs.iex.ec/tools/web3mail/methods/sendEmail"
+            href="https://docs.iex.ec/references/web3mail/methods/sendEmail"
             target="_blank"
             rel="noreferrer"
             className="text-primary whitespace-pre hover:underline"

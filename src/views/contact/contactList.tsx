@@ -178,7 +178,7 @@ export default function ContactList() {
       <DocLink>
         web3mail / Method called:{' '}
         <a
-          href="https://tools.docs.iex.ec/tools/web3mail/methods/fetchMyContacts"
+          href="https://docs.iex.ec/references/web3mail/methods/fetchMyContacts"
           target="_blank"
           rel="noreferrer"
           className="text-primary whitespace-pre hover:underline"
@@ -194,7 +194,7 @@ export default function ContactList() {
       <DocLink>
         web3telegram / Method called:{' '}
         <a
-          href="https://tools.docs.iex.ec/tools/web3telegram/methods/fetchMyContacts"
+          href="https://docs.iex.ec/references/web3telegram/methods/fetchMyContacts"
           target="_blank"
           rel="noreferrer"
           className="text-primary whitespace-pre hover:underline"
@@ -206,7 +206,7 @@ export default function ContactList() {
       <DocLink>
         dataprotector-sdk / Method called:{' '}
         <a
-          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getProtectedData"
+          href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/getProtectedData"
           target="_blank"
           rel="noreferrer"
           className="text-primary whitespace-pre hover:underline"
@@ -222,7 +222,7 @@ export default function ContactList() {
       <DocLink>
         dataprotector-sdk / Method called:{' '}
         <a
-          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getGrantedAccess"
+          href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/getGrantedAccess"
           target="_blank"
           rel="noreferrer"
           className="text-primary whitespace-pre hover:underline"

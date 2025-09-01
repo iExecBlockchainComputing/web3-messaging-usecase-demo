@@ -205,7 +205,7 @@ export default function ProtectedData() {
       <DocLink>
         dataprotector-sdk / Method called:{' '}
         <a
-          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getProtectedData"
+          href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/getProtectedData"
           target="_blank"
           rel="noreferrer"
           className="text-primary whitespace-pre hover:underline"
@@ -223,7 +223,7 @@ export default function ProtectedData() {
       <DocLink>
         dataprotector-sdk / Method called:{' '}
         <a
-          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/getGrantedAccess"
+          href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/getGrantedAccess"
           target="_blank"
           rel="noreferrer"
           className="text-primary whitespace-pre hover:underline"
@@ -239,7 +239,7 @@ export default function ProtectedData() {
       <DocLink>
         dataprotector-sdk / Method called:{' '}
         <a
-          href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/revokeOneAccess"
+          href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/revokeOneAccess"
           target="_blank"
           rel="noreferrer"
           className="text-primary whitespace-pre hover:underline"
