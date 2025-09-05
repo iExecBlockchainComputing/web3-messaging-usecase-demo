@@ -224,7 +224,7 @@ export default function GrantAccessModal({
           <DocLink className="bg-grey-600 border-grey-500">
             dataprotector-sdk / Method called:{' '}
             <a
-              href="https://tools.docs.iex.ec/tools/dataProtector/dataProtectorCore/grantAccess"
+              href="https://docs.iex.ec/references/dataProtector/dataProtectorCore/grantAccess"
               target="_blank"
               rel="noreferrer"
               className="text-primary whitespace-pre hover:underline"

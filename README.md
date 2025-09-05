@@ -2,7 +2,7 @@
 
 ![Screenshot](screenshot.png)
 
-This project is mainly used as a demo of what can be accomplished with iExec [web3mail](https://tools.docs.iex.ec/tools/web3mail) and [web3telegram](https://tools.docs.iex.ec/tools/web3telegram) SDK
+This project is mainly used as a demo of what can be accomplished with iExec [web3mail](https://docs.iex.ec/references/web3mail) and [web3telegram](https://docs.iex.ec/references/web3telegram) SDK
 
 ## Main libraries
 
