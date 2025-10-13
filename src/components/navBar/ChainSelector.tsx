@@ -17,7 +17,7 @@ export function ChainSelector({ className }: { className?: string }) {
     await switchChain(wagmiAdapter.wagmiConfig, { chainId });
   };
 
-  const filteredChains = getSupportedChains();
+  const chains = getSupportedChains();
 
   return (
     <Select
@@ -29,7 +29,7 @@ export function ChainSelector({ className }: { className?: string }) {
         <SelectValue placeholder="Select Chain" />
       </SelectTrigger>
       <SelectContent className="border-grey-600">
-        {filteredChains.map((chain) => (
+        {chains.map((chain) => (
           <SelectItem key={chain.id} value={chain.id.toString()}>
             <img src={chain.icon} className="size-4" alt="" /> {chain.name}
           </SelectItem>
