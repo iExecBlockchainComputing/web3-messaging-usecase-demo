@@ -52,7 +52,7 @@ export const steps = [
             <br />
             {'  }'}
             <br />
-            {'  '}name: "Antoine Telegram",
+            {'  '}name: "Antoine Mail",
             <br />
             {'}'});
           </a>
