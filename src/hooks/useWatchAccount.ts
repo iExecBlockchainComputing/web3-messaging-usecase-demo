@@ -23,12 +23,12 @@ export function useWatchAccount() {
       setChainId(accountChain.id);
     }
 
+    cleanIExecSDKs();
     // Update dataProtector client
     if (status === 'connected') {
       initIExecSDKs({ connector });
       return;
     }
-    cleanIExecSDKs();
   }, [
     connector,
     status,
