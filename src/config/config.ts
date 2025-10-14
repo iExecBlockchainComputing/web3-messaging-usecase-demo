@@ -1,6 +1,6 @@
 import arbitrumIcon from '@/assets/chain-icons/arbitrum.svg';
 import iexecLogo from '@/assets/iexec-logo.svg';
-import { bellecour, arbitrum, arbitrumSepolia } from '../utils/wagmiNetworks';
+import wagmiNetworks from '@/utils/wagmiNetworks';
 
 export const ITEMS_PER_PAGE = 6;
 
@@ -36,7 +36,7 @@ export const SUPPORTED_CHAINS = [
     bridge: 'https://bridge-bellecour.iex.ec/',
     bridgeInformation:
       'Move your xRLC in your wallet between bellecour and Ethereum Mainnet with our bridge.',
-    wagmiNetwork: bellecour,
+    wagmiNetwork: wagmiNetworks.bellecour,
     tokenSymbol: 'xRLC',
     whitelist: {
       web3mail: '0x781482c39cce25546583eac4957fb7bf04c277d2',
@@ -52,7 +52,7 @@ export const SUPPORTED_CHAINS = [
     blockExplorerUrl: 'https://arbiscan.io/',
     subgraphUrl:
       'https://thegraph.arbitrum.iex.ec/api/subgraphs/id/B1comLe9SANBLrjdnoNTJSubbeC7cY7EoNu6zD82HeKy',
-    wagmiNetwork: arbitrum,
+    wagmiNetwork: wagmiNetworks.arbitrum,
     tokenSymbol: 'RLC',
     whitelist: {
       web3mail: '0xD5054a18565c4a9E5c1aa3cEB53258bd59d4c78C',
@@ -71,7 +71,7 @@ export const SUPPORTED_CHAINS = [
       dataprotector:
         'https://thegraph.arbitrum-sepolia-testnet.iex.ec/api/subgraphs/id/5YjRPLtjS6GH6bB4yY55Qg4HzwtRGQ8TaHtGf9UBWWd',
     },
-    wagmiNetwork: arbitrumSepolia,
+    wagmiNetwork: wagmiNetworks.arbitrumSepolia,
     tokenSymbol: 'RLC',
   },
 ] as const;

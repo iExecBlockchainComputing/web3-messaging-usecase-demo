@@ -4,8 +4,6 @@ import {
   arbitrumSepolia,
 } from '@reown/appkit/networks';
 
-export { arbitrum, arbitrumSepolia } from '@reown/appkit/networks';
-
 export const bellecour: AppKitNetwork = {
   id: 0x86,
   name: 'iExec Sidechain',
