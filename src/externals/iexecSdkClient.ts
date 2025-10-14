@@ -46,6 +46,7 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return;
   }
 
+  // TODO: remove allowExperimentalNetworks in next sdk update
   const dataProtectorParent = new IExecDataProtector(provider, {
     allowExperimentalNetworks: true,
   });
@@ -65,6 +66,7 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
   });
   DATA_PROTECTOR_SHARING_CLIENT_RESOLVES.length = 0;
 
+  // TODO: remove allowExperimentalNetworks in next sdk update
   iExecWeb3mail = new IExecWeb3mail(provider, {
     allowExperimentalNetworks: true,
   });
@@ -73,6 +75,7 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
   });
   WEB3MAIL_CLIENT_RESOLVES.length = 0;
 
+  // TODO: remove allowExperimentalNetworks in next sdk update
   iExecWeb3telegram = new IExecWeb3telegram(provider, {
     allowExperimentalNetworks: true,
   });
