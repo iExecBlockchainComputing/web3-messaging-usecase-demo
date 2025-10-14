@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.6.0...web3-messaging-usecase-demo-v1.7.0) (2025-10-14)
+
+
+### 🚀 Features
+
+* add Arbitrum Sepolia support ([#139](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/139)) ([9e5eb47](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/9e5eb471c178d1190706bcb5cbabafc13aeb02df))
+
 ## [1.6.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.5.2...web3-messaging-usecase-demo-v1.6.0) (2025-10-13)
 
 
