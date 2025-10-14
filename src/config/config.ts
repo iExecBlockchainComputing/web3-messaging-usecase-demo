@@ -1,6 +1,6 @@
 import arbitrumIcon from '@/assets/chain-icons/arbitrum.svg';
 import iexecLogo from '@/assets/iexec-logo.svg';
-import { bellecour, arbitrum } from '../utils/wagmiNetworks';
+import wagmiNetworks from '@/utils/wagmiNetworks';
 
 export const ITEMS_PER_PAGE = 6;
 
@@ -11,6 +11,7 @@ export const CONTACT_URL =
 // Chain ID constants
 export const BELLECOUR_CHAIN_ID = 134;
 export const ARBITRUM_CHAIN_ID = 42161;
+export const ARBITRUM_SEPOLIA_CHAIN_ID = 421614;
 
 // Workerpool configuration
 export const WORKERPOOL_ADDRESS_OR_ENS = 'prod-v8-learn.main.pools.iexec.eth';
@@ -35,7 +36,7 @@ export const SUPPORTED_CHAINS = [
     bridge: 'https://bridge-bellecour.iex.ec/',
     bridgeInformation:
       'Move your xRLC in your wallet between bellecour and Ethereum Mainnet with our bridge.',
-    wagmiNetwork: bellecour,
+    wagmiNetwork: wagmiNetworks.bellecour,
     tokenSymbol: 'xRLC',
     whitelist: {
       web3mail: '0x781482c39cce25546583eac4957fb7bf04c277d2',
@@ -51,11 +52,26 @@ export const SUPPORTED_CHAINS = [
     blockExplorerUrl: 'https://arbiscan.io/',
     subgraphUrl:
       'https://thegraph.arbitrum.iex.ec/api/subgraphs/id/B1comLe9SANBLrjdnoNTJSubbeC7cY7EoNu6zD82HeKy',
-    wagmiNetwork: arbitrum,
+    wagmiNetwork: wagmiNetworks.arbitrum,
     tokenSymbol: 'RLC',
     whitelist: {
       web3mail: '0xD5054a18565c4a9E5c1aa3cEB53258bd59d4c78C',
       web3telegram: '0x53AFc09a647e7D5Fa9BDC784Eb3623385C45eF89',
     },
+  },
+  {
+    id: ARBITRUM_SEPOLIA_CHAIN_ID,
+    name: 'Arbitrum Sepolia',
+    slug: 'arbitrum-sepolia-testnet',
+    color: '#28A0F080',
+    icon: arbitrumIcon,
+    blockExplorerUrl: 'https://sepolia.arbiscan.io/',
+    subgraphUrl: {
+      poco: 'https://thegraph.arbitrum-sepolia-testnet.iex.ec/api/subgraphs/id/2GCj8gzLCihsiEDq8cYvC5nUgK6VfwZ6hm3Wj8A3kcxz',
+      dataprotector:
+        'https://thegraph.arbitrum-sepolia-testnet.iex.ec/api/subgraphs/id/5YjRPLtjS6GH6bB4yY55Qg4HzwtRGQ8TaHtGf9UBWWd',
+    },
+    wagmiNetwork: wagmiNetworks.arbitrumSepolia,
+    tokenSymbol: 'RLC',
   },
 ] as const;
