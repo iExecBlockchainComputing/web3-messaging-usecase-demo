@@ -73,5 +73,9 @@ export const SUPPORTED_CHAINS = [
     },
     wagmiNetwork: wagmiNetworks.arbitrumSepolia,
     tokenSymbol: 'RLC',
+    whitelist: {
+      web3mail: '0x8d46d40840f1Aa2264F96184Ffadf04e5D573B9B',
+      web3telegram: '0x54cb7f6d417b2b29c2a4b2e95a66f670812c869d',
+    },
   },
 ] as const;
