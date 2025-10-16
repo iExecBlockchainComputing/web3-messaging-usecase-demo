@@ -68,9 +68,6 @@ export const SUPPORTED_CHAINS = [
     icon: iexecLogo,
     blockExplorerUrl: 'https://blockscout-bellecour.iex.ec',
     subgraphUrl: 'https://thegraph.iex.ec/subgraphs/name/bellecour/poco-v5',
-    bridge: 'https://bridge-bellecour.iex.ec/',
-    bridgeInformation:
-      'Move your xRLC in your wallet between bellecour and Ethereum Mainnet with our bridge.',
     wagmiNetwork: wagmiNetworks.bellecour,
     tokenSymbol: 'xRLC',
     whitelist: {
