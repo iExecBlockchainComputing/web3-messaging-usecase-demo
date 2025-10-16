@@ -26,24 +26,6 @@ export const WORKERPOOL_MAX_PRICE = 0.1 * 1e9; // 0.1 RLC in wei
  */
 export const SUPPORTED_CHAINS = [
   {
-    id: BELLECOUR_CHAIN_ID,
-    name: 'Bellecour',
-    slug: 'bellecour',
-    color: '#F4942566',
-    icon: iexecLogo,
-    blockExplorerUrl: 'https://blockscout-bellecour.iex.ec',
-    subgraphUrl: 'https://thegraph.iex.ec/subgraphs/name/bellecour/poco-v5',
-    bridge: 'https://bridge-bellecour.iex.ec/',
-    bridgeInformation:
-      'Move your xRLC in your wallet between bellecour and Ethereum Mainnet with our bridge.',
-    wagmiNetwork: wagmiNetworks.bellecour,
-    tokenSymbol: 'xRLC',
-    whitelist: {
-      web3mail: '0x781482c39cce25546583eac4957fb7bf04c277d2',
-      web3telegram: '0x192C6f5AccE52c81Fcc2670f10611a3665AAA98F',
-    },
-  },
-  {
     id: ARBITRUM_CHAIN_ID,
     name: 'Arbitrum',
     slug: 'arbitrum-mainnet',
@@ -73,5 +55,24 @@ export const SUPPORTED_CHAINS = [
     },
     wagmiNetwork: wagmiNetworks.arbitrumSepolia,
     tokenSymbol: 'RLC',
+    whitelist: {
+      web3mail: '0x8d46d40840f1Aa2264F96184Ffadf04e5D573B9B',
+      web3telegram: '0x54cb7f6d417b2b29c2a4b2e95a66f670812c869d',
+    },
+  },
+  {
+    id: BELLECOUR_CHAIN_ID,
+    name: 'Bellecour',
+    slug: 'bellecour',
+    color: '#F4942566',
+    icon: iexecLogo,
+    blockExplorerUrl: 'https://blockscout-bellecour.iex.ec',
+    subgraphUrl: 'https://thegraph.iex.ec/subgraphs/name/bellecour/poco-v5',
+    wagmiNetwork: wagmiNetworks.bellecour,
+    tokenSymbol: 'xRLC',
+    whitelist: {
+      web3mail: '0x781482c39cce25546583eac4957fb7bf04c277d2',
+      web3telegram: '0x192C6f5AccE52c81Fcc2670f10611a3665AAA98F',
+    },
   },
 ] as const;
