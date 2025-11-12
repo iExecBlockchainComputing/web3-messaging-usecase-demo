@@ -2,64 +2,46 @@ import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from '@typescript-eslint/eslint-plugin';
-import tsparser from '@typescript-eslint/parser';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
 
 export default [
+  { ignores: ['dist/**'] },
   {
-    ignores: ['dist/**'],
-  },
-  js.configs.recommended,
-  {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: {
-        ...globals.browser,
-        JSX: 'readonly',
-        process: 'readonly',
-      },
-      parser: tsparser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-        jsx: true,
-      },
+      parser: tsParser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: globals.browser,
     },
     plugins: {
-      '@typescript-eslint': tseslint,
+      '@typescript-eslint': tsPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     rules: {
-      ...tseslint.configs.recommended.rules,
+      ...js.configs.recommended.rules,
+      ...tsPlugin.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       curly: ['error', 'all'],
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
   {
-    files: ['vite.config.ts', 'vite.config.js', 'eslint.config.js', '*.config.ts', '*.config.js'],
+    files: [
+      '**/*.config.{js,ts}',
+      'vite.config.{js,ts}',
+      'eslint.config.js',
+      'tailwind.config.{js,ts}',
+    ],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: {
-        ...globals.node,
-        ...globals.browser,
-      },
-      parser: tsparser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
-    plugins: {
-      '@typescript-eslint': tseslint,
+      parser: tsParser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: { ...globals.node },
     },
     rules: {
-      ...tseslint.configs.recommended.rules,
       curly: ['error', 'all'],
     },
   },
