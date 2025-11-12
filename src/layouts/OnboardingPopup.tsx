@@ -1,6 +1,6 @@
 import { LOCAL_STORAGE_PREFIX } from '@/config/config';
 import { DialogTitle } from '@radix-ui/react-dialog';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { ArrowRight } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorageState from 'use-local-storage-state';
@@ -76,19 +76,25 @@ export default function OnboardingPopup() {
       defaultValue: false,
     });
 
-  function onPopupOpenChange(open: boolean) {
-    setDialogOpen(open);
-    if (!open) {
-      setStorageOnboardingViewed(true);
-      navigate('/my-data');
-    }
-  }
+  const onPopupOpenChange = useCallback(
+    (open: boolean) => {
+      setDialogOpen(open);
+      if (!open) {
+        setStorageOnboardingViewed(true);
+        navigate('/my-data');
+      }
+    },
+    [navigate, setStorageOnboardingViewed]
+  );
 
   useEffect(() => {
     if (step === steps.length) {
-      onPopupOpenChange(false);
+      const timer = setTimeout(() => {
+        onPopupOpenChange(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
-  }, [step]);
+  }, [step, onPopupOpenChange]);
 
   if (isStorageOnboardingViewed) {
     return false;

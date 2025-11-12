@@ -1,5 +1,5 @@
 export const getBasename = (): string => {
-  const vercelEnv = import.meta.env.VITE_VERCEL_ENV || process.env.VERCEL_ENV;
+  const vercelEnv = import.meta.env.VITE_VERCEL_ENV;
 
   // Vercel production
   if (vercelEnv === 'production') {
