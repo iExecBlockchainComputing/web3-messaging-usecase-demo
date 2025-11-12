@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.7.1...web3-messaging-usecase-demo-v1.7.2) (2025-11-12)
+
+
+### 🧰 Other
+
+* update dependencies and devDependencies to latest versions ([#143](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/143)) ([0aa26b0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/0aa26b0da79260d7dadb0928f15f28bd007c829e))
+
 ## [1.7.1](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.7.0...web3-messaging-usecase-demo-v1.7.1) (2025-10-16)
 
 
