@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -41,7 +42,7 @@ const generatePaginationItems = (
   currentPage: number,
   onPageChange: (page: number) => void
 ) => {
-  const items: JSX.Element[] = [];
+  const items: ReactElement[] = [];
 
   if (currentPage <= 3) {
     for (let i = 0; i < Math.min(5, totalPages); i++) {

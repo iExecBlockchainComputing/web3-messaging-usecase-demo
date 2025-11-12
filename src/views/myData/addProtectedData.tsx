@@ -1,6 +1,7 @@
 import { OneProtectDataStatus } from '@iexec/dataprotector';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { JSX, useEffect, useState } from 'react';
+import { ReactElement } from 'react';
+import { useState } from 'react';
 import { ArrowRight, Info, Mail, User } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '@/components/Alert';
@@ -19,7 +20,7 @@ const COLOR_CLASSES: {
   [key: string]: {
     gradientTo: string;
     dataReadableType: string;
-    icon: JSX.Element;
+    icon: ReactElement;
   };
 } = {
   mail: {
@@ -41,30 +42,28 @@ export default function AddProtectedData() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [currentStep, setCurrentStep] = useState(0);
-
   const [formData, setFormData] = useState({
     dataType: '',
     encryptedDataContent: '',
     encryptedDataName: '',
   });
+  // Derive current step directly from URL to avoid setState inside effects.
+  const currentStep = (() => {
+    const raw = new URLSearchParams(location.search).get('step');
+    const parsed = parseInt(raw ?? '0', 10);
+    if (!formData.dataType && parsed > 0) {
+      return 0; // Force step 0 until dataType chosen
+    }
+    if (Number.isNaN(parsed)) {
+      return 0;
+    }
+    // Clamp between 0 and 2 (we have 3 steps)
+    return Math.min(Math.max(parsed, 0), 2);
+  })();
 
   const updateStep = (step: number) => {
     navigate(`/my-data/add-protected-data?step=${step}`);
-    setCurrentStep(step);
   };
-
-  useEffect(() => {
-    const stepFromURL = parseInt(
-      new URLSearchParams(location.search).get('step') ?? '0',
-      10
-    );
-    if (!formData.dataType && stepFromURL !== 0) {
-      updateStep(0);
-    } else {
-      setCurrentStep(stepFromURL);
-    }
-  }, [location.search]);
 
   const validateFormData = () => {
     if (currentStep === 0 && !formData.dataType) {
