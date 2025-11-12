@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.7.0...web3-messaging-usecase-demo-v1.7.1) (2025-10-16)
+
+
+### 🐞 Bug Fixes
+
+* add whitelist for web3mail and web3telegram in supported chains ([#141](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/141)) ([d2d4776](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/d2d4776e5d4c66420ed71c4ac67f54ae0a5cd0b3))
+
 ## [1.7.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.6.0...web3-messaging-usecase-demo-v1.7.0) (2025-10-14)
 
 
