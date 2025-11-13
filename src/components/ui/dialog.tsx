@@ -37,7 +37,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'bg-grey-600 before:bg-grey-700 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed top-[50%] left-[50%] z-50 w-[92%] max-w-xl translate-x-[-50%] translate-y-[-50%] rounded-xl p-6 shadow-lg duration-300 before:absolute before:inset-px before:-z-10 before:rounded-[11px] sm:w-full sm:rounded-3xl sm:before:rounded-[23px]',
+        'border-grey-600 bg-grey-700 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] fixed top-[50%] left-[50%] z-50 max-h-[calc(100vh-2rem)] w-[92%] max-w-xl translate-x-[-50%] translate-y-[-50%] overflow-auto rounded-xl border p-6 shadow-lg duration-300 sm:w-full sm:rounded-3xl',
         className
       )}
       {...props}
