@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.3](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.7.2...web3-messaging-usecase-demo-v1.7.3) (2025-11-13)
+
+
+### 🐞 Bug Fixes
+
+* update dialog responsiveness ([#144](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/144)) ([5a17d1f](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/5a17d1f61307e7ae8fb702fcd6cf168abb87724a))
+
 ## [1.7.2](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.7.1...web3-messaging-usecase-demo-v1.7.2) (2025-11-12)
 
 
