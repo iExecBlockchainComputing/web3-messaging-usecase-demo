@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.7.3...web3-messaging-usecase-demo-v1.8.0) (2025-11-20)
+
+
+### 🚀 Features
+
+* update @iexec/web3mail and @iexec/web3telegram to latest versions ([#147](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/issues/147)) ([a592dff](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/commit/a592dff16e8b14e8e62b820304ee37b0702fbe11))
+
 ## [1.7.3](https://github.com/iExecBlockchainComputing/web3-messaging-usecase-demo/compare/web3-messaging-usecase-demo-v1.7.2...web3-messaging-usecase-demo-v1.7.3) (2025-11-13)
 
 
